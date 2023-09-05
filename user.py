@@ -1,4 +1,3 @@
-import json
 
 class User:
     def __init__(self, firstName, lastName):
@@ -12,4 +11,4 @@ class User:
         return self.lastName
 
     def toJson(self):
-        return json.dumps(self, default=lambda o: o.__dict__)
+        return {"firstName": self.firstName, "lastName": self.lastName}

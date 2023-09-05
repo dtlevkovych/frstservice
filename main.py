@@ -1,4 +1,5 @@
-from flask import Flask
+import json
+from flask import Flask, jsonify
 from user import User
 
 users = []
@@ -11,7 +12,11 @@ def add_user(firstName, lastName):
 
 @app.route("/users")
 def get_users():
-    return users
+    return [u.toJson() for u in users]
 
-add_user("Dmytro", "Levkovych")
-add_user("Daryna", "Levkovych")
+def fill_users():
+    add_user("Dmytro", "Levkovych")
+    add_user("Daryna", "Levkovych")
+
+fill_users()
+
