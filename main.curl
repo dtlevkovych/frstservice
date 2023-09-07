@@ -1,0 +1,17 @@
+get_users: 
+curl -i -X GET "http://127.0.0.1:5000/users"
+
+get_user: 
+curl -i -X GET "http://127.0.0.1:5000/user/77b4f61b-f004-4263-9d67-43c083e883f8"
+
+add_user:
+curl -i -X POST "http://127.0.0.1:5000/user" \
+    -H 'Content-Type: application/json' \
+    -d '{"firstName": "Daryna", "lastName": "Levkovych", "age": 11}'
+
+curl -i -X POST "http://127.0.0.1:5000/user" \
+    -H 'Content-Type: application/json' \
+    -d '{"firstName": "Dmytro", "lastName": "Levkovych", "age": 16}'
+
+delete_user:
+curl -i -X DELETE "http://127.0.0.1:5000/user/f4ad110b-f872-4c6e-a97d-31cf7b1f676f"

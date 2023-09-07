@@ -1,8 +1,8 @@
 import json
 from flask import Flask, request
 from user import User
+import user_repo as user_repo
 
-users = []
 
 app = Flask(__name__)
 
@@ -14,11 +14,18 @@ def add_user():
     age = data["age"]
 
     user = User(firstName, lastName, age)
-    users.append(user)
+    user_repo.add(user)
     return ""
 
 @app.route("/users")
 def get_users():
-    return [u.toJson() for u in users]
+    return user_repo.get_all()
 
+@app.route("/user/<id>")
+def get_user(id):
+    return user_repo.get_one(id)
 
+@app.route("/user/<id>", methods = ["DELETE"])
+def delete_user(id):
+    user_repo.delete(id)
+    return ""

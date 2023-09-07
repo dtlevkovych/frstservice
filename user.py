@@ -4,6 +4,7 @@ class User:
         self.firstName = firstName
         self.lastName = lastName
         self.age = age
+        self.id = None
 
     def getFirstName(self):
         return self.firstName
@@ -15,4 +16,4 @@ class User:
         return self.age
 
     def toJson(self):
-        return {"firstName": self.firstName, "lastName": self.lastName, "age": self.age}
+        return {"firstName": self.firstName, "lastName": self.lastName, "age": self.age, "id": self.id}
