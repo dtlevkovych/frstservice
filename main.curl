@@ -13,5 +13,10 @@ curl -i -X POST "http://127.0.0.1:5000/user" \
     -H 'Content-Type: application/json' \
     -d '{"firstName": "Dmytro", "lastName": "Levkovych", "age": 16}'
 
+update:
+curl -i -X UPDATE "http://127.0.0.1:5000/user/d60cc835-a982-4000-bbdc-b186e13d0ad2" \
+    -H 'Content-Type: application/json' \
+    -d '{"firstName": "Sofiia", "lastName": "Levkovyc", "age": 18}'
+
 delete_user:
 curl -i -X DELETE "http://127.0.0.1:5000/user/f4ad110b-f872-4c6e-a97d-31cf7b1f676f"

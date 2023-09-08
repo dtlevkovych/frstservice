@@ -12,8 +12,9 @@ def add(user):
     user.id = get_next_id()
     users[user.id] = user
 
-def update():
-    pass
+def update(id, user):
+    user.id = id
+    users[id] = user
 
 def delete(id):
     users.pop(id)
