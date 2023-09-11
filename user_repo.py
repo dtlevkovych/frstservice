@@ -3,7 +3,7 @@ import uuid
 users = {}
 
 def get_all():
-    return [u.toJson() for u in list(users.values())]
+    return list(users.values())
 
 def get_one(id):
     return users[id].toJson()

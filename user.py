@@ -5,15 +5,7 @@ class User:
         self.lastName = lastName
         self.age = age
         self.id = None
-
-    def getFirstName(self):
-        return self.firstName
-
-    def getLastName(self):
-        return self.lastName
-
-    def getAge(self):
-        return self.age
+        self.active = True
 
     def toJson(self):
         return {"firstName": self.firstName, "lastName": self.lastName, "age": self.age, "id": self.id}
