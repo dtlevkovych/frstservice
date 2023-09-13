@@ -1,5 +1,5 @@
 get_users: 
-curl -i -X GET "http://127.0.0.1:5000/users"
+curl -i -X GET "http://127.0.0.1:5000/users?all=true"
 
 get_user: 
 curl -i -X GET "http://127.0.0.1:5000/user/77b4f61b-f004-4263-9d67-43c083e883f8"

@@ -1,6 +1,9 @@
 import user_repo as repo
 
-def get_all():
+def get_all(all):
+    if all == True:
+        return [u.toJson() for u in repo.get_all()]
+        
     return [u.toJson() for u in repo.get_all() if u.active == True]
 
 def get_one(id):

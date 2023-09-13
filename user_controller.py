@@ -5,7 +5,12 @@ import main as main
 
 @main.app.route("/users")
 def get_users():
-    return user_serv.get_all()
+    all = request.args.get("all")
+    if all == "true":
+        all = True
+    else:
+        all = False
+    return user_serv.get_all(all)
 
 @main.app.route("/user/<id>")
 def get_user(id):
