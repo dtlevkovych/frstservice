@@ -28,18 +28,27 @@ def get_all():
     conn = get_conn()
 
     cur = conn.cursor()
-    cur.execute("select * from user")
+    cur.execute("select first_name, last_name, age, id, active from user")
 
     rows = cur.fetchall()
 
-    return [User(r["first_name"], r["last_name"], r["age"], r["id"], r["active"]) for r in rows]
+    return [User(r[0], r[1], r[2], r[3], r[4]) for r in rows]
 
 def get_one(id):
     return users[id].toJson()
 
 def add(user):
-    user.id = get_next_id()
-    users[user.id] = user
+    conn = get_conn()
+
+    cur = conn.cursor()
+
+    id = get_next_id()
+
+    user_params = (id, user.firstName, user.lastName, user.age, user.active)
+    cur.execute("insert into user (id, first_name, last_name, age, active) values (?, ?, ?, ?, ?)", user_params)
+    conn.commit()
+    
+    return id
 
 def update(id, user):
     user.id = id
