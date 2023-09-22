@@ -18,12 +18,6 @@ def get_conn():
     return conn
 
 
-
-
-
-
-users = {}
-
 def get_all():
     conn = get_conn()
 
@@ -34,8 +28,22 @@ def get_all():
 
     return [User(r[0], r[1], r[2], r[3], r[4]) for r in rows]
 
+
 def get_one(id):
-    return users[id].toJson()
+    conn = get_conn()
+
+    cur = conn.cursor()
+    user_params = (id,)
+    cur.execute("select first_name, last_name, age, id, active from user where id=? limit 0,1", user_params)
+
+    rows = cur.fetchall()
+
+    for r in rows:
+        user = User(r[0], r[1], r[2], r[3], r[4])
+        return user.toJson()
+
+    return None
+
 
 def add(user):
     conn = get_conn()
@@ -51,11 +59,22 @@ def add(user):
     return id
 
 def update(id, user):
-    user.id = id
-    users[id] = user
+    conn = get_conn()
+
+    cur = conn.cursor()
+    user_params = (user.firstName, user.lastName, user.age, user.active, id)
+    cur.execute("update user set first_name=?, last_name=?, age=?, active=? where id=?", user_params)
+    conn.commit()
+
 
 def delete(id):
-    users.pop(id)
+    conn = get_conn()
+
+    cur = conn.cursor()
+    user_params = (id,)
+    cur.execute("delete from user where id=?", user_params)
+    conn.commit()
+
 
 def get_next_id():
     return str(uuid.uuid4())
