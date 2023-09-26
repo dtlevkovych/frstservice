@@ -19,9 +19,9 @@ curl -i -X POST "http://127.0.0.1:5000/user" \
 
 
 update:
-curl -i -X UPDATE "http://127.0.0.1:5000/user/0ec20e40-975c-46b1-8f4f-a904e3de4567" \
+curl -i -X UPDATE "http://127.0.0.1:5000/user/0ec20e40-975c-46b1-8f4f-a904e3de45" \
     -H 'Content-Type: application/json' \
     -d '{"firstName": "Sofia", "lastName": "Levkovyc", "age": 1}'
 
 delete_user:
-curl -i -X DELETE "http://127.0.0.1:5000/user/0ec20e40-975c-46b1-8f4f-a904e3de4567"
+curl -i -X DELETE "http://127.0.0.1:5000/user/0ec20e40-975c-46b1-8f4f-a904e3de45"

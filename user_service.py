@@ -12,10 +12,19 @@ def get_one(id):
 def add(user):
     if user.firstName == "Sofiia":
         user.active = False
-    repo.add(user)
+
+    return repo.add(user)
 
 def update(id, user):
-   repo.update(id, user)
+    if repo.get_one(id) == None:
+        return False
+
+    repo.update(id, user)
+    return True
 
 def delete(id):
+    if repo.get_one(id) == None:
+        return False 
+
     repo.delete(id)
+    return True

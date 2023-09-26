@@ -24,8 +24,10 @@ def add_user():
     age = data["age"]
 
     user = User(firstName, lastName, age)
-    user_serv.add(user)
-    return ""
+
+    id = user_serv.add(user)
+
+    return id, 201
 
 @main.app.route("/user/<id>", methods = ["UPDATE"])
 def update_user(id):
@@ -35,10 +37,18 @@ def update_user(id):
     age = data["age"]
 
     user = User(firstName, lastName, age)
-    user_serv.update(id, user)
-    return ""
+    result = user_serv.update(id, user)
+
+    if result == False:
+        return "Not Found", 404
+
+    return "Success", 200
 
 @main.app.route("/user/<id>", methods = ["DELETE"])
 def delete_user(id):
-    user_serv.delete(id)
-    return ""
+    result = user_serv.delete(id)
+
+    if result == False:
+        return "Not Found", 404
+
+    return "Success", 200
