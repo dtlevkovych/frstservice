@@ -66,6 +66,8 @@ def update(id, user):
     cur.execute("update user set first_name=?, last_name=?, age=?, active=? where id=?", user_params)
     conn.commit()
 
+    return True
+
 
 def delete(id):
     conn = get_conn()
@@ -74,6 +76,8 @@ def delete(id):
     user_params = (id,)
     cur.execute("delete from user where id=?", user_params)
     conn.commit()
+
+    return True
 
 
 def get_next_id():

@@ -19,12 +19,12 @@ def update(id, user):
     if repo.get_one(id) == None:
         return False
 
-    repo.update(id, user)
-    return True
+    return repo.update(id, user)
+
 
 def delete(id):
     if repo.get_one(id) == None:
         return False 
 
-    repo.delete(id)
-    return True
+    return repo.delete(id)
+
