@@ -25,10 +25,13 @@ def add_user():
 
     user = User(firstName, lastName, age)
 
-    id = user_serv.add(user)
+    try:
+        id = user_serv.add(user)
+        return id, 201
+    except ValueError as e:
+        return str(e), 400
 
-    return id, 201
-
+        
 @main.app.route("/user/<id>", methods = ["UPDATE"])
 def update_user(id):
     data = request.get_json()

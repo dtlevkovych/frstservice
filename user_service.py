@@ -10,8 +10,11 @@ def get_one(id):
     return repo.get_one(id)
 
 def add(user):
-    if user.firstName == "Sofiia":
-        user.active = False
+    users = repo.get_all()
+
+    for u in users:
+        if user.firstName == u.firstName and user.lastName == u.lastName:
+            raise ValueError("User with such first and last name allready exist")
 
     return repo.add(user)
 
