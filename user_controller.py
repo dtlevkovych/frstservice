@@ -29,7 +29,7 @@ def add_user():
         id = user_serv.add(user)
         return id, 201
     except ValueError as e:
-        return str(e), 400
+        return e.__str__(), 400
 
         
 @main.app.route("/user/<id>", methods = ["UPDATE"])

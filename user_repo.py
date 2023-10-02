@@ -45,6 +45,18 @@ def get_one(id):
     return None
 
 
+def get_one(firstName, lastName):
+    conn = get_conn()
+
+    cur = conn.cursor()
+    user_params = (firstName, lastName)
+    cur.execute("select first_name, last_name, age, id, active from user where first_name=? and last_name=?", user_params)
+
+    row = cur.fetchone()
+    
+    return None if row == None else User(row[0], row[1], row[2], row[3], row[4])
+
+
 def add(user):
     conn = get_conn()
 

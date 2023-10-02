@@ -2,19 +2,18 @@ import user_repo as repo
 
 def get_all(all):
     if all == True:
-        return [u.toJson() for u in repo.get_all()]
+        return [u.__dict__ for u in repo.get_all()]
         
-    return [u.toJson() for u in repo.get_all() if u.active == True]
+    return [u.__dict__ for u in repo.get_all() if u.active == True]
 
 def get_one(id):
     return repo.get_one(id)
 
 def add(user):
-    users = repo.get_all()
+    existing_user = repo.get_one(user.firstName, user.lastName)
 
-    for u in users:
-        if user.firstName == u.firstName and user.lastName == u.lastName:
-            raise ValueError("User with such first and last name allready exist")
+    if existing_user != None:
+        raise ValueError("User with such first and last name allready exist")
 
     return repo.add(user)
 
