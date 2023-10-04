@@ -2,6 +2,7 @@ import user_service as user_serv
 from user import User
 from flask import request
 import main as main
+from response import Response
 
 @main.app.route("/users")
 def get_users():
@@ -10,11 +11,12 @@ def get_users():
         all = True
     else:
         all = False
-    return user_serv.get_all(all)
+
+    return Response(data=user_serv.get_all(all)).__dict__
 
 @main.app.route("/user/<id>")
 def get_user(id):
-    return user_serv.get_one(id)
+    return Response(data=user_serv.get_one(id)).__dict__
 
 @main.app.route("/user", methods = ["POST"])
 def add_user():
@@ -27,9 +29,9 @@ def add_user():
 
     try:
         id = user_serv.add(user)
-        return id, 201
+        return Response(data={"id": id}).__dict__, 201
     except ValueError as e:
-        return e.__str__(), 400
+        return Response(error_msg=e.__str__(), status=False).__dict__, 400
 
         
 @main.app.route("/user/<id>", methods = ["UPDATE"])
@@ -43,15 +45,15 @@ def update_user(id):
     result = user_serv.update(id, user)
 
     if result == False:
-        return "Not Found", 404
+        return Response(error_msg="Not Found", status=False).__dict__, 404
 
-    return "Success", 200
+    return Response().__dict__, 200
 
 @main.app.route("/user/<id>", methods = ["DELETE"])
 def delete_user(id):
     result = user_serv.delete(id)
 
     if result == False:
-        return "Not Found", 404
+        return Response(error_msg="Not Found", status=False).__dict__, 404
 
-    return "Success", 200
+    return Response().__dict__, 200

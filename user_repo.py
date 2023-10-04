@@ -45,7 +45,7 @@ def get_one(id):
     return None
 
 
-def get_one(firstName, lastName):
+def get_one_by_name(firstName, lastName):
     conn = get_conn()
 
     cur = conn.cursor()

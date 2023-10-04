@@ -10,7 +10,7 @@ def get_one(id):
     return repo.get_one(id)
 
 def add(user):
-    existing_user = repo.get_one(user.firstName, user.lastName)
+    existing_user = repo.get_one_by_name(user.firstName, user.lastName)
 
     if existing_user != None:
         raise ValueError("User with such first and last name allready exist")
