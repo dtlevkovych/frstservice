@@ -1,10 +1,8 @@
 import user_repo as repo
 
-def get_all(all):
-    if all == True:
-        return [u.__dict__ for u in repo.get_all()]
+def get_all(order_by):
         
-    return [u.__dict__ for u in repo.get_all() if u.active == True]
+    return [u.__dict__ for u in repo.get_all(order_by)]
 
 def get_one(id):
     return repo.get_one(id)

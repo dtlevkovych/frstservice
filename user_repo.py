@@ -18,11 +18,19 @@ def get_conn():
     return conn
 
 
-def get_all():
+def get_all(order_by):
     conn = get_conn()
 
     cur = conn.cursor()
-    cur.execute("select first_name, last_name, age, id, active from user")
+    sql = "select first_name, last_name, age, id, active from user"
+    if order_by != None:
+        sql = sql + " order by "
+        for i in range(len(order_by)):
+            if i > 0:
+                sql = sql + ","
+            sql = sql + order_by[i]
+
+    cur.execute(sql)
 
     rows = cur.fetchall()
 
