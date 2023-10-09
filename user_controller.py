@@ -33,7 +33,7 @@ def add_user():
         return Response(error_msg=e.__str__(), status=False).__dict__, 400
 
         
-@main.app.route("/user/<id>", methods = ["UPDATE"])
+@main.app.route("/user/<id>", methods = ["PUT"])
 def update_user(id):
     data = request.get_json()
     firstName = data["firstName"]

@@ -30,7 +30,7 @@ curl -i -X POST "http://127.0.0.1:5000/user" \
     -d '{"firstName": "Petro", "lastName": "Levkovych", "age": 66}'
 
 update:
-curl -i -X UPDATE "http://127.0.0.1:5000/user/c480b60a-530a-4dcf-aa55-6c97ee5e6629" \
+curl -i -X PUT "http://127.0.0.1:5000/user/c480b60a-530a-4dcf-aa55-6c97ee5e6629" \
     -H 'Content-Type: application/json' \
     -d '{"firstName": "Petro", "lastName": "Levkovych", "age": 66}'
 
