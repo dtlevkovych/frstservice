@@ -1,5 +1,5 @@
 get_users: 
-curl -i -X GET "http://127.0.0.1:5000/users?order_by=first_name"
+curl -i -X GET "http://127.0.0.1:5000/users?order_by=first_name&order_dir=Dmytro"
 
 get_user: 
 curl -i -X GET "http://127.0.0.1:5000/user/1234dsfwdsafdss"

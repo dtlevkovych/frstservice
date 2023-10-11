@@ -1,8 +1,8 @@
 import user_repo as repo
 
-def get_all(order_by):
+def get_all(order_by, order_dir):
         
-    return [u.__dict__ for u in repo.get_all(order_by)]
+    return [u.__dict__ for u in repo.get_all(order_by, order_dir)]
 
 def get_one(id):
     return repo.get_one(id)

@@ -6,12 +6,16 @@ from response import Response
 
 @main.app.route("/users")
 def get_users():
-
     order_by = request.args.get("order_by")
     if order_by != None:
         order_by = order_by.split(",")
 
-    return Response(data=user_serv.get_all(order_by)).__dict__
+    order_dir = request.args.get("order_dir")
+    #order_dir = asc, desc, None
+    if order_dir != "asc" and order_dir != "desc":
+        order_dir = None
+
+    return Response(data=user_serv.get_all(order_by, order_dir)).__dict__
 
 @main.app.route("/user/<id>")
 def get_user(id):
