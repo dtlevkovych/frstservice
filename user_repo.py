@@ -3,6 +3,7 @@ import sqlite3
 from sqlite3 import Error
 from user import User
 import os.path
+from order import Order
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DB_FILE_NAME = os.path.join(BASE_DIR, "db/user.db")
@@ -18,19 +19,17 @@ def get_conn():
     return conn
 
 
-def get_all(order_by, order_dir):
+def get_all(orders):
     conn = get_conn()
 
     cur = conn.cursor()
     sql = "select first_name, last_name, age, id, active from user"
-    if order_dir == None:
-        order_dir = ""
-    if order_by != None:
+    if orders != None:
         sql = sql + " order by "
-        for i in range(len(order_by)):
+        for i in range(len(orders)):
             if i > 0:
                 sql = sql + ","
-            sql = sql + order_by[i] + " " + order_dir
+            sql = sql + orders[i].name + " " + orders[i].direction
             
     cur.execute(sql)
 

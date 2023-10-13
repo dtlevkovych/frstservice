@@ -3,19 +3,29 @@ from user import User
 from flask import request
 import main as main
 from response import Response
+from order import Order
 
 @main.app.route("/users")
 def get_users():
+    orders = []
+
     order_by = request.args.get("order_by")
     if order_by != None:
         order_by = order_by.split(",")
 
-    order_dir = request.args.get("order_dir")
-    #order_dir = asc, desc, None
-    if order_dir != "asc" and order_dir != "desc":
-        order_dir = None
+        order_name = None
+        order_direction = None
 
-    return Response(data=user_serv.get_all(order_by, order_dir)).__dict__
+        for o in order_by:
+            if o.endswith('_desc'):
+                order_name = o.split("_desc")[0]
+                order_direction = "desc"
+            else:
+                order_name = o.split("_asc")[0]
+                order_direction = "asc"
+            orders.append(Order(order_name, order_direction))
+
+    return Response(data=user_serv.get_all(orders)).__dict__
 
 @main.app.route("/user/<id>")
 def get_user(id):
