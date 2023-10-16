@@ -1,9 +1,9 @@
 import uuid
 import sqlite3
 from sqlite3 import Error
-from user import User
 import os.path
-from order import Order
+from model.order import Order
+from model.user import User
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
 DB_FILE_NAME = os.path.join(BASE_DIR, "db/user.db")

@@ -1,10 +1,11 @@
-import user_service as user_serv
-from user import User
+from service import user_service as user_serv
 from flask import request
 import main as main
-from response import Response
-from order import Order
+from model.response import Response
+from model.user import User
+from model.order import Order
 
+print("123")
 @main.app.route("/users")
 def get_users():
     orders = []
