@@ -6,7 +6,7 @@ from model.order import Order
 from model.user import User
 
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-DB_FILE_NAME = os.path.join(BASE_DIR, "db/user.db")
+DB_FILE_NAME = os.path.join(BASE_DIR, "../db/user.db")
 
 def get_conn():
     conn = None

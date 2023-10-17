@@ -1,12 +1,12 @@
-from service import user_service as user_serv
 from flask import request
-import main as main
+from service import user_service as user_serv
 from model.response import Response
 from model.user import User
 from model.order import Order
 
-print("123")
-@main.app.route("/users")
+from frstservice.controller import bp
+
+@bp.route("/users")
 def get_users():
     orders = []
 
@@ -28,11 +28,11 @@ def get_users():
 
     return Response(data=user_serv.get_all(orders)).__dict__
 
-@main.app.route("/user/<id>")
+@bp.route("/user/<id>")
 def get_user(id):
     return Response(data=user_serv.get_one(id)).__dict__
 
-@main.app.route("/user", methods = ["POST"])
+@bp.route("/user", methods = ["POST"])
 def add_user():
     data = request.get_json()
     firstName = data["firstName"]
@@ -48,7 +48,7 @@ def add_user():
         return Response(error_msg=e.__str__(), status=False).__dict__, 400
 
         
-@main.app.route("/user/<id>", methods = ["PUT"])
+@bp.route("/user/<id>", methods = ["PUT"])
 def update_user(id):
     data = request.get_json()
     firstName = data["firstName"]
@@ -63,7 +63,7 @@ def update_user(id):
 
     return Response().__dict__, 200
 
-@main.app.route("/user/<id>", methods = ["DELETE"])
+@bp.route("/user/<id>", methods = ["DELETE"])
 def delete_user(id):
     result = user_serv.delete(id)
 
