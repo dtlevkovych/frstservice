@@ -6,5 +6,5 @@ app = Flask(__name__)
 def test_page():
     return "pong"
 
-from frstservice.controller import bp as usr_ctrl
-app.register_blueprint(usr_ctrl)
+from frstservice.controller import bp as user_ctrl
+app.register_blueprint(user_ctrl)
