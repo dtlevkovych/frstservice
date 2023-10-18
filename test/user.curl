@@ -1,8 +1,8 @@
 get_users: 
-curl -i -X GET "http://127.0.0.1:5000/users?order_by=first_name,last_name_asc,age_desc"
+curl -i -X GET "http://127.0.0.1:5000/users?order_by=id"
 
 get_user: 
-curl -i -X GET "http://127.0.0.1:5000/user/1234dsfwdsafdss"
+curl -i -X GET "http://127.0.0.1:5000/user/30c64f74-d0bb-413e-8b57-4e3a1764ca5a"
 
 add_user:
 curl -i -X POST "http://127.0.0.1:5000/user" \
@@ -30,9 +30,9 @@ curl -i -X POST "http://127.0.0.1:5000/user" \
     -d '{"firstName": "Petro", "lastName": "Levkovych", "age": 66}'
 
 update:
-curl -i -X PUT "http://127.0.0.1:5000/user/c480b60a-530a-4dcf-aa55-6c97ee5e6629" \
+curl -i -X PUT "http://127.0.0.1:5000/user/30c64f74-d0bb-413e-8b57-4e3a1764ca5a" \
     -H 'Content-Type: application/json' \
-    -d '{"firstName": "Petro", "lastName": "Levkovych", "age": 66}'
+    -d '{"firstName": "Yurii", "lastName": "Levkovych", "age": 46}'
 
 delete_user:
-curl -i -X DELETE "http://127.0.0.1:5000/user/9e056c4c-5f3b-4c6c-8543-85b627d3542"
+curl -i -X DELETE "http://127.0.0.1:5000/user/73b7eba0-f08f-410a-8c4b-d387534596de"
