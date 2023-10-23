@@ -1,23 +1,10 @@
-import uuid
-import sqlite3
-from sqlite3 import Error
-import os.path
 from model.order import Order
 from model.user import User
-
-BASE_DIR = os.path.dirname(os.path.abspath(__file__))
-DB_FILE_NAME = os.path.join(BASE_DIR, "../db/user.db")
+import repository.db_conn as db_conn
+import repository.db_tools as db_tools
 
 def get_conn():
-    conn = None
-
-    try:
-        conn = sqlite3.connect(DB_FILE_NAME)
-    except Error as e:
-        print(e)
-
-    return conn
-
+    return db_conn.get_conn()
 
 def get_all(orders):
     conn = get_conn()
@@ -71,7 +58,7 @@ def add(user):
 
     cur = conn.cursor()
 
-    id = get_next_id()
+    id = db_tools.get_next_id()
 
     user_params = (id, user.firstName, user.lastName, user.age, user.active)
     cur.execute("insert into user (id, first_name, last_name, age, active, created_at) values (?, ?, ?, ?, ?, unixepoch() * 1000)", user_params)
@@ -100,6 +87,3 @@ def delete(id):
 
     return True
 
-
-def get_next_id():
-    return str(uuid.uuid4())

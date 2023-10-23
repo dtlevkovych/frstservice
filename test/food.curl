@@ -1,0 +1,5 @@
+add food: 
+
+curl -i -X POST "http://127.0.0.1:5000/food" \
+    -H 'Content-Type: application/json' \
+    -d '{"name": "Potato", "rate": 5}'
