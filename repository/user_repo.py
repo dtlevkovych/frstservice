@@ -23,7 +23,7 @@ def get_all(orders):
     conn = get_conn()
 
     cur = conn.cursor()
-    sql = "select first_name, last_name, age, id, active, updated_at from user"
+    sql = "select first_name, last_name, age, id, active, created_at from user"
     if orders != None:
         sql = sql + " order by "
         for i in range(len(orders)):
@@ -43,7 +43,7 @@ def get_one(id):
 
     cur = conn.cursor()
     user_params = (id,)
-    cur.execute("select first_name, last_name, age, id, active, updated_at from user where id=? limit 0,1", user_params)
+    cur.execute("select first_name, last_name, age, id, active, created_at from user where id=? limit 0,1", user_params)
 
     rows = cur.fetchall()
 
@@ -59,7 +59,7 @@ def get_one_by_name(firstName, lastName):
 
     cur = conn.cursor()
     user_params = (firstName, lastName)
-    cur.execute("select first_name, last_name, age, id, active, updated_at from user where first_name=? and last_name=?", user_params)
+    cur.execute("select first_name, last_name, age, id, active, created_at from user where first_name=? and last_name=?", user_params)
 
     row = cur.fetchone()
     
@@ -74,7 +74,7 @@ def add(user):
     id = get_next_id()
 
     user_params = (id, user.firstName, user.lastName, user.age, user.active)
-    cur.execute("insert into user (id, first_name, last_name, age, active, updated_at) values (?, ?, ?, ?, ?, unixepoch() * 1000)", user_params)
+    cur.execute("insert into user (id, first_name, last_name, age, active, created_at) values (?, ?, ?, ?, ?, unixepoch() * 1000)", user_params)
     conn.commit()
     
     return id
@@ -84,7 +84,7 @@ def update(id, user):
 
     cur = conn.cursor()
     user_params = (user.firstName, user.lastName, user.age, user.active, id)
-    cur.execute("update user set first_name=?, last_name=?, age=?, active=?, updated_at=unixepoch() * 1000 where id=?", user_params)
+    cur.execute("update user set first_name=?, last_name=?, age=?, active=? where id=?", user_params)
     conn.commit()
 
     return True
