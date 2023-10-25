@@ -1,5 +1,15 @@
+get foods:
+curl -i -X GET "http://127.0.0.1:5000/foods"
+
 add food: 
+curl -i -X POST "http://127.0.0.1:5000/food" \
+    -H 'Content-Type: application/json' \
+    -d '{"name": "Salad", "rate": 1}'
 
 curl -i -X POST "http://127.0.0.1:5000/food" \
     -H 'Content-Type: application/json' \
-    -d '{"name": "Potato", "rate": 5}'
+    -d '{"name": "Potato", "rate": 2}'
+
+curl -i -X POST "http://127.0.0.1:5000/food" \
+    -H 'Content-Type: application/json' \
+    -d '{"name": "Chips", "rate": 3}'
