@@ -10,13 +10,7 @@ def get_all(orders):
     conn = get_conn()
 
     cur = conn.cursor()
-    sql = "select first_name, last_name, age, id, active, created_at from user"
-    if orders != None:
-        sql = sql + " order by "
-        for i in range(len(orders)):
-            if i > 0:
-                sql = sql + ","
-            sql = sql + orders[i].name + " " + orders[i].direction
+    sql = "select first_name, last_name, age, id, active, created_at from user" + db_tools.get_order_text(orders)
             
     cur.execute(sql)
 

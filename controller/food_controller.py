@@ -5,20 +5,8 @@ from model.food import Food
 from model.response import Response
 from model.order import Order
 
-@bp.route("/food", methods = ["POST"] )
-def add_food():
-    data = request.get_json()
-    name = data["name"]
-    rate = data["rate"]
 
-    try:
-        food = Food(None, name, rate)
-        id = food_serv.add(food)
-        return Response(data={"id": id}).__dict__, 201
-    except ValueError as e:
-        return Response(error_msg=e.__str__(), status=False).__dict__, 400
-
-@bp.route("/foods", methods = ["GET"])
+@bp.route("/foods")
 def get_foods():
     orders = []
 
@@ -40,3 +28,17 @@ def get_foods():
             orders.append(Order(order_name, order_direction))
 
     return Response(data=food_serv.get_foods(orders)).__dict__
+
+
+@bp.route("/food", methods = ["POST"] )
+def add_food():
+    data = request.get_json()
+    name = data["name"]
+    rate = data["rate"]
+
+    try:
+        food = Food(None, name, rate)
+        id = food_serv.add(food)
+        return Response(data={"id": id}).__dict__, 201
+    except ValueError as e:
+        return Response(error_msg=e.__str__(), status=False).__dict__, 400
