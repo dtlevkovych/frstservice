@@ -4,7 +4,7 @@ from service import food_service as food_serv
 from model.food import Food
 from model.response import Response
 from model.order import Order
-
+from exception.notfound import NotFoundError
 
 @bp.route("/foods")
 def get_foods():
@@ -42,3 +42,23 @@ def add_food():
         return Response(data={"id": id}).__dict__, 201
     except ValueError as e:
         return Response(error_msg=e.__str__(), status=False).__dict__, 400
+
+
+@bp.route("/food/<id>")
+def get_food(id):
+    return Response(data=food_serv.get_one(id)).__dict__
+
+
+@bp.route("/food/<id>", methods = ["PUT"])
+def update(id):
+    data = request.get_json()
+    name = data["name"]
+    rate = data["rate"]
+
+    food = Food(id, name, rate)
+
+    try:
+        food_serv.update(id, food)
+        return Response().__dict__, 200
+    except Exception as e:
+        return Response(error_msg=e.__str__(), status=False).__dict__, 404

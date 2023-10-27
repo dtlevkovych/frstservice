@@ -1,7 +1,8 @@
 from repository import user_repo as repo
+from exception.notfound import NotFoundError
+
 
 def get_all(orders):
-        
     return [u.__dict__ for u in repo.get_all(orders)]
 
 def get_one(id):
@@ -17,7 +18,7 @@ def add(user):
 
 def update(id, user):
     if repo.get_one(id) == None:
-        return False
+        raise NotFoundError()
 
     return repo.update(id, user)
 

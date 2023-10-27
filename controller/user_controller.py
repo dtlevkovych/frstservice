@@ -3,8 +3,9 @@ from service import user_service as user_serv
 from model.response import Response
 from model.user import User
 from model.order import Order
-
 from frstservice.controller import bp
+from exception.notfound import NotFoundError
+
 
 @bp.route("/users")
 def get_users():
@@ -56,12 +57,13 @@ def update_user(id):
     age = data["age"]
 
     user = User(firstName, lastName, age)
-    result = user_serv.update(id, user)
+    
+    try:
+        user_serv.update(id, user)
+        return Response().__dict__, 200
+    except Exception as e:
+        return Response(error_msg=e.__str__(), status=False).__dict__, 404
 
-    if result == False:
-        return Response(error_msg="Not Found", status=False).__dict__, 404
-
-    return Response().__dict__, 200
 
 @bp.route("/user/<id>", methods = ["DELETE"])
 def delete_user(id):
