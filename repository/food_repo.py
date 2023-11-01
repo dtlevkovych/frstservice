@@ -45,8 +45,23 @@ def get_one(id):
     rows = cur.fetchall()
 
     for r in rows:
-        food = Food(r[0], r[1], r[2],)
+        food = Food(r[0], r[1], r[2])
         return food.toJson()
+
+    return None
+
+
+def get_one_by_name(name):
+    conn = get_conn()
+
+    cur = conn.cursor()
+    food_params = (name,)
+    cur.execute("select id, name, rate from food where name=?", food_params)
+
+    rows = cur.fetchall()
+
+    for r in rows:
+        return Food(r[0], r[1], r[2])
 
     return None
 
@@ -57,6 +72,16 @@ def update(id, food):
     cur = conn.cursor()
     food_params = (food.name, food.rate, id)
     cur.execute("update food set name=?, rate=? where id=?", food_params)
+    conn.commit()
+
+    return True
+
+
+def delete(id):
+    conn = get_conn()
+    cur = conn.cursor()
+    food_params = (id,)
+    cur.execute("delete from food where id=?", food_params)
     conn.commit()
 
     return True

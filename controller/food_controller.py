@@ -62,3 +62,15 @@ def update(id):
         return Response().__dict__, 200
     except Exception as e:
         return Response(error_msg=e.__str__(), status=False).__dict__, 404
+
+
+@bp.route("/food/<id>", methods = ["DELETE"])
+def delete(id):
+    result = food_serv.delete(id)
+
+    if result == False:
+         return Response(error_msg="Not Found", status=False).__dict__, 404
+
+    return Response().__dict__, 200
+
+

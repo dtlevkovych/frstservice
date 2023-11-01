@@ -18,6 +18,9 @@ curl -i -X POST "http://127.0.0.1:5000/food" \
     -d '{"name": "Chips", "rate": 3}'
 
 update:
-curl -i -X PUT "http://127.0.0.1:5000/food/30fc61df-b0b6-4f9b-93d2-0c1a2d28ea4" \
+curl -i -X PUT "http://127.0.0.1:5000/food/dc118b9c-d76d-43f8-bee9-24caffe2173f" \
     -H 'Content-Type: application/json' \
-    -d '{"name": "Potato", "rate": 2}'
+    -d '{"name": "Potato", "rate": 3}'
+
+delete_food:
+curl -i -X DELETE "http://127.0.0.1:5000/food/e237c7b6-32c8-4122-8278-494a2cb7fdad"

@@ -40,9 +40,8 @@ def add_user():
     lastName = data["lastName"]
     age = data["age"]
 
-    user = User(firstName, lastName, age)
-
     try:
+        user = User(firstName, lastName, age)
         id = user_serv.add(user)
         return Response(data={"id": id}).__dict__, 201
     except ValueError as e:
