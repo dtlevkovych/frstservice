@@ -1,0 +1,4 @@
+add user_food:
+curl -i -X POST "http://127.0.0.1:5000/userfood" \
+    -H 'Content-Type: application/json' \
+    -d '{"userId": "5c2a42ae-e848-41d5-851c-1a11b85df82b", "foodId": "dc118b9c-d76d-43f8-bee9-24caffe2173f"}'

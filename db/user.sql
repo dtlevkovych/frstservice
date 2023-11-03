@@ -5,3 +5,5 @@ create table user (
     age integer,
     active integer
 );
+
+alter table user add column created_at integer not null default 0;
