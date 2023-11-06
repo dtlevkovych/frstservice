@@ -1,4 +1,4 @@
-from repository import user_repo, food_repo
+from repository import user_repo, food_repo, user_food_repo
 
 
 def add(userId, foodId):
@@ -8,4 +8,4 @@ def add(userId, foodId):
     if food_repo.get_one(foodId) == None:
         raise ValueError("Wrong food id")
 
-    return 1
+    return user_food_repo.add(userId, foodId)
