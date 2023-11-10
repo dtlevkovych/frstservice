@@ -1,19 +1,36 @@
 import repository.db_conn as db_conn
 import repository.db_tools as db_tools
+from model.userfood import UserFood
 
 
 def get_conn():
     return db_conn.get_conn()
 
 
-def add(userId, foodId):
+def get_all():
+    conn = get_conn()
+
+    cur = conn.cursor()
+    sql = "select id, user_id, food_id from user_food"
+            
+    cur.execute(sql)
+
+    rows = cur.fetchall()
+    print(rows)
+
+    return [UserFood(r[0], r[1], r[2]) for r in rows]
+
+
+def add(userFood):
     conn = get_conn()
 
     cur = conn.cursor()
     id = db_tools.get_next_id()
-    user_food_params = (id, userId, foodId)
+    user_food_params = (id, userFood.userId, userFood.foodId)
     sql = "insert into user_food (id, user_id, food_id, created_at) values (?, ?, ?, unixepoch() * 1000)"
             
     cur.execute(sql, user_food_params)
+
+    conn.commit()
 
     return id

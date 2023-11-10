@@ -1,3 +1,6 @@
+get_all:
+curl -i -X GET "http://127.0.0.1:5000/userfoods"
+
 add user_food:
 curl -i -X POST "http://127.0.0.1:5000/userfood" \
     -H 'Content-Type: application/json' \

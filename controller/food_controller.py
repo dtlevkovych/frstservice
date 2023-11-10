@@ -28,7 +28,7 @@ def get_foods():
             orders.append(Order(order_name, order_direction))
 
     return Response(data=food_serv.get_foods(orders)).__dict__
-
+    
 
 @bp.route("/food", methods = ["POST"] )
 def add_food():
