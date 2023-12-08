@@ -11,6 +11,7 @@ def get_foods():
     orders = []
 
     order_by = request.args.get("order_by")
+    
     if order_by != None:
         order_by = order_by.split(",")
 
