@@ -10,6 +10,11 @@ def get_all():
     return Response(data=user_food_serv.get_all()).__dict__, 201
 
 
+@bp.route("/userfood/user/<userId>/food/<foodId>")
+def get_one_by_id(userId, foodId):
+    return Response(data=user_food_serv.get_one_by_id(userId, foodId)).__dict__
+
+
 @bp.route("/userfood", methods = ["POST"])
 def add():
     data = request.get_json()
@@ -22,3 +27,5 @@ def add():
         return Response(data=id).__dict__, 201
     except Exception as e:
         return Response(status=False, error_msg=e.__str__()).__dict__, 400
+
+

@@ -31,7 +31,7 @@ def get_foods():
     return Response(data=food_serv.get_foods(orders)).__dict__
     
 
-@bp.route("/food", methods = ["POST"] )
+@bp.route("/food", methods = ["POST"])
 def add_food():
     data = request.get_json()
     name = data["name"]

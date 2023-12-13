@@ -21,6 +21,21 @@ def get_all():
     return [UserFood(r[0], r[1], r[2]) for r in rows]
 
 
+def get_one_by_id(userId, foodId):
+    conn = get_conn()
+
+    cur = conn.cursor()
+    user_food_params = (userId, foodId)
+    cur.execute("select id, user_id, food_id from user_food where user_id=? and food_id=?", user_food_params)
+
+    rows = cur.fetchall()
+
+    for r in rows:
+        return UserFood(r[0], r[1], r[2]).toJson()
+
+    return None
+
+
 def add(userFood):
     conn = get_conn()
 

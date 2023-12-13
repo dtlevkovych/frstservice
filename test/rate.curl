@@ -1,0 +1,4 @@
+add rate: 
+curl -i -X POST "http://127.0.0.1:5000/rate" \
+    -H 'Content-Type: application/json' \
+    -d '{"name": "exelent", "value": 1}'
