@@ -5,6 +5,11 @@ from model.response import Response
 from model.rate import Rate
 
 
+@bp.route("/rates")
+def get_rates():
+    return Response(data=rate_serv.get_rates()).__dict__
+    
+
 @bp.route("/rate", methods = ["POST"])
 def add_rate():
     data = request.get_json()
