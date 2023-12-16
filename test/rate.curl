@@ -1,7 +1,26 @@
 get_rates:
 curl -i -X GET "http://127.0.0.1:5000/rates"
 
+
 add rate: 
 curl -i -X POST "http://127.0.0.1:5000/rate" \
     -H 'Content-Type: application/json' \
     -d '{"name": "exelent", "value": 1}'
+
+curl -i -X POST "http://127.0.0.1:5000/rate" \
+    -H 'Content-Type: application/json' \
+    -d '{"name": "exelent", "value": 2}'
+
+curl -i -X POST "http://127.0.0.1:5000/rate" \
+    -H 'Content-Type: application/json' \
+    -d '{"name": "exelent", "value": 3}'
+
+
+update:
+curl -i -X PUT "http://127.0.0.1:5000/rate/0b18aabd-489e-45e3-a919-b791c0054c00" \
+    -H 'Content-Type: application/json' \
+    -d '{"name": "Potato", "rate": 3}'
+
+
+delete_user:
+curl -i -X DELETE "http://127.0.0.1:5000/rate/731480b3-6eb5-4b5c-a063-4ec068bf9460"

@@ -6,4 +6,4 @@ class Rate:
         self.createdAt = createdAt
 
     def toJson(self):
-        return {"id": self.id, "name": self.name, "rate": self.rate, "createdAt": self.createdAt}
+        return {"id": self.id, "name": self.name, "value": self.value, "createdAt": self.createdAt}
