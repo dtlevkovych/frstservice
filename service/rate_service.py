@@ -3,7 +3,7 @@ from exception.notfound import NotFoundError
 
 
 def get_rates():
-    return [f.__dict__ for f in rate_repo.get_rates()]
+    return rate_repo.get_rates()
 
 def get_one(id):
     return rate_repo.get_one(id)

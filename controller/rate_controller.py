@@ -7,12 +7,12 @@ from model.rate import Rate
 
 @bp.route("/rates")
 def get_rates():
-    return Response(data=rate_serv.get_rates()).__dict__
+    return Response(data=[r.__dict__ for r in rate_serv.get_rates()]).__dict__
 
 
 @bp.route("/rate/<id>")
 def get_rate(id):
-    return Response(data=rate_serv.get_one(id)).__dict__
+    return Response(data=rate_serv.get_one(id).__dict__).__dict__
 
 
 @bp.route("/rate", methods = ["POST"])
@@ -33,7 +33,7 @@ def add_rate():
 def update_rate(id):
     data = request.get_json()
     name = data["name"]
-    value = data["rate"]
+    value = data["value"]
 
     rate = Rate(id, name, value)
 

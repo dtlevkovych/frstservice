@@ -12,7 +12,7 @@ def get_foods(orders):
     conn = get_conn()
 
     cur = conn.cursor()
-    sql = "select id, name, rate from food" + db_tools.get_order_text(orders)
+    sql = "select id, name, rate_id from food" + db_tools.get_order_text(orders)
 
     cur.execute(sql)
             
@@ -29,7 +29,7 @@ def add(food):
     id = db_tools.get_next_id()
 
     food_params = (id, food.name, food.rate)
-    cur.execute("insert into food (id, name, rate) values (?, ?, ?)", food_params)
+    cur.execute("insert into food (id, name, rate_id) values (?, ?, ?)", food_params)
     conn.commit()
     
     return id
@@ -40,13 +40,12 @@ def get_one(id):
 
     cur = conn.cursor()
     food_params = (id,)
-    cur.execute("select id, name, rate from food where id=? limit 0,1", food_params)
+    cur.execute("select id, name, rate_id from food where id=? limit 0,1", food_params)
 
     rows = cur.fetchall()
 
     for r in rows:
-        food = Food(r[0], r[1], r[2])
-        return food.toJson()
+        return Food(r[0], r[1], r[2])
 
     return None
 
@@ -56,7 +55,7 @@ def get_one_by_name(name):
 
     cur = conn.cursor()
     food_params = (name,)
-    cur.execute("select id, name, rate from food where name=?", food_params)
+    cur.execute("select id, name, rate_id from food where name=?", food_params)
 
     rows = cur.fetchall()
 
@@ -70,8 +69,8 @@ def update(id, food):
     conn = get_conn()
 
     cur = conn.cursor()
-    food_params = (food.name, food.rate, id)
-    cur.execute("update food set name=?, rate=? where id=?", food_params)
+    food_params = (food.name, food.rateId, id)
+    cur.execute("update food set name=?, rate_id=? where id=?", food_params)
     conn.commit()
 
     return True

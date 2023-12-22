@@ -1,5 +1,7 @@
 create table food (
     id text,
     name text,
-    rate integer
+    rateId text not null
 );
+
+alter table food rename column rateId to rate_id;

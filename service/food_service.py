@@ -3,7 +3,7 @@ from exception.notfound import NotFoundError
 
 
 def get_foods(orders):
-    return [f.__dict__ for f in food_repo.get_foods(orders)]
+    return food_repo.get_foods(orders)
 
 
 def get_one(id):

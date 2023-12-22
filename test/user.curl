@@ -2,7 +2,7 @@ get_users:
 curl -i -X GET "http://127.0.0.1:5000/users?order_by=id"
 
 get_user: 
-curl -i -X GET "http://127.0.0.1:5000/user/30c64f74-d0bb-413e-8b57-4e3a1764ca5a"
+curl -i -X GET "http://127.0.0.1:5000/user/1234dsfwdsafdss"
 
 add_user:
 curl -i -X POST "http://127.0.0.1:5000/user" \

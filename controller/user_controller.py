@@ -27,11 +27,11 @@ def get_users():
                 order_direction = "asc"
             orders.append(Order(order_name, order_direction))
 
-    return Response(data=user_serv.get_all(orders)).__dict__
+    return Response(data=[u.__dict__ for u in user_serv.get_all(orders)]).__dict__
 
 @bp.route("/user/<id>")
 def get_user(id):
-    return Response(data=user_serv.get_one(id)).__dict__
+    return Response(data=user_serv.get_one(id).__dict__).__dict__
 
 @bp.route("/user", methods = ["POST"])
 def add_user():

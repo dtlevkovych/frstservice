@@ -29,8 +29,7 @@ def get_one(id):
     rows = cur.fetchall()
 
     for r in rows:
-        user = User(r[0], r[1], r[2], r[3], r[4], r[5])
-        return user.toJson()
+        return User(r[0], r[1], r[2], r[3], r[4], r[5])
 
     return None
 

@@ -28,17 +28,17 @@ def get_foods():
 
             orders.append(Order(order_name, order_direction))
 
-    return Response(data=food_serv.get_foods(orders)).__dict__
+    return Response(data=[f.__dict__ for f in food_serv.get_foods(orders)]).__dict__
     
 
 @bp.route("/food", methods = ["POST"])
 def add_food():
     data = request.get_json()
     name = data["name"]
-    rate = data["rate"]
+    rateId = data["rateId"]
 
     try:
-        food = Food(None, name, rate)
+        food = Food(None, name, rateId)
         id = food_serv.add(food)
         return Response(data={"id": id}).__dict__, 201
     except ValueError as e:
@@ -47,16 +47,16 @@ def add_food():
 
 @bp.route("/food/<id>")
 def get_food(id):
-    return Response(data=food_serv.get_one(id)).__dict__
+    return Response(data=food_serv.get_one(id).__dict__).__dict__
 
 
 @bp.route("/food/<id>", methods = ["PUT"])
 def update(id):
     data = request.get_json()
     name = data["name"]
-    rate = data["rate"]
+    rateId = data["rateId"]
 
-    food = Food(id, name, rate)
+    food = Food(id, name, rateId)
 
     try:
         food_serv.update(id, food)

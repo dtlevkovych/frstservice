@@ -3,7 +3,11 @@ from model.userfood import UserFood
 
 
 def get_all():
-    return [u.__dict__ for u in user_food_repo.get_all()]
+    return user_food_repo.get_all()
+    
+
+def get_all_by_user_id(userId):
+    return user_food_repo.get_all_by_user_id(userId)
 
 
 def get_one_by_id(userId, foodId):
@@ -18,3 +22,9 @@ def add(userFood):
         raise ValueError("Wrong food id")
 
     return user_food_repo.add(userFood)
+
+def delete(id):
+    if user_food_repo.get_one(id) == None:
+        return False
+
+    return user_food_repo.delete(id)

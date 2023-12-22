@@ -1,10 +1,20 @@
 get_all:
 curl -i -X GET "http://127.0.0.1:5000/userfoods"
 
+get_all_by_user_id:
+curl -i -X GET "http://127.0.0.1:5000/userfoods/user/1234dsfwdsafdss"
+
 get_one_by_id:
-curl -i -X GET "http://127.0.0.1:5000/userfood/user/21d7adb4-87b2-4135-ac8e-bd993a8ac1ff/food/dc118b9c-d76d-43f8-bee9-24caffe2173f"
+curl -i -X GET "http://127.0.0.1:5000/userfood/user/1234dsfwdsafdss/food/dc118b9c-d76d-43f8-bee9-24caffe2173f"
 
 add user_food:
 curl -i -X POST "http://127.0.0.1:5000/userfood" \
     -H 'Content-Type: application/json' \
     -d '{"userId": "1234dsfwdsafdss", "foodId": "dc118b9c-d76d-43f8-bee9-24caffe2173f"}'
+
+curl -i -X POST "http://127.0.0.1:5000/userfood" \
+    -H 'Content-Type: application/json' \
+    -d '{"userId": "e64ff942-6f34-41a1-a7a4-63e5b2e1a789", "foodId": "2294a585-3761-414a-bd1e-67b0b251d643"}'
+
+delete_user_food:
+curl -i -X DELETE "http://127.0.0.1:5000/userfood/e58eeeee-ac85-4b3a-931d-f2e39b857ba7"

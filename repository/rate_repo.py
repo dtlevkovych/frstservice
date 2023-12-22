@@ -28,8 +28,7 @@ def get_one(id):
     rows = cur.fetchall()
 
     for r in rows:
-        rate = Rate(r[0], r[1], r[2], r[3])
-        return rate.toJson()
+        return Rate(r[0], r[1], r[2], r[3])
 
     return None
 
