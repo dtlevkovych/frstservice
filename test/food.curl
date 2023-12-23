@@ -27,4 +27,4 @@ curl -i -X PUT "http://127.0.0.1:5000/food/dc118b9c-d76d-43f8-bee9-24caffe2173f"
     -d '{"name": "Potato", "rate": 3}'
 
 delete_food:
-curl -i -X DELETE "http://127.0.0.1:5000/food/e237c7b6-32c8-4122-8278-494a2cb7fdad"
+curl -i -X DELETE "http://127.0.0.1:5000/food/123"

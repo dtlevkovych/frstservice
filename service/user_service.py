@@ -25,7 +25,7 @@ def update(id, user):
 
 def delete(id):
     if repo.get_one(id) == None:
-        return False 
+        raise NotFoundError(message="Not found")
 
     return repo.delete(id)
 

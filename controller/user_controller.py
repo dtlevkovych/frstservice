@@ -66,9 +66,9 @@ def update_user(id):
 
 @bp.route("/user/<id>", methods = ["DELETE"])
 def delete_user(id):
-    result = user_serv.delete(id)
-
-    if result == False:
-        return Response(error_msg="Not Found", status=False).__dict__, 404
-
-    return Response().__dict__, 200
+    
+    try:
+        user_serv.delete(id)
+        return Response().__dict__, 200
+    except Exception as e:
+        return Response(error_msg=e.__str__(), status=False).__dict__, 404

@@ -3,6 +3,7 @@ from frstservice.controller import bp
 from model.response import Response
 from model.userfood import UserFood
 from service import user_food_service as user_food_serv
+from exception.notfound import NotFoundError
 
 
 @bp.route("/userfoods")
@@ -34,10 +35,9 @@ def add():
 
 @bp.route("/userfood/<id>", methods = ["DELETE"])
 def delete_userfood(id):
-    result = user_food_serv.delete(id)
 
-    if result == False:
-         return Response(error_msg="Not Found", status=False).__dict__, 404
-
-    return Response().__dict__, 200
-
+    try:
+        user_food_serv.delete(id)
+        return Response().__dict__, 200
+    except Exception as e:
+         return Response(error_msg=e.__str__(), status=False).__dict__, 404

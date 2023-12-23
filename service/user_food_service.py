@@ -1,5 +1,6 @@
 from repository import user_repo, food_repo, user_food_repo
 from model.userfood import UserFood
+from exception.notfound import NotFoundError
 
 
 def get_all():
@@ -25,6 +26,6 @@ def add(userFood):
 
 def delete(id):
     if user_food_repo.get_one(id) == None:
-        return False
+        raise NotFoundError(message="Not found")
 
     return user_food_repo.delete(id)

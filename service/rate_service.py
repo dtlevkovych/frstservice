@@ -21,6 +21,6 @@ def update_rate(id, rate):
 
 def delete_rate(id):
     if rate_repo.get_one(id) == None:
-        return False
+        raise NotFoundError(message="Not found")
 
     return rate_repo.delete_rate(id)

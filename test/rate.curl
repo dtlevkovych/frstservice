@@ -25,4 +25,4 @@ curl -i -X PUT "http://127.0.0.1:5000/rate/45268599-6711-4b6a-8d12-929a98a7e2d3"
 
 
 delete_user:
-curl -i -X DELETE "http://127.0.0.1:5000/rate/731480b3-6eb5-4b5c-a063-4ec068bf9460"
+curl -i -X DELETE "http://127.0.0.1:5000/rate/123"

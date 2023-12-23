@@ -35,4 +35,4 @@ curl -i -X PUT "http://127.0.0.1:5000/user/5c2a42ae-e848-41d5-851c-1a11b85df82b"
     -d '{"firstName": "Yurii", "lastName": "Levkovych", "age": 46}'
 
 delete_user:
-curl -i -X DELETE "http://127.0.0.1:5000/user/30c64f74-d0bb-413e-8b57-4e3a1764ca5a"
+curl -i -X DELETE "http://127.0.0.1:5000/user/123"

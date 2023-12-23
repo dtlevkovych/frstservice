@@ -30,7 +30,7 @@ def update(id, food):
 
 def delete(id):
     if food_repo.get_one(id) == None:
-        return False
+        raise NotFoundError(message="Not found")
 
     return food_repo.delete(id)
 
