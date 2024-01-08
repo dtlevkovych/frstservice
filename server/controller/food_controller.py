@@ -1,5 +1,5 @@
 from flask import request
-from frstservice.controller import bp
+from server.controller import bp
 from service import food_service as food_serv
 from model.food import Food
 from model.response import Response

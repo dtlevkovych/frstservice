@@ -1,5 +1,5 @@
 from flask import request
-from frstservice.controller import bp
+from server.controller import bp
 from service import rate_service as rate_serv
 from model.response import Response
 from model.rate import Rate

@@ -3,7 +3,7 @@ from service import user_service as user_serv
 from model.response import Response
 from model.user import User
 from model.order import Order
-from frstservice.controller import bp
+from server.controller import bp
 from exception.notfound import NotFoundError
 
 

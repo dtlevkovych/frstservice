@@ -8,5 +8,5 @@ CORS(app)
 def test_page():
     return "pong"
 
-from frstservice.controller import bp as user_ctrl
+from server.controller import bp as user_ctrl
 app.register_blueprint(user_ctrl)
