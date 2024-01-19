@@ -1,4 +1,4 @@
-<script src="@/router/food.js"></script>
+<script src="@/stores/food.js"></script>
 
 <template>
   <article id="article-food" class="article-params not-visible">

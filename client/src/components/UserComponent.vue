@@ -1,4 +1,4 @@
-<script src="@/router/user.js"></script>
+<script src="@/stores/user.js"></script>
 
 <template>
   <article id="article-user" class="article-params">
