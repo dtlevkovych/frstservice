@@ -1,38 +1,38 @@
 get_users: 
-curl -i -X GET "http://127.0.0.1:5000/users?order_by=id"
+curl -i -X GET "http://127.0.0.1:3000/api/users?order_by=id"
 
 get_user: 
-curl -i -X GET "http://127.0.0.1:5000/user/"
+curl -i -X GET "http://127.0.0.1:3000/api/user/"
 
 add_user:
-curl -i -X POST "http://127.0.0.1:5000/user" \
+curl -i -X POST "http://127.0.0.1:3000/api/user" \
     -H 'Content-Type: application/json' \
     -d '{"firstName": "Daryna", "lastName": "Levkovych", "age": 11}'
 
-curl -i -X POST "http://127.0.0.1:5000/user" \
+curl -i -X POST "http://127.0.0.1:3000/api/user" \
     -H 'Content-Type: application/json' \
     -d '{"firstName": "Dmytro", "lastName": "Levkovych", "age": 16}'
 
-curl -i -X POST "http://127.0.0.1:5000/user" \
+curl -i -X POST "http://127.0.0.1:3000/api/user" \
     -H 'Content-Type: application/json' \
     -d '{"firstName": "Sofiia", "lastName": "Levkovych", "age": 18}'
 
-curl -i -X POST "http://127.0.0.1:5000/user" \
+curl -i -X POST "http://127.0.0.1:3000/api/user" \
     -H 'Content-Type: application/json' \
     -d '{"firstName": "Yurii", "lastName": "Levkovych", "age": 64}'
 
-curl -i -X POST "http://127.0.0.1:5000/user" \
+curl -i -X POST "http://127.0.0.1:3000/api/user" \
     -H 'Content-Type: application/json' \
     -d '{"firstName": "Ivanna", "lastName": "Levkovych", "age": 40}'
 
-curl -i -X POST "http://127.0.0.1:5000/user" \
+curl -i -X POST "http://127.0.0.1:3000/api/user" \
     -H 'Content-Type: application/json' \
     -d '{"firstName": "Petro", "lastName": "Levkovych", "age": 66}'
 
 update:
-curl -i -X PUT "http://127.0.0.1:5000/user/5c2a42ae-e848-41d5-851c-1a11b85df82b" \
+curl -i -X PUT "http://127.0.0.1:3000/api/user/5c2a42ae-e848-41d5-851c-1a11b85df82b" \
     -H 'Content-Type: application/json' \
     -d '{"firstName": "Yurii", "lastName": "Levkovych", "age": 46}'
 
 delete_user:
-curl -i -X DELETE "http://127.0.0.1:5000/user/123"
+curl -i -X DELETE "http://127.0.0.1:3000/api/user/123"

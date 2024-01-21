@@ -9,10 +9,26 @@ export default {
         this.showUserTable()
         this.getUsers()
       },
+      showUserTable() {
+        console.log(document);
+        document.getElementById('user-table').style.display = 'block'
+        document.getElementById('user-edit').style.display = 'none'
+      },
+      showAddUser() {
+        document.getElementById('userId').value = ''
+        document.getElementById('user-table').style.display = 'none'
+        document.getElementById('user-edit').style.display = 'block'
+      },
+      showUpdateUser(userId) {
+        this.getUserAndFillForm(userId)
+        document.getElementById('userId').value = userId
+        document.getElementById('user-table').style.display = 'none'
+        document.getElementById('user-edit').style.display = 'block'
+      },
       async getUsers() {
         console.log("get users");
         try {
-          const response = await fetch('http://127.0.0.1:5000/users?order_by=id', {
+          const response = await fetch('http://127.0.0.1:3000/api/users?order_by=id', {
             method: 'GET',
             headers: {
               'Content-Type': 'application/json'
@@ -34,7 +50,7 @@ export default {
       },
       async deleteUser(userId) {
         try {
-          const response = await fetch('http://127.0.0.1:5000/user/' + userId, {
+          const response = await fetch('http://127.0.0.1:3000/api/user/' + userId, {
             method: 'DELETE',
             headers: {
               'Content-Type': 'application/json'
@@ -50,21 +66,6 @@ export default {
         } catch (error) {
           alert('Error: ', error)
         }
-      },
-      showUserTable() {
-        document.getElementById('user-table').style.display = 'block'
-        document.getElementById('user-edit').style.display = 'none'
-      },
-      showAddUser() {
-        document.getElementById('userId').value = ''
-        document.getElementById('user-table').style.display = 'none'
-        document.getElementById('user-edit').style.display = 'block'
-      },
-      showUpdateUser(userId) {
-        this.getUserAndFillForm(userId)
-        document.getElementById('userId').value = userId
-        document.getElementById('user-table').style.display = 'none'
-        document.getElementById('user-edit').style.display = 'block'
       },
       saveUser() {
         var userId = document.getElementById('userId').value
@@ -84,7 +85,7 @@ export default {
           age: age
         }
         try {
-          const response = await fetch('http://127.0.0.1:5000/user', {
+          const response = await fetch('http://127.0.0.1:3000/api/user', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'
@@ -112,7 +113,7 @@ export default {
           age: age
         }
         try {
-          const response = await fetch('http://127.0.0.1:5000/user/' + userId, {
+          const response = await fetch('http://127.0.0.1:3000/api/user/' + userId, {
             method: 'PUT',
             headers: {
               'Content-Type': 'application/json'
@@ -132,7 +133,7 @@ export default {
       },
       async getUserAndFillForm(userId) {
         try {
-          const response = await fetch('http://127.0.0.1:5000/user/' + userId, {
+          const response = await fetch('http://127.0.0.1:3000/api/user/' + userId, {
             method: 'GET',
             headers: {
               'Content-Type': 'application/json'

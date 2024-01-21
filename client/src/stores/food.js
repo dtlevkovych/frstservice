@@ -12,7 +12,7 @@ export default {
       async getFoods() {
       console.log("get foods");
         try {
-          const response = await fetch('http://127.0.0.1:5000/foods', {
+          const response = await fetch('http://127.0.0.1:3000/api/foods', {
             method: 'GET',
             headers: {
               'Content-Type': 'application/json'

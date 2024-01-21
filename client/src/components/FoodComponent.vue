@@ -1,7 +1,7 @@
 <script src="@/stores/food.js"></script>
 
 <template>
-  <article id="article-food" class="article-params not-visible">
+  <article id="article-food">
     <div id="user-table" style="text-align: center">
       <table class="table">
         <thead>

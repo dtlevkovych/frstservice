@@ -1,9 +1,7 @@
 <script setup>
-
 import UserComponent from '@/components/UserComponent.vue'
 import FoodComponent from '@/components/FoodComponent.vue'
 import RateComponent from '@/components/RateComponent.vue'
-
 </script>
 
 <template>
@@ -14,12 +12,5 @@ import RateComponent from '@/components/RateComponent.vue'
   </div>
 </template>
 
-<style lang="css">
-.visible {
-  display: block;
-}
-
-.not-visible {
-  display: none;
-}
+<style>
 </style>

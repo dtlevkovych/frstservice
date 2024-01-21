@@ -1,5 +1,5 @@
 <template>
-  <article id="article-rate" class="article-params not-visible">
+  <article id="article-rate">
     <h1>Rate</h1>
   </article>
 </template>

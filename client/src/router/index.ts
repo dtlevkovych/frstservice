@@ -4,11 +4,12 @@ import FoodComponent from '@/components/FoodComponent.vue'
 import RateComponent from '@/components/RateComponent.vue'
 
 
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/user',
+      path: '/',
       name: 'user',
       component: UserComponent
     },

@@ -6,15 +6,15 @@ import { RouterView } from 'vue-router'
 <div>
     <nav class="navbar navbar-dark bg-dark">
       <div class="btn-group">
-        <router-link to="/user"><button class="btn btn-dark btn-secondary">
+        <router-link to="/" class="btn btn-dark btn-secondary">
           User
-        </button></router-link>
-        <router-link to="/food"><button class="btn btn-dark btn-secondary">
+        </router-link>
+        <router-link to="/food" class="btn btn-dark btn-secondary">
           Food
-        </button></router-link>
-        <router-link to="/rate"><button class="btn btn-dark btn-secondary">
+        </router-link>
+        <router-link to="/rate" class="btn btn-dark btn-secondary">
           Rate
-        </button></router-link>
+        </router-link>
       </div>
     </nav>
   </div>

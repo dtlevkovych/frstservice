@@ -3,11 +3,15 @@ services:
     build:
       dockerfile: Dockerfile
       context: ./server
-    ports:
-      - '5000:6010'
+ 
   client:
     build:
       dockerfile: Dockerfile
       context: ./client
+  
+  nginx:
+    build:
+      dockerfile: Dockerfile
+      context: ./nginx
     ports:
-      - '3000:8080'
+      - '3000:80'
