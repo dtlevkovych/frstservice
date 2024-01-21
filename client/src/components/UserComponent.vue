@@ -2,7 +2,7 @@
 
 <template>
   <article id="article-user" class="article-params">
-    <div id="user-table" style="text-align: center">
+    <div v-if="ui.showTable" id="user-table" style="text-align: center">
       <table class="table">
         <thead>
           <tr>
@@ -30,30 +30,27 @@
         </tr>
       </table>
     </div>
-    <div id="user-edit">
-      <form>
-        <input type="text" hidden id="userId" />
-        <div class="control-group mx-auto m-3 w-25">
-          <label for="firstName">First name</label>
-          <input id="firstName" type="text" class="form-control" />
-        </div>
+    <div v-if="ui.showEditForm" id="user-edit">
+      <div class="control-group mx-auto m-3 w-25">
+        <label for="firstName">First name</label>
+        <input id="firstName" type="text" class="form-control" v-model="ui.editForm.firstName" />
+      </div>
 
-        <div class="control-group mx-auto m-3 w-25">
-          <label for="lastName">Last name</label>
-          <input id="lastName" type="text" class="form-control" />
-        </div>
+      <div class="control-group mx-auto m-3 w-25">
+        <label for="lastName">Last name</label>
+        <input id="lastName" type="text" class="form-control" v-model="ui.editForm.lastName" />
+      </div>
 
-        <div class="control-group mx-auto m-3 w-25">
-          <label for="age">Age</label>
-          <input id="age" type="number" class="form-control" />
-        </div>
+      <div class="control-group mx-auto m-3 w-25">
+        <label for="age">Age</label>
+        <input id="age" type="number" class="form-control" v-model="ui.editForm.age" />
+      </div>
 
-        <div class="control-group mx-auto m-3 w-25">
-          <button @click="saveUser()" class="btn btn-outline-success btn-sm">Save</button>
-          &nbsp;
-          <button @click="showUserTable()" class="btn btn-outline-dark btn-sm">Cancel</button>
-        </div>
-      </form>
+      <div class="control-group mx-auto m-3 w-25">
+        <button @click="saveUser()" class="btn btn-outline-success btn-sm">Save</button>
+        &nbsp;
+        <button @click="showUserTable()" class="btn btn-outline-dark btn-sm">Cancel</button>
+      </div>
     </div>
   </article>
 </template>

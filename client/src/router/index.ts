@@ -8,21 +8,9 @@ import RateComponent from '@/components/RateComponent.vue'
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
-    {
-      path: '/',
-      name: 'user',
-      component: UserComponent
-    },
-    {
-      path: '/food',
-      name: 'food',
-      component: FoodComponent
-    },
-    {
-      path: '/rate',
-      name: 'rate',
-      component: RateComponent
-    }
+    {path: '/user', name: 'user', component: UserComponent},
+    {path: '/food', name: 'food', component: FoodComponent},
+    {path: '/rate', name: 'rate', component: RateComponent}
   ]
 })
 

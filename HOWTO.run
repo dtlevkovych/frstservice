@@ -1,0 +1,22 @@
+DESCRIPTION:
+
+Please use docker and docker-compose to run the solution
+that contains following parts as docker container:
+
+- server: container with python flask server solution
+
+- client: container with vue.js client solution
+
+- nginx: nginx http server container that sits in front of two previous
+
+
+HOW TO RUN:
+
+- in root of the project run following command:
+
+docker-compose up --build
+
+
+- in browser go by following link:
+
+http://localhost:3000/

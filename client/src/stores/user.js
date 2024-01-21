@@ -1,6 +1,16 @@
 export default {
     data: function () {
       return {
+        ui: {
+          showTable: true,
+          showEditForm: false,
+          editForm: {
+            id: null,
+            firstName: '',
+            lastName: '',
+            age: 0
+          }
+        },
         users: []
       }
     },
@@ -9,24 +19,29 @@ export default {
         this.showUserTable()
         this.getUsers()
       },
+      cleanEditForm() {
+        this.ui.editForm.id = null;
+        this.ui.editForm.firstName = '';
+        this.ui.editForm.lastName = '';
+        this.ui.editForm.age = 0;
+      },
       showUserTable() {
-        console.log(document);
-        document.getElementById('user-table').style.display = 'block'
-        document.getElementById('user-edit').style.display = 'none'
+        this.ui.showTable = true;
+        this.ui.showEditForm = false;
       },
       showAddUser() {
-        document.getElementById('userId').value = ''
-        document.getElementById('user-table').style.display = 'none'
-        document.getElementById('user-edit').style.display = 'block'
+        this.ui.showTable = false;
+        this.ui.showEditForm = true;
+        this.cleanEditForm();
       },
       showUpdateUser(userId) {
-        this.getUserAndFillForm(userId)
-        document.getElementById('userId').value = userId
-        document.getElementById('user-table').style.display = 'none'
-        document.getElementById('user-edit').style.display = 'block'
+        this.ui.showTable = false;
+        this.ui.showEditForm = true;
+        this.ui.editForm.id = userId;
+        this.getUserAndFillForm(userId);
       },
       async getUsers() {
-        console.log("get users");
+
         try {
           const response = await fetch('http://127.0.0.1:3000/api/users?order_by=id', {
             method: 'GET',
@@ -68,21 +83,17 @@ export default {
         }
       },
       saveUser() {
-        var userId = document.getElementById('userId').value
-        if (userId == '') {
-          this.addUser()
+        if (this.ui.editForm.id == null) {
+          this.addUser();
         } else {
-          this.updateUser(userId)
+          this.updateUser(this.ui.editForm.id);
         }
       },
       async addUser() {
-        var firstName = document.getElementById('firstName').value
-        var lastName = document.getElementById('lastName').value
-        var age = document.getElementById('age').value
         var obj = {
-          firstName: firstName,
-          lastName: lastName,
-          age: age
+          firstName: this.ui.editForm.firstName,
+          lastName: this.ui.editForm.lastName,
+          age: this.ui.editForm.age
         }
         try {
           const response = await fetch('http://127.0.0.1:3000/api/user', {
@@ -104,13 +115,10 @@ export default {
         }
       },
       async updateUser(userId) {
-        var firstName = document.getElementById('firstName').value
-        var lastName = document.getElementById('lastName').value
-        var age = document.getElementById('age').value
         var obj = {
-          firstName: firstName,
-          lastName: lastName,
-          age: age
+          firstName: this.ui.editForm.firstName,
+          lastName: this.ui.editForm.lastName,
+          age: this.ui.editForm.age
         }
         try {
           const response = await fetch('http://127.0.0.1:3000/api/user/' + userId, {
@@ -143,9 +151,9 @@ export default {
           const result = await response.json()
   
           if (result.status == true) {
-            document.getElementById('firstName').value = result.data.firstName
-            document.getElementById('lastName').value = result.data.lastName
-            document.getElementById('age').value = result.data.age
+            this.ui.editForm.firstName = result.data.firstName;
+            this.ui.editForm.lastName = result.data.lastName;
+            this.ui.editForm.age = result.data.age;
           } else {
             alert(result.error_msg)
           }
