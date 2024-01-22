@@ -64,6 +64,10 @@ export default {
         }
       },
       async deleteUser(userId) {
+        if (confirm("Press 'OK' to delete the user.") == false) {
+          return;
+        }
+
         try {
           const response = await fetch('http://127.0.0.1:3000/api/user/' + userId, {
             method: 'DELETE',
@@ -86,6 +90,8 @@ export default {
         if (this.ui.editForm.id == null) {
           this.addUser();
         } else {
+          if (confirm("Press 'OK' to update the user.") == false) return;
+          
           this.updateUser(this.ui.editForm.id);
         }
       },
