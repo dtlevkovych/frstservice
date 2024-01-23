@@ -63,11 +63,12 @@ export default {
           alert('Error: ', error)
         }
       },
+      removeUser(userId) {
+        if (confirm("Press 'OK' to delete the user.") == false) return;
+        
+        this.deleteUser(userId);
+      },
       async deleteUser(userId) {
-        if (confirm("Press 'OK' to delete the user.") == false) {
-          return;
-        }
-
         try {
           const response = await fetch('http://127.0.0.1:3000/api/user/' + userId, {
             method: 'DELETE',

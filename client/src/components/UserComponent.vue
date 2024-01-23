@@ -25,7 +25,7 @@
             </button>
           </td>
           <td>
-            <button @click="deleteUser(u.id)" class="btn btn-outline-danger btn-sm">Delete</button>
+            <button @click="removeUser(u.id)" class="btn btn-outline-danger btn-sm">Delete</button>
           </td>
         </tr>
       </table>
