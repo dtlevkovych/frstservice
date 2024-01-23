@@ -65,7 +65,7 @@ export default {
       },
       removeUser(userId) {
         if (confirm("Press 'OK' to delete the user.") == false) return;
-        
+
         this.deleteUser(userId);
       },
       async deleteUser(userId) {
@@ -113,7 +113,8 @@ export default {
           const result = await response.json()
   
           if (result.status == true) {
-            this.refresh()
+            this.refresh();
+            setTimeout(alert, 1000, "User has been successfully created.");
           } else {
             alert(result.error_msg)
           }
@@ -138,7 +139,8 @@ export default {
           const result = await response.json()
   
           if (result.status == true) {
-            this.refresh()
+            this.refresh();
+            setTimeout(alert, 1000, "User has been successfully updated.");
           } else {
             alert(result.error_msg)
           }
