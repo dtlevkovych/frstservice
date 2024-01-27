@@ -1,3 +1,5 @@
+import alerts from "@/stores/alerts.js"
+
 export default {
     data: function () {
       return {
@@ -57,10 +59,10 @@ export default {
               this.users.push(result.data[i])
             }
           } else {
-            alert(result.error_msg)
+            alerts.alertError(result.error_msg);
           }
         } catch (error) {
-          alert('Error: ', error)
+          alerts.alertError(error);
         }
       },
       removeUser(userId) {
@@ -81,10 +83,10 @@ export default {
           if (result.status == true) {
             this.getUsers()
           } else {
-            alert(result.error_msg)
+            alerts.alertError(result.error_msg);
           }
         } catch (error) {
-          alert('Error: ', error)
+          alerts.alertError(error);
         }
       },
       saveUser() {
@@ -114,12 +116,12 @@ export default {
   
           if (result.status == true) {
             this.refresh();
-            setTimeout(alert, 1000, "User has been successfully created.");
+            alerts.alertSuccess("User has been successfully created.");
           } else {
-            alert(result.error_msg)
+            alerts.alertError(result.error_msg);
           }
         } catch (error) {
-          alert('Error: ', error)
+          alerts.alertError(error);
         }
       },
       async updateUser(userId) {
@@ -140,12 +142,12 @@ export default {
   
           if (result.status == true) {
             this.refresh();
-            setTimeout(alert, 1000, "User has been successfully updated.");
+            alert.alertSuccess("User has been successfully updated.");
           } else {
-            alert(result.error_msg)
+            alerts.alertError(result.error_msg);
           }
         } catch (error) {
-          alert('Error: ', error)
+          alerts.alertError(error);
         }
       },
       async getUserAndFillForm(userId) {
@@ -164,10 +166,10 @@ export default {
             this.ui.editForm.lastName = result.data.lastName;
             this.ui.editForm.age = result.data.age;
           } else {
-            alert(result.error_msg)
+            alerts.alertError(result.error_msg);
           }
         } catch (error) {
-          alert('Error: ', error)
+          alerts.alertError(error);
         }
       }
     },

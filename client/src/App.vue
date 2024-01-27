@@ -11,6 +11,8 @@ import { RouterView } from 'vue-router'
         <router-link to="/rate" class="btn btn-dark btn-secondary">Rate</router-link>
       </div>
     </nav>
+    <div class="alert-area">
+    </div>
   </div>
   <link
     href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
