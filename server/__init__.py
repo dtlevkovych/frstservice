@@ -9,4 +9,4 @@ def test_page():
     return "pong"
 
 from server.controller import bp as ctrl
-app.register_blueprint(ctrl)
+app.register_blueprint(ctrl, url_prefix="/api")
