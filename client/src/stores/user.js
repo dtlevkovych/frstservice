@@ -66,9 +66,14 @@ export default {
         }
       },
       removeUser(userId) {
-        if (confirm("Press 'OK' to delete the user.") == false) return;
-
-        this.deleteUser(userId);
+        var self = this;
+        bootbox.confirm({
+          closeButton: false,
+          message: "Press 'OK' to delete the user.",
+          callback: function(result) {
+            if(result == true) self.deleteUser(userId);
+          }
+        });
       },
       async deleteUser(userId) {
         try {
@@ -82,6 +87,7 @@ export default {
   
           if (result.status == true) {
             this.getUsers()
+            alerts.alertSuccess("User deleted successfully.");
           } else {
             alerts.alertError(result.error_msg);
           }
@@ -93,9 +99,14 @@ export default {
         if (this.ui.editForm.id == null) {
           this.addUser();
         } else {
-          if (confirm("Press 'OK' to update the user.") == false) return;
-          
-          this.updateUser(this.ui.editForm.id);
+          var self = this;
+          bootbox.confirm({
+            closeButton: false,
+            message: "Press 'OK' to update the user.",
+            callback: function(result) {
+              if(result == true) self.updateUser(self.ui.editForm.id);
+            }
+          });
         }
       },
       async addUser() {
@@ -142,7 +153,7 @@ export default {
   
           if (result.status == true) {
             this.refresh();
-            alert.alertSuccess("User has been successfully updated.");
+            alerts.alertSuccess("User has been successfully updated.");
           } else {
             alerts.alertError(result.error_msg);
           }
