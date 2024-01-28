@@ -1,22 +1,40 @@
 DESCRIPTION:
 
-Please use docker and docker-compose to run the solution
-that contains following parts as docker container:
 
-- server: container with python flask server solution
+DOCKER WAY:
 
-- client: container with vue.js client solution
+    Please use docker and docker-compose to run the solution
+    that contains following parts as docker container:
 
-- nginx: nginx http server container that sits in front of two previous
+    - server: container with python flask server solution
 
+    - client: container with vue.js client solution
 
-HOW TO RUN:
-
-- in root of the project run following command:
-
-docker-compose up --build
+    - nginx: nginx http server container that sits in front of two previous
 
 
-- in browser go by following link:
+    HOW TO RUN:
 
-http://localhost:3000/
+    - in root of the project run following command:
+
+    docker-compose up --build
+
+
+    - in browser go by following link:
+
+    http://localhost:3000/
+
+
+
+
+NON-DOCKER WAY:
+
+    To run the solution please use following two commands:
+
+    1. From server folder:
+
+    python3 -m flask --app . run --port=3000
+
+    2. From client folder:
+
+    npm run dev
