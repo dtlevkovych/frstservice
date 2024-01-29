@@ -66,14 +66,7 @@ export default {
         }
       },
       removeUser(userId) {
-        var self = this;
-        bootbox.confirm({
-          closeButton: false,
-          message: "Press 'OK' to delete the user.",
-          callback: function(result) {
-            if(result == true) self.deleteUser(userId);
-          }
-        });
+        alerts.showConfirm("Press 'OK' to delete the user", this.deleteUser, userId);
       },
       async deleteUser(userId) {
         try {
@@ -99,14 +92,7 @@ export default {
         if (this.ui.editForm.id == null) {
           this.addUser();
         } else {
-          var self = this;
-          bootbox.confirm({
-            closeButton: false,
-            message: "Press 'OK' to update the user.",
-            callback: function(result) {
-              if(result == true) self.updateUser(self.ui.editForm.id);
-            }
-          });
+          alerts.showConfirm("Press 'OK' to update the user", this.updateUser, this.ui.editForm.id);
         }
       },
       async addUser() {
