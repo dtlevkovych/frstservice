@@ -38,10 +38,10 @@ def add_user():
     data = request.get_json()
     firstName = data["firstName"]
     lastName = data["lastName"]
-    age = data["age"]
+    dob = data["dob"]
 
     try:
-        user = User(firstName, lastName, age)
+        user = User(firstName, lastName, dob)
         id = user_serv.add(user)
         return Response(data={"id": id}).__dict__, 201
     except ValueError as e:
@@ -53,9 +53,9 @@ def update_user(id):
     data = request.get_json()
     firstName = data["firstName"]
     lastName = data["lastName"]
-    age = data["age"]
+    dob = data["dob"]
 
-    user = User(firstName, lastName, age)
+    user = User(firstName, lastName, dob)
     
     try:
         user_serv.update(id, user)

@@ -8,7 +8,7 @@
           <tr>
             <th scope="col">First Name</th>
             <th scope="col">Last Name</th>
-            <th scope="col">age</th>
+            <th scope="col">Age</th>
             <th scope="col"></th>
             <th scope="col">
               <button @click="showAddUser()" class="btn btn-outline-success btn-sm">Add</button>
@@ -42,8 +42,8 @@
       </div>
 
       <div class="control-group mx-auto m-3 w-25">
-        <label for="age">Age</label>
-        <input id="age" type="number" class="form-control" v-model="ui.editForm.age" />
+        <label for="dob">Date Of Birthday</label>
+        <input id="dob" type="date" class="form-control" v-model="ui.editForm.dob" />
       </div>
 
       <div class="control-group mx-auto m-3 w-25">

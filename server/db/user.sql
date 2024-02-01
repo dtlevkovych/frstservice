@@ -7,3 +7,4 @@ create table user (
 );
 
 alter table user add column created_at integer not null default 0;
+alter table user rename column age to dob;

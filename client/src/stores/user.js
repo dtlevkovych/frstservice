@@ -10,7 +10,8 @@ export default {
             id: null,
             firstName: '',
             lastName: '',
-            age: 0
+            age: 0,
+            dob: ""
           }
         },
         users: []
@@ -25,7 +26,6 @@ export default {
         this.ui.editForm.id = null;
         this.ui.editForm.firstName = '';
         this.ui.editForm.lastName = '';
-        this.ui.editForm.age = 0;
       },
       showUserTable() {
         this.ui.showTable = true;
@@ -56,6 +56,7 @@ export default {
           if (result.status == true) {
             this.users = []
             for (var i = 0; i < result.data.length; i++) {
+              result.data[i].age = parseInt((Date.now() - result.data[i].dob) / 1000 / 60 / 60 / 24 / 365);
               this.users.push(result.data[i])
             }
           } else {
@@ -99,7 +100,7 @@ export default {
         var obj = {
           firstName: this.ui.editForm.firstName,
           lastName: this.ui.editForm.lastName,
-          age: this.ui.editForm.age
+          dob: this.getMillisFromString(this.ui.editForm.dob)
         }
         try {
           const response = await fetch('http://127.0.0.1:3000/api/user', {
@@ -125,7 +126,7 @@ export default {
         var obj = {
           firstName: this.ui.editForm.firstName,
           lastName: this.ui.editForm.lastName,
-          age: this.ui.editForm.age
+          dob: this.getMillisFromString(this.ui.editForm.dob)
         }
         try {
           const response = await fetch('http://127.0.0.1:3000/api/user/' + userId, {
@@ -161,13 +162,25 @@ export default {
           if (result.status == true) {
             this.ui.editForm.firstName = result.data.firstName;
             this.ui.editForm.lastName = result.data.lastName;
-            this.ui.editForm.age = result.data.age;
+            var dob = new Date(result.data.dob);
+            var month = (dob.getMonth() + 1);
+            var day = dob.getDate();
+            this.ui.editForm.dob = "" + dob.getFullYear() + "-" + (month < 10 ? "0" + month : month) + "-" + (day < 10 ? "0" + day : day);
           } else {
             alerts.alertError(result.error_msg);
           }
         } catch (error) {
           alerts.alertError(error);
         }
+      },
+      getMillisFromString(date) {
+        var dob = new Date();
+        var date_arr = date.split("-");
+        dob.setFullYear(parseInt(date_arr[0]));
+        dob.setMonth(parseInt(date_arr[1]) - 1);
+        dob.setDate(parseInt(date_arr[2]));
+
+        return dob.valueOf();
       }
     },
     mounted() {
