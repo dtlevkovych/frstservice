@@ -1,4 +1,5 @@
 import alerts from "@/stores/alerts.js"
+import dateTools from "@/stores/date_tools.js"
 
 export default {
     data: function () {
@@ -100,7 +101,7 @@ export default {
         var obj = {
           firstName: this.ui.editForm.firstName,
           lastName: this.ui.editForm.lastName,
-          dob: this.getMillisFromString(this.ui.editForm.dob)
+          dob: dateTools.stringToMillis(this.ui.editForm.dob)
         }
         try {
           const response = await fetch('http://127.0.0.1:3000/api/user', {
@@ -126,7 +127,7 @@ export default {
         var obj = {
           firstName: this.ui.editForm.firstName,
           lastName: this.ui.editForm.lastName,
-          dob: this.getMillisFromString(this.ui.editForm.dob)
+          dob: dateTools.stringToMillis(this.ui.editForm.dob)
         }
         try {
           const response = await fetch('http://127.0.0.1:3000/api/user/' + userId, {
@@ -162,25 +163,13 @@ export default {
           if (result.status == true) {
             this.ui.editForm.firstName = result.data.firstName;
             this.ui.editForm.lastName = result.data.lastName;
-            var dob = new Date(result.data.dob);
-            var month = (dob.getMonth() + 1);
-            var day = dob.getDate();
-            this.ui.editForm.dob = "" + dob.getFullYear() + "-" + (month < 10 ? "0" + month : month) + "-" + (day < 10 ? "0" + day : day);
+            this.ui.editForm.dob = dateTools.millisToString(result.data.dob);
           } else {
             alerts.alertError(result.error_msg);
           }
         } catch (error) {
           alerts.alertError(error);
         }
-      },
-      getMillisFromString(date) {
-        var dob = new Date();
-        var date_arr = date.split("-");
-        dob.setFullYear(parseInt(date_arr[0]));
-        dob.setMonth(parseInt(date_arr[1]) - 1);
-        dob.setDate(parseInt(date_arr[2]));
-
-        return dob.valueOf();
       }
     },
     mounted() {
