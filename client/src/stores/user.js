@@ -27,6 +27,7 @@ export default {
         this.ui.editForm.id = null;
         this.ui.editForm.firstName = '';
         this.ui.editForm.lastName = '';
+        this.ui.editForm.dob = dateTools.millisToString((new Date()).valueOf());
       },
       showUserTable() {
         this.ui.showTable = true;
