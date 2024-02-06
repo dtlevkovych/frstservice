@@ -1,6 +1,10 @@
 get_users: 
 curl -i -X GET "http://127.0.0.1:3000/api/users?order_by=id"
 
+get_users_pagination:
+curl -i -X GET "http://127.0.0.1:3000/api/users/pagination?limit=2"
+curl -i -X GET "http://127.0.0.1:3000/api/users/pagination?limit=2&since=1704462204000"
+
 get_user: 
 curl -i -X GET "http://127.0.0.1:3000/api/user/"
 

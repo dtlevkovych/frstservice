@@ -29,6 +29,13 @@ def get_users():
 
     return Response(data=[u.__dict__ for u in user_serv.get_all(orders)]).__dict__
 
+@bp.route("/users/pagination")
+def get_users_pagination():
+    limit = request.args.get("limit")
+    since = request.args.get("since")
+
+    return Response(data=[u.__dict__ for u in user_serv.get_users_pagination(limit, since)]).__dict__
+
 @bp.route("/user/<id>")
 def get_user(id):
     return Response(data=user_serv.get_one(id).__dict__).__dict__
