@@ -18,19 +18,12 @@ def get_all(orders):
 
     return [User(r[0], r[1], r[2], r[3], r[4], r[5]) for r in rows]
 
-def get_users_pagination(limit, since):
+def get_users_pagination(start, limit):
     conn = get_conn()
 
     cur = conn.cursor()
-    sql = ""
-    if since == None:
-        users_params = (limit,)
-        sql = "select first_name, last_name, dob, id, active, created_at from user order by created_at desc limit ?"
-    else:
-        users_params = (since, limit)
-        sql = "select first_name, last_name, dob, id, active, created_at from user where created_at < ? order by created_at desc limit ?"
-
-    cur.execute(sql, users_params)
+    user_params = (start, limit)
+    cur.execute("select first_name, last_name, dob, id, active, created_at from user order by created_at desc limit ?,?", user_params)
 
     rows = cur.fetchall()
 

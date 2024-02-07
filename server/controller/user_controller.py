@@ -32,9 +32,17 @@ def get_users():
 @bp.route("/users/pagination")
 def get_users_pagination():
     limit = request.args.get("limit")
-    since = request.args.get("since")
+    page = request.args.get("page")
 
-    return Response(data=[u.__dict__ for u in user_serv.get_users_pagination(limit, since)]).__dict__
+    if limit == None:
+        limit = 10
+
+    if page == None:
+        page = 0
+    
+    start = int(page) * int(limit)
+
+    return Response(data=[u.__dict__ for u in user_serv.get_users_pagination(start, int(limit))]).__dict__
 
 @bp.route("/user/<id>")
 def get_user(id):

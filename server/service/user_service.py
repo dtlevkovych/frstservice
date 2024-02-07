@@ -5,8 +5,8 @@ from exception.notfound import NotFoundError
 def get_all(orders):
     return repo.get_all(orders)
 
-def get_users_pagination(limit, since):
-    return repo.get_users_pagination(limit, since)
+def get_users_pagination(start, limit):
+    return repo.get_users_pagination(start, limit)
 
 def get_one(id):
     return repo.get_one(id)
