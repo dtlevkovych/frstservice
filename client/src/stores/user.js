@@ -5,6 +5,8 @@ export default {
     data: function () {
       return {
         ui: {
+          page: 0,
+          limit: 5,
           showTable: true,
           showEditForm: false,
           editForm: {
@@ -44,10 +46,22 @@ export default {
         this.ui.editForm.id = userId;
         this.getUserAndFillForm(userId);
       },
+      showPreviousPage() {
+        if(this.ui.page < 1) {
+          return false;
+        } else {
+          this.ui.page = this.ui.page - 1;
+          this.getUsers();
+        }
+      },
+      showNextPage() {
+        this.ui.page = this.ui.page + 1;
+        this.getUsers();
+      },
       async getUsers() {
 
         try {
-          const response = await fetch('http://127.0.0.1:3000/api/users?order_by=id', {
+          const response = await fetch('http://127.0.0.1:3000/api/users/pagination?limit=' + this.ui.limit + '&page=' + this.ui.page, {
             method: 'GET',
             headers: {
               'Content-Type': 'application/json'

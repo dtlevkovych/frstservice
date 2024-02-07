@@ -2,6 +2,10 @@
 
 <template>
   <article id="article-user" class="article-params">
+  
+   <button class="btn btn-link" v-if="ui.page > 0" @click="showPreviousPage">&#8592;Previous</button>
+   <button class="btn btn-link" v-if="users.length >= ui.limit" @click="showNextPage">Next&#8594;</button>
+
     <div v-if="ui.showTable" id="user-table" style="text-align: center">
       <table class="table">
         <thead>
@@ -30,6 +34,7 @@
         </tr>
       </table>
     </div>
+
     <div v-if="ui.showEditForm" id="user-edit">
       <div class="control-group mx-auto m-3 w-25">
         <label for="firstName">First name</label>
@@ -51,6 +56,7 @@
         &nbsp;
         <button @click="showUserTable()" class="btn btn-outline-dark btn-sm">Cancel</button>
       </div>
+
     </div>
   </article>
 </template>
