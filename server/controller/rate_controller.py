@@ -14,6 +14,20 @@ def get_rates():
 def get_rate(id):
     return Response(data=rate_serv.get_one(id).__dict__).__dict__
 
+@bp.route("/rates/pagination")
+def get_rates_pagination():
+    limit = request.args.get("limit")
+    page = request.args.get("page")
+
+    if limit == None:
+        limit = 10
+
+    if page == None:
+        page = 0
+    
+    start = int(page) * int(limit)
+
+    return Response(data=[u.__dict__ for u in rate_serv.get_rates_pagination(start, int(limit))]).__dict__
 
 @bp.route("/rate", methods = ["POST"])
 def add_rate():

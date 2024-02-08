@@ -8,6 +8,9 @@ def get_rates():
 def get_one(id):
     return rate_repo.get_one(id)
 
+def get_rates_pagination(start, limit):
+    return rate_repo.get_rates_pagination(start, limit)
+
 def add_rate(rate):
     return rate_repo.add_rate(rate)
 

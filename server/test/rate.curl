@@ -4,6 +4,10 @@ curl -i -X GET "http://127.0.0.1:3000/api/rates"
 get_rate: 
 curl -i -X GET "http://127.0.0.1:3000/api/rate/45268599-6711-4b6a-8d12-929a98a7e2d3"
 
+get_users_pagination:
+curl -i -X GET "http://127.0.0.1:3000/api/rates/pagination?limit=2"
+curl -i -X GET "http://127.0.0.1:3000/api/rates/pagination?limit=2&page=1"
+
 add rate: 
 curl -i -X POST "http://127.0.0.1:3000/api/rate" \
     -H 'Content-Type: application/json' \

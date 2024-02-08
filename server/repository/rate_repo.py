@@ -32,6 +32,16 @@ def get_one(id):
 
     return None
 
+def get_rates_pagination(start, limit):
+    conn = get_conn()
+
+    cur = conn.cursor()
+    rate_params = (start, limit)
+    cur.execute("select id, name, value, created_at from rate order by value limit ?,?", rate_params)
+
+    rows = cur.fetchall()
+
+    return [Rate(r[0], r[1], r[2], r[3]) for r in rows]
 
 def add_rate(rate):
     conn = get_conn()
