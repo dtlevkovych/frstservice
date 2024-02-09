@@ -2,37 +2,41 @@
 
 <template>
   <article id="article-user" class="article-params">
-  
-   <button class="btn btn-link" v-if="ui.page > 0" @click="showPreviousPage">&#8592;Previous</button>
-   <button class="btn btn-link" v-if="users.length >= ui.limit" @click="showNextPage">Next&#8594;</button>
 
-    <div v-if="ui.showTable" id="user-table" style="text-align: center">
-      <table class="table">
-        <thead>
-          <tr>
-            <th scope="col">First Name</th>
-            <th scope="col">Last Name</th>
-            <th scope="col">Age</th>
-            <th scope="col"></th>
-            <th scope="col">
-              <button @click="showAddUser()" class="btn btn-outline-success btn-sm">Add</button>
-            </th>
+    <div v-if="ui.showTable" id="user-table">
+    
+      <button class="btn btn-link" v-if="ui.page > 0" @click="showPreviousPage">&#8592;Previous</button>
+      <button class="btn btn-link" v-if="users.length >= ui.limit" @click="showNextPage">Next&#8594;</button>
+
+      <div style="text-align: center">
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">First Name</th>
+              <th scope="col">Last Name</th>
+              <th scope="col">Age</th>
+              <th scope="col"></th>
+              <th scope="col">
+                <button @click="showAddUser()" class="btn btn-outline-success btn-sm">Add</button>
+              </th>
+            </tr>
+          </thead>
+          <tr v-for="u in users">
+            <td>{{ u.firstName }}</td>
+            <td>{{ u.lastName }}</td>
+            <td>{{ u.age }}</td>
+            <td>
+              <button @click="showUpdateUser(u.id)" class="btn btn-outline-primary btn-sm">
+                Edit
+              </button>
+            </td>
+            <td>
+              <button @click="removeUser(u.id)" class="btn btn-outline-danger btn-sm">Delete</button>
+            </td>
           </tr>
-        </thead>
-        <tr v-for="u in users">
-          <td>{{ u.firstName }}</td>
-          <td>{{ u.lastName }}</td>
-          <td>{{ u.age }}</td>
-          <td>
-            <button @click="showUpdateUser(u.id)" class="btn btn-outline-primary btn-sm">
-              Edit
-            </button>
-          </td>
-          <td>
-            <button @click="removeUser(u.id)" class="btn btn-outline-danger btn-sm">Delete</button>
-          </td>
-        </tr>
-      </table>
+        </table>
+      </div>
+      
     </div>
 
     <div v-if="ui.showEditForm" id="user-edit">
@@ -56,7 +60,7 @@
         &nbsp;
         <button @click="showUserTable()" class="btn btn-outline-dark btn-sm">Cancel</button>
       </div>
-
     </div>
+    
   </article>
 </template>
