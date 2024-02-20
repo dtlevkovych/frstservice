@@ -19,8 +19,8 @@ export default {
     },
     methods: {
         refresh() {
-            this.showRateTable()
-            this.getRates()
+            this.showRateTable();
+            this.getRates();
           },
           cleanEditForm() {
             this.ui.editForm.id = null;

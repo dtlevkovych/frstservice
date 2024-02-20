@@ -20,6 +20,16 @@ def get_foods(orders):
 
     return [Food(r[0], r[1], r[2]) for r in rows]
 
+def get_foods_pagination(start, limit):
+    conn = get_conn()
+
+    cur = conn.cursor()
+    food_params = (start, limit)
+    cur.execute("select id, name, rate_id from food order by name limit ?,?", food_params)
+
+    rows = cur.fetchall()
+
+    return [Food(r[0], r[1], r[2]) for r in rows]
 
 def add(food):
     conn = get_conn()
@@ -28,7 +38,7 @@ def add(food):
 
     id = db_tools.get_next_id()
 
-    food_params = (id, food.name, food.rate)
+    food_params = (id, food.name, food.rateId)
     cur.execute("insert into food (id, name, rate_id) values (?, ?, ?)", food_params)
     conn.commit()
     

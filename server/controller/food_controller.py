@@ -44,6 +44,20 @@ def add_food():
     except ValueError as e:
         return Response(error_msg=e.__str__(), status=False).__dict__, 400
 
+@bp.route("/foods/pagination")
+def get_foods_pagination():
+    limit = request.args.get("limit")
+    page = request.args.get("page")
+
+    if limit == None:
+        limit = 10
+
+    if page == None:
+        page = 0
+    
+    start = int(page) * int(limit)
+
+    return Response(data=[u.__dict__ for u in food_serv.get_foods_pagination(start, int(limit))]).__dict__
 
 @bp.route("/food/<id>")
 def get_food(id):

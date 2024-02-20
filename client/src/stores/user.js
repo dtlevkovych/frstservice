@@ -22,8 +22,8 @@ export default {
     },
     methods: {
       refresh() {
-        this.showUserTable()
-        this.getUsers()
+        this.showUserTable();
+        this.getUsers();
       },
       cleanEditForm() {
         this.ui.editForm.id = null;

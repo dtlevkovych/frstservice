@@ -12,7 +12,7 @@ def get_rates_pagination(start, limit):
     return rate_repo.get_rates_pagination(start, limit)
 
 def add_rate(rate):
-    check_if_exist_by_value(rate.value)
+    check_if_exist_by_value(rate.value, rate.name)
 
     return rate_repo.add_rate(rate)
 
@@ -21,7 +21,7 @@ def update_rate(id, rate):
     if rate_repo.get_one(id) == None:
         raise NotFoundError()
 
-    check_if_exist_by_value(rate.value)
+    check_if_exist_by_value(rate.value, rate.name)
 
     return rate_repo.update_rate(id, rate)
 
@@ -32,6 +32,9 @@ def delete_rate(id):
 
     return rate_repo.delete_rate(id)
 
-def check_if_exist_by_value(value):
+def check_if_exist_by_value(value, name):
     if rate_repo.get_one_by_value(value) != None:
         raise ValueError("Rate with such value exist.")
+
+    if rate_repo.get_one_by_name(name) != None:
+        raise ValueError("Rate with such name exist.")

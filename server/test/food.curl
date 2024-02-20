@@ -4,27 +4,31 @@ curl -i -X GET "http://127.0.0.1:3000/api/foods"
 get_food: 
 curl -i -X GET "http://127.0.0.1:3000/api/food/2294a585-3761-414a-bd1e-67b0b251d643"
 
+get_foods_pagination:
+curl -i -X GET "http://127.0.0.1:3000/api/foods/pagination?limit=2"
+curl -i -X GET "http://127.0.0.1:3000/api/foods/pagination?limit=2&page=1"
+
 add food: 
 curl -i -X POST "http://127.0.0.1:3000/api/food" \
     -H 'Content-Type: application/json' \
-    -d '{"name": "Salad", "rate": 1}'
+    -d '{"name": "Salad", "rateId": 1}'
 
 curl -i -X POST "http://127.0.0.1:3000/api/food" \
     -H 'Content-Type: application/json' \
-    -d '{"name": "Potato", "rate": 2}'
+    -d '{"name": "Potato", "rateId": 2}'
 
 curl -i -X POST "http://127.0.0.1:3000/api/food" \
     -H 'Content-Type: application/json' \
-    -d '{"name": "Chips", "rate": 3}'
+    -d '{"name": "Chips", "rateId": 3}'
 
 curl -i -X POST "http://127.0.0.1:3000/api/food" \
     -H 'Content-Type: application/json' \
-    -d '{"name": "Tomato", "rate": 1}'
+    -d '{"name": "Tomato", "rateId": 1}'
 
 update:
-curl -i -X PUT "http://127.0.0.1:3000/api/food/dc118b9c-d76d-43f8-bee9-24caffe2173f" \
+curl -i -X PUT "http://127.0.0.1:3000/api/food/2294a585-3761-414a-bd1e-67b0b251d643" \
     -H 'Content-Type: application/json' \
-    -d '{"name": "Potato", "rate": 3}'
+    -d '{"name": "Salad", "rateId": "9817174a-3540-4b58-9c41-e9f1f1d8dd99"}'
 
 delete_food:
 curl -i -X DELETE "http://127.0.0.1:3000/api/food/123"

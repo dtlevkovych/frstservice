@@ -9,6 +9,8 @@ def get_foods(orders):
 def get_one(id):
     return food_repo.get_one(id)
 
+def get_foods_pagination(start, limit):
+    return food_repo.get_foods_pagination(start, limit)
 
 def add(food):
     if food_repo.get_one_by_name(food.name) != None:
