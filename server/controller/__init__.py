@@ -6,3 +6,4 @@ from server.controller import user_controller
 from server.controller import food_controller
 from server.controller import user_food_controller
 from server.controller import rate_controller
+from server.controller import exception_handler
