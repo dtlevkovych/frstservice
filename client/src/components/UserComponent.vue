@@ -8,35 +8,31 @@
       <button class="btn btn-link" v-if="ui.page > 0" @click="showPreviousPage">&#8592;Previous</button>
       <button class="btn btn-link" v-if="users.length >= ui.limit" @click="showNextPage">Next&#8594;</button>
 
-      <div style="text-align: center">
+      <div style="margin-left: 100px;">
         <table class="table">
           <thead>
             <tr>
-              <th scope="col">First Name</th>
-              <th scope="col">Last Name</th>
-              <th scope="col">Age</th>
               <th scope="col"></th>
               <th scope="col">
-                <button @click="showAddUser()" class="btn btn-outline-success btn-sm">Add</button>
+                <button @click="showAddUser()" class="btn btn-outline-success">Add</button>
               </th>
             </tr>
           </thead>
           <tr v-for="u in users">
-            <td>{{ u.firstName }}</td>
-            <td>{{ u.lastName }}</td>
-            <td>{{ u.age }}</td>
-            <td>
-              <button @click="showUpdateUser(u.id)" class="btn btn-outline-primary btn-sm">
-                Edit
-              </button>
+            <td style="padding: 50px;">
+              <p style="margin-top: 0px; padding: 1px;"><h3>{{ u.firstName }} {{ u.lastName }}</h3></p>
+              <p style="margin-top: 0px; padding: 1px;">
+                {{ u.age }} yo &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <button @click="showUpdateUser(u.id)" class="btn btn-link btn-sm">Edit</button>
+                <button @click="removeUser(u.id)" class="btn btn-link btn-sm">Delete</button>
+              </p>
             </td>
             <td>
-              <button @click="removeUser(u.id)" class="btn btn-outline-danger btn-sm">Delete</button>
             </td>
           </tr>
         </table>
       </div>
-      
+
     </div>
 
     <div v-if="ui.showEditForm" id="user-edit">

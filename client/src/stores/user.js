@@ -6,7 +6,7 @@ export default {
       return {
         ui: {
           page: 0,
-          limit: 5,
+          limit: 3,
           showTable: true,
           showEditForm: false,
           editForm: {
