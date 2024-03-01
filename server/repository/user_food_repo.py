@@ -19,6 +19,7 @@ def get_all():
 
     return [UserFood(r[0], r[1], r[2]) for r in rows]
 
+
 def get_all_by_user_id(userId):
     conn = get_conn()
 
@@ -31,6 +32,25 @@ def get_all_by_user_id(userId):
 
     return [UserFood(r[0], r[1], r[2]) for r in rows]
 
+
+def get_eating_health_report(userId):
+    conn = get_conn()
+
+    cur = conn.cursor()
+    user_food_params = (userId,)
+    sql = """
+        SELECT r.value, r.color_hex, count(*) as count 
+        FROM user_food AS uf 
+        INNER JOIN food AS f ON uf.food_id=f.id 
+        INNER JOIN rate AS r ON f.rate_id = r.id 
+        WHERE uf.user_id=? 
+        GROUP BY r.value 
+        ORDER BY r.value"""
+
+    cur.execute(sql, user_food_params)
+    rows = cur.fetchall()
+    
+    return [{"value": r[0], "colorHex": r[1], "count": r[2]} for r in rows]
 
 def get_one_by_id(userId, foodId):
     conn = get_conn()

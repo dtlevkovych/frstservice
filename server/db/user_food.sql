@@ -6,3 +6,4 @@ create table user_food (
 );
 
 alter table user_food add column created_at integer not null default 0;
+alter table user_food drop column color_hex;

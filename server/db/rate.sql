@@ -4,3 +4,4 @@ create table rate (
     value integer,
     created_at integer not null default 0
 );
+alter table rate add column color_hex text after value;
