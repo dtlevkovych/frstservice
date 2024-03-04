@@ -34,9 +34,10 @@ def add_rate():
     data = request.get_json()
     name = data["name"]
     value = data["value"]
+    colorHex = data["colorHex"]
 
     try:
-        rate = Rate(None, name, value)
+        rate = Rate(None, name, value, colorHex)
         id = rate_serv.add_rate(rate)
         return Response(data=id).__dict__, 201
     except ValueError as e:
@@ -48,8 +49,9 @@ def update_rate(id):
     data = request.get_json()
     name = data["name"]
     value = data["value"]
+    colorHex = data["colorHex"]
 
-    rate = Rate(id, name, value)
+    rate = Rate(id, name, value, colorHex)
 
     try:
         rate_serv.update_rate(id, rate)

@@ -21,7 +21,7 @@ def update_rate(id, rate):
     if rate_repo.get_one(id) == None:
         raise NotFoundError()
 
-    check_if_exist_by_value(rate.value, rate.name)
+    check_if_exist_by_value(rate.value, rate.name, id)
 
     return rate_repo.update_rate(id, rate)
 
@@ -32,9 +32,9 @@ def delete_rate(id):
 
     return rate_repo.delete_rate(id)
 
-def check_if_exist_by_value(value, name):
-    if rate_repo.get_one_by_value(value) != None:
+def check_if_exist_by_value(value, name, excluded_id = None):
+    if rate_repo.get_one_by_value(value, excluded_id) != None:
         raise ValueError("Rate with such value exist.")
 
-    if rate_repo.get_one_by_name(name) != None:
+    if rate_repo.get_one_by_name(name, excluded_id) != None:
         raise ValueError("Rate with such name exist.")

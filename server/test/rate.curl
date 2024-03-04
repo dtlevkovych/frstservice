@@ -2,7 +2,7 @@ get_rates:
 curl -i -X GET "http://127.0.0.1:3000/api/rates"
 
 get_rate: 
-curl -i -X GET "http://127.0.0.1:3000/api/rate/45268599-6711-4b6a-8d12-929a98a7e2d3"
+curl -i -X GET "http://127.0.0.1:3000/api/rate/69fe4481-8c73-4630-ae3b-feea7619af12"
 
 get_users_pagination:
 curl -i -X GET "http://127.0.0.1:3000/api/rates/pagination?limit=2"
@@ -11,22 +11,22 @@ curl -i -X GET "http://127.0.0.1:3000/api/rates/pagination?limit=2&page=1"
 add rate: 
 curl -i -X POST "http://127.0.0.1:3000/api/rate" \
     -H 'Content-Type: application/json' \
-    -d '{"name": "exelent", "value": 1}'
+    -d '{"name": "excellent", "value": 4, "colorHex": "#FFFFFF"}'
 
 curl -i -X POST "http://127.0.0.1:3000/api/rate" \
     -H 'Content-Type: application/json' \
-    -d '{"name": "neutral", "value": 2}'
+    -d '{"name": "neutral", "value": 2, "colorHex": "#FFFFFF"}'
 
 curl -i -X POST "http://127.0.0.1:3000/api/rate" \
     -H 'Content-Type: application/json' \
-    -d '{"name": "exelent", "value": 3}'
+    -d '{"name": "exelent", "value": 3, "colorHex": "#FFFFFF"}'
 
 
 update:
-curl -i -X PUT "http://127.0.0.1:3000/api/rate/45268599-6711-4b6a-8d12-929a98a7e2d3" \
+curl -i -X PUT "http://127.0.0.1:3000/api/rate/4a08bcd6-124e-4667-a692-1f690765705a" \
     -H 'Content-Type: application/json' \
-    -d '{"name": "excellent", "value": 1}'
+    -d '{"name": "excellent", "value": 1, "colorHex": "#00FF00"}'
 
 
 delete_user:
-curl -i -X DELETE "http://127.0.0.1:3000/api/rate/123"
+curl -i -X DELETE "http://127.0.0.1:3000/api/rate/9817174a-3540-4b58-9c41-e9f1f1d8dd99"
