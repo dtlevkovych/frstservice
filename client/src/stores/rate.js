@@ -11,7 +11,8 @@ export default {
           editForm: {
             id: null,
             name: '',
-            value: 0
+            value: 0,
+            colorHex: ''
           }
         },
         rates: []
@@ -26,6 +27,7 @@ export default {
             this.ui.editForm.id = null;
             this.ui.editForm.name = '';
             this.ui.editForm.value = '';
+            this.ui.editForm.colorHex = '';
           },
           showRateTable() {
             this.ui.showTable = true;
@@ -88,6 +90,7 @@ export default {
             var obj = {
               name: this.ui.editForm.name,
               value: this.ui.editForm.value,
+              colorHex: this.ui.editForm.colorHex
             }
             try {
               const response = await fetch('http://127.0.0.1:3000/api/rate', {
@@ -112,7 +115,8 @@ export default {
         async updateRate(rateId) {
             var obj = {
               name: this.ui.editForm.name,
-              value: this.ui.editForm.value
+              value: this.ui.editForm.value,
+              colorHex: this.ui.editForm.colorHex
             }
             try {
               const response = await fetch('http://127.0.0.1:3000/api/rate/' + rateId, {
@@ -171,13 +175,14 @@ export default {
               if (result.status == true) {
                 this.ui.editForm.name = result.data.name;
                 this.ui.editForm.value = result.data.value;
+                this.ui.editForm.colorHex = result.data.colorHex;
               } else {
                 alerts.alertError(result.error_msg);
               }
             } catch (error) {
               alerts.alertError(error);
             }
-          }
+          },
     },
     mounted() {
       this.refresh()

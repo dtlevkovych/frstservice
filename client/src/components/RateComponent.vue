@@ -14,6 +14,7 @@
             <tr>
               <th scope="col">Name</th>
               <th scope="col">Value</th>
+              <th scope="col">Color</th>
               <th scope="col"></th>
               <th scope="col">
                 <button @click="showAddRate()" class="btn btn-outline-success btn-sm">Add</button>
@@ -23,6 +24,7 @@
           <tr v-for="r in rates">
             <td>{{ r.name }}</td>
             <td>{{ r.value }}</td>
+            <td> <input disabled type="color" :value="r.colorHex" /></td>
             <td>
               <button @click="showUpdateRate(r.id)" class="btn btn-outline-primary btn-sm">
                 Edit
@@ -45,6 +47,11 @@
       <div class="control-group mx-auto m-3 w-25">
         <label for="value">Value</label>
         <input id="value" type="number" class="form-control" v-model="ui.editForm.value" />
+      </div>
+
+       <div class="control-group mx-auto m-3 w-25">
+        <label for="color">Color</label>
+        <input id="color" type="color" class="form-control" v-model="ui.editForm.colorHex" />
       </div>
 
       <div class="control-group mx-auto m-3 w-25">
