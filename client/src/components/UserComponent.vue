@@ -28,6 +28,9 @@
               </p>
             </td>
             <td>
+              <div>
+                <canvas :id="getUserChartId(u.id)" width="100px" height="100px"></canvas>
+              </div>
             </td>
           </tr>
         </table>

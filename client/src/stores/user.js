@@ -17,7 +17,9 @@ export default {
             dob: ""
           }
         },
-        users: []
+        users: [],
+        eatingHealth: new Map(),
+        charts: []
       }
     },
     methods: {
@@ -58,6 +60,45 @@ export default {
         this.ui.page = this.ui.page + 1;
         this.getUsers();
       },
+      destroyCharts() {
+        for (var i = 0; i < this.charts; i++) {
+          this.charts[i].destroy();
+        }
+      },
+      getUserChartId(userId) {
+        return "user-chart-" + userId;
+      },
+      formChartjs(userId) {
+        console.log(userId);
+        var userData =  this.eatingHealth.get(userId);
+        var lables = [];
+        var datasetsData = [];
+        var datasetsColor = [];
+        for (var i = 0; i < userData.length; i++) {
+          lables.push[""+i];
+          datasetsData.push[userData[i].percentage];
+          datasetsColor.push[userData[i].colorHex];
+        }
+        const data = {
+          labels: lables,
+          datasets: [{
+            label: 'Eating Health.',
+            data: datasetsData,
+            backgroundColor: datasetsColor,
+            hoverOffset: 4
+          }]
+        };
+
+        const ctx = document.getElementById(this.getUserChartId(userId));
+
+        var chart = new Chart(ctx, {
+          type: 'doughnut',
+          data: data
+        });
+
+        this.charts.push[chart];
+
+      },
       async getUsers() {
 
         try {
@@ -70,11 +111,38 @@ export default {
           const result = await response.json()
   
           if (result.status == true) {
-            this.users = []
+            this.users = [];
+            this.eatingHealth = new Map();
+            this.destroyCharts();
             for (var i = 0; i < result.data.length; i++) {
               result.data[i].age = parseInt((Date.now() - result.data[i].dob) / 1000 / 60 / 60 / 24 / 365);
-              this.users.push(result.data[i])
+              this.users.push(result.data[i]);
+              this.getEatingHealthReport(result.data[i].id);
             }
+          } else {
+            alerts.alertError(result.error_msg);
+          }
+        } catch (error) {
+          alerts.alertError(error);
+        }
+      },
+      removeUser(userId) {
+        alerts.showConfirm("Press 'OK' to delete the user", this.deleteUser, userId);
+      },
+      async getEatingHealthReport(userId) {
+
+        try {
+          const response = await fetch('http://127.0.0.1:3000/api/userfoods/eatinghealth/user/' + userId, {
+            method: 'GET',
+            headers: {
+              'Content-Type': 'application/json'
+            }
+          })
+          const result = await response.json();
+  
+          if (result.status == true) {
+            this.eatingHealth.set(userId, result.data);
+            this.formChartjs(userId);
           } else {
             alerts.alertError(result.error_msg);
           }
