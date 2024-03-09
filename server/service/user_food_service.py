@@ -15,12 +15,7 @@ def get_one_by_id(userId, foodId):
     return user_food_repo.get_one_by_id(userId, foodId)
 
 def get_eating_health_report(userId):
-    total_count = 0
-    result = user_food_repo.get_eating_health_report(userId)
-    for r in result:
-        total_count = total_count + r["count"]
-    print(total_count)
-    return [{"value": r["value"], "colorHex": r["colorHex"], "percentage": round(r["count"] * 100 / total_count)} for r in result]
+    return user_food_repo.get_eating_health_report(userId) 
 
 def add(userFood):
     if user_repo.get_one(userFood.userId) == None:

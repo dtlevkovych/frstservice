@@ -13,13 +13,13 @@
           <thead>
             <tr>
               <th scope="col"></th>
-              <th scope="col">
-                <button @click="showAddUser()" class="btn btn-outline-success">Add</button>
+              <th scope="col" style="text-align: right;">
+                <button @click="showAddUser()" class="btn btn-outline-success">Add</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
               </th>
             </tr>
           </thead>
           <tr v-for="u in users">
-            <td style="padding: 50px;">
+            <td style="padding: 50px; text-align: center;">
               <p style="margin-top: 0px; padding: 1px;"><h3>{{ u.firstName }} {{ u.lastName }}</h3></p>
               <p style="margin-top: 0px; padding: 1px;">
                 {{ u.age }} yo &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
@@ -27,9 +27,9 @@
                 <button @click="removeUser(u.id)" class="btn btn-link btn-sm">Delete</button>
               </p>
             </td>
-            <td>
-              <div>
-                <canvas :id="getUserChartId(u.id)" width="100px" height="100px"></canvas>
+            <td style="text-align: left;">
+              <div class="chart-container" style="width: 200px; height: 200px;">
+                <canvas :id="getUserChartId(u.id)"></canvas>
               </div>
             </td>
           </tr>

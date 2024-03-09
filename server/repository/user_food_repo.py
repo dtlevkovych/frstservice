@@ -1,6 +1,7 @@
 import repository.db_conn as db_conn
 import repository.db_tools as db_tools
 from model.userfood import UserFood
+from model.rate_report import RateReport
 
 
 def get_conn():
@@ -39,7 +40,7 @@ def get_eating_health_report(userId):
     cur = conn.cursor()
     user_food_params = (userId,)
     sql = """
-        SELECT r.value, r.color_hex, count(*) as count 
+        SELECT r.id, r.name, r.value, r.color_hex, r.created_at, count(*) as count 
         FROM user_food AS uf 
         INNER JOIN food AS f ON uf.food_id=f.id 
         INNER JOIN rate AS r ON f.rate_id = r.id 
@@ -50,7 +51,7 @@ def get_eating_health_report(userId):
     cur.execute(sql, user_food_params)
     rows = cur.fetchall()
     
-    return [{"value": r[0], "colorHex": r[1], "count": r[2]} for r in rows]
+    return [ RateReport(r[0], r[1], r[2], r[3], r[4], r[5]) for r in rows]
 
 def get_one_by_id(userId, foodId):
     conn = get_conn()

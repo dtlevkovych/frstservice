@@ -69,15 +69,14 @@ export default {
         return "user-chart-" + userId;
       },
       formChartjs(userId) {
-        console.log(userId);
         var userData =  this.eatingHealth.get(userId);
         var lables = [];
         var datasetsData = [];
         var datasetsColor = [];
         for (var i = 0; i < userData.length; i++) {
-          lables.push[""+i];
-          datasetsData.push[userData[i].percentage];
-          datasetsColor.push[userData[i].colorHex];
+          lables.push(userData[i].name);
+          datasetsData.push(userData[i].count);
+          datasetsColor.push(userData[i].colorHex);
         }
         const data = {
           labels: lables,
@@ -89,14 +88,26 @@ export default {
           }]
         };
 
-        const ctx = document.getElementById(this.getUserChartId(userId));
+        var chartId = this.getUserChartId(userId);
+        var chart = Chart.getChart(chartId);
+        try {
+          chart.destroy();
+        } catch(error) {}
+        const ctx = document.getElementById(chartId);
 
-        var chart = new Chart(ctx, {
+        chart = new Chart(ctx, {
           type: 'doughnut',
-          data: data
+          data: data,
+          options: {
+            plugins: {
+              legend: {
+                display: false
+              }
+            }
+          }
         });
 
-        this.charts.push[chart];
+        this.charts.push(chart);
 
       },
       async getUsers() {

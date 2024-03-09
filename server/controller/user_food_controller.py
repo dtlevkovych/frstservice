@@ -21,7 +21,7 @@ def get_one_by_id(userId, foodId):
 
 @bp.route(API_USERFOODS + "/eatinghealth/user/<userId>")
 def get_eating_health_report(userId):
-    return Response(data=user_food_serv.get_eating_health_report(userId)).__dict__
+    return Response(data=[r.__dict__ for r in user_food_serv.get_eating_health_report(userId)]).__dict__
 
 @bp.route(API_USERFOODS, methods = ["POST"])
 def add():
