@@ -26,6 +26,9 @@ def add(userFood):
 
     return user_food_repo.add(userFood)
 
+def delete_userfood_by_user_id(userId):
+    return user_food_repo.delete_userfood_by_user_id(userId)
+
 def delete(id):
     if user_food_repo.get_one(id) == None:
         raise NotFoundError(message="Not found")

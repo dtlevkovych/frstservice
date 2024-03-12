@@ -2,7 +2,7 @@ get_all:
 curl -i -X GET "http://127.0.0.1:3000/api/userfoods"
 
 get_all_by_user_id:
-curl -i -X GET "http://127.0.0.1:3000/api/userfoods/user/950f4862-bc4b-483b-a763-5c39765d2a71"
+curl -i -X GET "http://127.0.0.1:3000/api/userfoods/user/4373c647-ce85-4895-ae75-b6ee1eb10622"
 
 get_eating_health_report:
 curl -i -X GET "http://127.0.0.1:3000/api/userfoods/eatinghealth/user/950f4862-bc4b-483b-a763-5c39765d2a71"
@@ -13,7 +13,7 @@ curl -i -X GET "http://127.0.0.1:3000/api/userfoods/user/1234dsfwdsafdss/food/dc
 add user_food:
 curl -i -X POST "http://127.0.0.1:3000/api/userfoods" \
     -H 'Content-Type: application/json' \
-    -d '{"userId": "1234dsfwdsafdss", "foodId": "dc118b9c-d76d-43f8-bee9-24caffe2173f"}'
+    -d '{"userId": "55bbd926-e82e-482f-9e10-bfa519c08eae", "foodId": "2294a585-3761-414a-bd1e-67b0b251d643"}'
 
 curl -i -X POST "http://127.0.0.1:3000/api/userfoods" \
     -H 'Content-Type: application/json' \

@@ -96,6 +96,15 @@ def get_one(id):
 
     return None
 
+def delete_userfood_by_user_id(userId):
+    conn = get_conn()
+    cur = conn.cursor()
+    user_food_params = (userId,)
+    cur.execute("delete from user_food where user_id=?", user_food_params)
+    conn.commit()
+
+    return True
+
 def delete(id):
     conn = get_conn()
     cur = conn.cursor()

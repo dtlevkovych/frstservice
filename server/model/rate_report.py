@@ -2,7 +2,6 @@ from model.rate import Rate
 
 class RateReport(Rate):
     def __init__(self, id, name, value, colorHex, createdAt = 0, count=0):
-        print("RateReport")
         super().__init__(id, name, value, colorHex, createdAt)
         self.count = count
 

@@ -6,7 +6,7 @@ curl -i -X GET "http://127.0.0.1:3000/api/users/pagination?limit=2"
 curl -i -X GET "http://127.0.0.1:3000/api/users/pagination?limit=2&page=1"
 
 get_user: 
-curl -i -X GET "http://127.0.0.1:3000/api/user/"
+curl -i -X GET "http://127.0.0.1:3000/api/user/0f14db66-4728-467c-a90b-4f10eabea202"
 
 add_user:
 curl -i -X POST "http://127.0.0.1:3000/api/user" \
@@ -23,7 +23,7 @@ curl -i -X POST "http://127.0.0.1:3000/api/user" \
 
 curl -i -X POST "http://127.0.0.1:3000/api/user" \
     -H 'Content-Type: application/json' \
-    -d '{"firstName": "Yurii", "lastName": "Levkovych", "dob": 64}'
+    -d '{"firstName": "Yurii", "lastName": "Levkovych", "dob": 46}'
 
 curl -i -X POST "http://127.0.0.1:3000/api/user" \
     -H 'Content-Type: application/json' \
@@ -39,4 +39,4 @@ curl -i -X PUT "http://127.0.0.1:3000/api/user/5c2a42ae-e848-41d5-851c-1a11b85df
     -d '{"firstName": "Yurii", "lastName": "Levkovych", "dob": 46}'
 
 delete_user:
-curl -i -X DELETE "http://127.0.0.1:3000/api/user/123"
+curl -i -X DELETE "http://127.0.0.1:3000/api/user/0f14db66-4728-467c-a90b-4f10eabea202"

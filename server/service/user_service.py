@@ -1,4 +1,5 @@
 from repository import user_repo as repo
+from service import user_food_service as userfood_service
 from exception.notfound import NotFoundError
 
 
@@ -30,5 +31,6 @@ def delete(id):
     if repo.get_one(id) == None:
         raise NotFoundError(message="Not found")
 
-    return repo.delete(id)
-
+    result = repo.delete(id)
+    userfood_service.delete_userfood_by_user_id(id)
+    return result
