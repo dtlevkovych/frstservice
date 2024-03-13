@@ -14,7 +14,7 @@
             <tr>
               <th scope="col"></th>
               <th scope="col" style="text-align: right;">
-                <button @click="showAddUser()" class="btn btn-outline-success">Add</button>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                <button @click="showAddUser()" class="btn btn-outline-success">Add</button>&nbsp;&nbsp;&nbsp;&nbsp;
               </th>
             </tr>
           </thead>

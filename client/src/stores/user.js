@@ -36,6 +36,7 @@ export default {
       showUserTable() {
         this.ui.showTable = true;
         this.ui.showEditForm = false;
+        this.redrawChartjs();
       },
       showAddUser() {
         this.ui.showTable = false;
@@ -68,8 +69,17 @@ export default {
       getUserChartId(userId) {
         return "user-chart-" + userId;
       },
+      redrawChartjs() {
+        var self = this;
+        setTimeout(function() {
+          for (var i = 0; i < self.users.length; i++) {
+            self.formChartjs(self.users[i].id);
+          }
+        }, 100);
+      },
       formChartjs(userId) {
         var userData =  this.eatingHealth.get(userId);
+       
         var lables = [];
         var datasetsData = [];
         var datasetsColor = [];
@@ -89,12 +99,14 @@ export default {
         };
 
         var chartId = this.getUserChartId(userId);
+        
         var chart = Chart.getChart(chartId);
+        
         try {
           chart.destroy();
         } catch(error) {}
-        const ctx = document.getElementById(chartId);
 
+        var ctx = document.getElementById(chartId);
         chart = new Chart(ctx, {
           type: 'doughnut',
           data: data,
@@ -106,7 +118,7 @@ export default {
             }
           }
         });
-
+        
         this.charts.push(chart);
 
       },
