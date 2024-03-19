@@ -1,6 +1,7 @@
 import repository.db_conn as db_conn
 import repository.db_tools as db_tools
 from model.userfood import UserFood
+from model.userfood_detailed import UserFoodDetailed
 from model.rate_report import RateReport
 
 
@@ -33,6 +34,23 @@ def get_all_by_user_id(userId):
 
     return [UserFood(r[0], r[1], r[2]) for r in rows]
 
+def get_by_user_id_pagination(userId, start, limit):
+    conn = get_conn()
+
+    cur = conn.cursor()
+    user_food_params = (userId, start, limit)
+    sql = """
+        select uf.id, uf.user_id, uf.food_id, f.name, f.rate_id
+        from user_food as uf 
+        inner join food as f on uf.food_id=f.id
+        where uf.user_id=?
+        order by f.name limit ?,?
+        """
+
+    cur.execute(sql, user_food_params)
+    rows = cur.fetchall()
+
+    return [UserFoodDetailed(r[0], r[1], r[2], r[3], r[4]) for r in rows]
 
 def get_eating_health_report(userId):
     conn = get_conn()
@@ -46,7 +64,8 @@ def get_eating_health_report(userId):
         INNER JOIN rate AS r ON f.rate_id = r.id 
         WHERE uf.user_id=? 
         GROUP BY r.value 
-        ORDER BY r.value"""
+        ORDER BY r.value
+        """
 
     cur.execute(sql, user_food_params)
     rows = cur.fetchall()

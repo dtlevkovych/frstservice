@@ -1,7 +1,7 @@
 <script src="@/stores/user.js"></script>
 
 <template>
-  <article id="article-user" class="article-params">
+  <article id="article-user">
 
     <div v-if="ui.showTable" id="user-table">
     
@@ -14,7 +14,7 @@
             <tr>
               <th scope="col"></th>
               <th scope="col" style="text-align: right;">
-                <button @click="showAddUser()" class="btn btn-outline-success">Add</button>&nbsp;&nbsp;&nbsp;&nbsp;
+                <button @click="showAddUser()" class="btn btn-outline-success">Add</button>&nbsp;&nbsp;&nbsp;
               </th>
             </tr>
           </thead>

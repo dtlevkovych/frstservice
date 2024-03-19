@@ -6,7 +6,7 @@ curl -i -X GET "http://127.0.0.1:3000/api/users/pagination?limit=2"
 curl -i -X GET "http://127.0.0.1:3000/api/users/pagination?limit=2&page=1"
 
 get_user: 
-curl -i -X GET "http://127.0.0.1:3000/api/user/0f14db66-4728-467c-a90b-4f10eabea202"
+curl -i -X GET "http://127.0.0.1:3000/api/user/950f4862-bc4b-483b-a763-5c39765d2a71"
 
 add_user:
 curl -i -X POST "http://127.0.0.1:3000/api/user" \

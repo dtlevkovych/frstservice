@@ -9,6 +9,7 @@ import { RouterView } from 'vue-router'
         <router-link to="/user" class="btn btn-dark btn-secondary">User</router-link>
         <router-link to="/food" class="btn btn-dark btn-secondary">Food</router-link>
         <router-link to="/rate" class="btn btn-dark btn-secondary">Rate</router-link>
+        <router-link to="/userfood" class="btn btn-dark btn-secondary">UserFood</router-link>
       </div>
     </nav>
     <div class="alert-area">

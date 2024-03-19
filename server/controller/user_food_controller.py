@@ -15,6 +15,21 @@ def get_all():
 def get_all_by_user_id(id):
     return Response(data=[u.__dict__ for u in user_food_serv.get_all_by_user_id(id)]).__dict__, 201
 
+@bp.route(API_USERFOODS + "/user/<id>/pagination")
+def get_by_user_id_pagination(id):
+    limit = request.args.get("limit")
+    page = request.args.get("page")
+
+    if limit == None:
+        limit = 10
+
+    if page == None:
+        page = 0
+    
+    start = int(page) * int(limit)
+
+    return Response(data=[u.__dict__ for u in user_food_serv.get_by_user_id_pagination(id, start, limit)]).__dict__, 201
+
 @bp.route(API_USERFOODS + "/user/<userId>/food/<foodId>")
 def get_one_by_id(userId, foodId):
     return Response(data=user_food_serv.get_one_by_id(userId, foodId).__dict__).__dict__

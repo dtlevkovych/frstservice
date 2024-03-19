@@ -118,7 +118,7 @@ export default {
             }
           }
         });
-        
+
         this.charts.push(chart);
 
       },
@@ -148,9 +148,6 @@ export default {
         } catch (error) {
           alerts.alertError(error);
         }
-      },
-      removeUser(userId) {
-        alerts.showConfirm("Press 'OK' to delete the user", this.deleteUser, userId);
       },
       async getEatingHealthReport(userId) {
 

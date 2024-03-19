@@ -1,7 +1,7 @@
 <script src="@/stores/food.js"></script>
 
 <template>
-  <article id="article-rate" class="article-params">
+  <article id="article-rate">
 
     <div v-if="ui.showTable" id="food-table">
 

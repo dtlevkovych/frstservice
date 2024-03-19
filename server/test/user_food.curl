@@ -2,7 +2,10 @@ get_all:
 curl -i -X GET "http://127.0.0.1:3000/api/userfoods"
 
 get_all_by_user_id:
-curl -i -X GET "http://127.0.0.1:3000/api/userfoods/user/4373c647-ce85-4895-ae75-b6ee1eb10622"
+curl -i -X GET "http://127.0.0.1:3000/api/userfoods/user/950f4862-bc4b-483b-a763-5c39765d2a71"
+
+get_by_id_user_pagination:
+curl -i -X GET "http://127.0.0.1:3000/api/userfoods/user/950f4862-bc4b-483b-a763-5c39765d2a71/pagination?limit=2&page=0"
 
 get_eating_health_report:
 curl -i -X GET "http://127.0.0.1:3000/api/userfoods/eatinghealth/user/950f4862-bc4b-483b-a763-5c39765d2a71"

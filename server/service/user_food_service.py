@@ -10,6 +10,8 @@ def get_all():
 def get_all_by_user_id(userId):
     return user_food_repo.get_all_by_user_id(userId)
 
+def get_by_user_id_pagination(userId, start, limit):
+    return user_food_repo.get_by_user_id_pagination(userId, start, limit)
 
 def get_one_by_id(userId, foodId):
     return user_food_repo.get_one_by_id(userId, foodId)
