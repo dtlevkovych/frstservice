@@ -11,6 +11,7 @@ def get_foods():
     orders = []
 
     order_by = request.args.get("order_by")
+    phrase = request.args.get("phrase")
     
     if order_by != None:
         order_by = order_by.split(",")
@@ -28,7 +29,7 @@ def get_foods():
 
             orders.append(Order(order_name, order_direction))
 
-    return Response(data=[f.__dict__ for f in food_serv.get_foods(orders)]).__dict__
+    return Response(data=[f.__dict__ for f in food_serv.get_foods(orders, phrase)]).__dict__
     
 
 @bp.route("/food", methods = ["POST"])
@@ -57,12 +58,11 @@ def get_foods_pagination():
     
     start = int(page) * int(limit)
 
-    return Response(data=[u.__dict__ for u in food_serv.get_foods_pagination(start, int(limit))]).__dict__
+    return Response(data=[f.__dict__ for f in food_serv.get_foods_pagination(start, int(limit))]).__dict__
 
 @bp.route("/food/<id>")
 def get_food(id):
     return Response(data=food_serv.get_one(id).__dict__).__dict__
-
 
 @bp.route("/food/<id>", methods = ["PUT"])
 def update(id):

@@ -41,7 +41,7 @@
     <div v-if="ui.showEditForm" id="user-edit">
       <div class="control-group mx-auto m-3 w-25">
         <label for="firstName">First name</label>
-        <input id="firstName" type="text" class="form-control" v-model="ui.editForm.firstName" />
+        <input id="firstName" type="text" class="form-control" v-model="foods" />
       </div>
 
       <div class="control-group mx-auto m-3 w-25">

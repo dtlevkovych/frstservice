@@ -11,6 +11,7 @@ export default {
                 id: null
             }
         },
+        foodsname: [],
         userfoods: []
       }
     },
@@ -60,6 +61,28 @@ export default {
           removeUserFood(userfoodId) {
             alerts.showConfirm("Press 'OK' to delete the user's food", this.deleteUserFood, userfoodId);
           },
+          async getFoods() {
+            try {
+              const response = await fetch('http://127.0.0.1:3000/api/foods/pagination?limit=' + this.ui.limit + '&page=' + this.ui.page + '', {
+                method: 'GET',
+                headers: {
+                  'Content-Type': 'application/json'
+                }
+              })
+              const result = await response.json()
+      
+              if (result.status == true) {
+                this.foods = []
+                for (var i = 0; i < result.data.length; i++) {
+                  this.foods.push(result.data[i])
+                }
+              } else {
+                alert(result.error_msg)
+              }
+            } catch (error) {
+              alert('Error: ', error)
+            }
+          },
           async deleteUserFood(userfoodId) {
             try {
               const response = await fetch('http://127.0.0.1:3000/api/userfoods/' + userfoodId, {
@@ -79,7 +102,7 @@ export default {
             } catch (error) {
               alerts.alertError(error);
             }
-          },
+          }
     },
     mounted() {
       this.refresh()

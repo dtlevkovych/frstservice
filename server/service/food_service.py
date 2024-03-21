@@ -2,8 +2,8 @@ import repository.food_repo as food_repo
 from exception.notfound import NotFoundError
 
 
-def get_foods(orders):
-    return food_repo.get_foods(orders)
+def get_foods(orders, phrase):
+    return food_repo.get_foods(orders, phrase)
 
 
 def get_one(id):
@@ -17,7 +17,6 @@ def add(food):
         raise ValueError("Food with such name allready exist")
 
     return food_repo.add(food)
-
 
 def update(id, food):
     same_name_food = food_repo.get_one_by_name(food.name)

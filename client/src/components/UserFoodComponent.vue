@@ -5,8 +5,8 @@
 
      <div v-if="ui.showTable" id="userfood-table">
         <div>
-        <button class="btn btn-link" v-if="ui.page > 0" @click="showPreviousPage">&#8592;Previous</button>
-        <button class="btn btn-link" v-if="userfoods.length >= ui.limit" @click="showNextPage">Next&#8594;</button>
+            <button class="btn btn-link" v-if="ui.page > 0" @click="showPreviousPage">&#8592;Previous</button>
+            <button class="btn btn-link" v-if="userfoods.length >= ui.limit" @click="showNextPage">Next&#8594;</button>
         </div>
 
       <div style="text-align: center;">

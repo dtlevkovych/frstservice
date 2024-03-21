@@ -8,13 +8,21 @@ def get_conn():
     return db_conn.get_conn()
 
 
-def get_foods(orders):
+def get_foods(orders, phrase):
     conn = get_conn()
 
     cur = conn.cursor()
-    sql = "select id, name, rate_id from food" + db_tools.get_order_text(orders)
+    
+    sql = "select id, name, rate_id from food "
 
-    cur.execute(sql)
+    food_params = ()
+    if phrase != None:
+        food_params = ("%" + phrase + "%",)
+        sql += "where name like ?"
+
+    sql += db_tools.get_order_text(orders)
+
+    cur.execute(sql, food_params)
             
     rows = cur.fetchall()
 
@@ -74,6 +82,16 @@ def get_one_by_name(name):
 
     return None
 
+def search_by_name(phrase):
+    conn = get_conn()
+
+    cur = conn.cursor()
+    food_params = (phrase,)
+    cur.execute("select id, name, rate_id from food where name like '%?%'", food_params)
+
+    rows = cur.fetchall()
+
+    return [Food(r[0], r[1], r[2]) for r in rows]
 
 def update(id, food):
     conn = get_conn()
