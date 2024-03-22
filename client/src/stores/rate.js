@@ -1,4 +1,4 @@
-import alerts from "@/stores/alerts.js"
+import alerts from "@/stores/common/alerts.js"
 
 export default {
     data: function () {

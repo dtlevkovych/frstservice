@@ -1,5 +1,5 @@
-import alerts from "@/stores/alerts.js"
-import rates from "@/stores/rate.js"
+import alerts from "@/stores/common/alerts.js"
+import rates from "@/stores/common/rate.js"
 
 export default {
     data: function () {
@@ -79,29 +79,9 @@ export default {
           alert('Error: ', error)
         }
       },
-    async getRates() {
-
-        try {
-          const response = await fetch('http://127.0.0.1:3000/api/rates/pagination?limit=' + this.ui.limit + '&page=' + this.ui.page, {
-            method: 'GET',
-            headers: {
-              'Content-Type': 'application/json'
-            }
-          })
-          const result = await response.json()
-  
-          if (result.status == true) {
-            this.rates = new Map();
-            for (var i = 0; i < result.data.length; i++) {
-              this.rates.set(result.data[i].id, result.data[i])
-            }
-          } else {
-            alerts.alertError(result.error_msg);
-          }
-        } catch (error) {
-          alerts.alertError(error);
-        }
-      },
+    getRates() {
+      rates.getRates(this.rates);
+    },
     saveFood() {
       if (this.ui.editForm.foodId == null) {
         this.addFood();

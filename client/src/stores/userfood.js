@@ -1,4 +1,5 @@
-import alerts from "@/stores/alerts.js"
+import alerts from "@/stores/common/alerts.js"
+import rates from "@/stores/common/rate.js"
 
 export default {
     data: function () {
@@ -7,21 +8,31 @@ export default {
             page: 0,
             limit: 2,
             showTable: true,
+            showAddForm: false,
             editForm: {
-                id: null
+                id: null,
+                searchfood: ""
+
             }
         },
-        foodsname: [],
-        userfoods: []
+        userfoods: [],
+        foods: [],
+        rates: new Map()
       }
     },
     methods: {
         refresh() {
             this.showUserFoodTable();
             this.getUserFoods();
+            this.getRates();
           },
           showUserFoodTable() {
             this.ui.showTable = true;
+            this.ui.showAddForm = false;
+          },
+          showAddUserFood() {
+            this.ui.showTable = false;
+            this.ui.showAddForm = true;
           },
           showPreviousPage() {
             if(this.ui.page < 1) {
@@ -35,6 +46,13 @@ export default {
             this.ui.page = this.ui.page + 1;
             this.getUserFoods();
           },
+          getRateColor(rateId) {
+            try{
+                return this.rates.get(rateId).colorHex;
+            } catch (error) {}
+
+            return "";
+          },
         async getUserFoods() {
 
             try {
@@ -44,7 +62,7 @@ export default {
                   'Content-Type': 'application/json'
                 }
               })
-              const result = await response.json()
+              const result = await response.json();
       
               if (result.status == true) {
                 this.userfoods = [];
@@ -61,27 +79,8 @@ export default {
           removeUserFood(userfoodId) {
             alerts.showConfirm("Press 'OK' to delete the user's food", this.deleteUserFood, userfoodId);
           },
-          async getFoods() {
-            try {
-              const response = await fetch('http://127.0.0.1:3000/api/foods/pagination?limit=' + this.ui.limit + '&page=' + this.ui.page + '', {
-                method: 'GET',
-                headers: {
-                  'Content-Type': 'application/json'
-                }
-              })
-              const result = await response.json()
-      
-              if (result.status == true) {
-                this.foods = []
-                for (var i = 0; i < result.data.length; i++) {
-                  this.foods.push(result.data[i])
-                }
-              } else {
-                alert(result.error_msg)
-              }
-            } catch (error) {
-              alert('Error: ', error)
-            }
+          getRates() {
+            rates.getRates(this.rates);
           },
           async deleteUserFood(userfoodId) {
             try {
@@ -91,16 +90,43 @@ export default {
                   'Content-Type': 'application/json'
                 }
               })
-              const result = await response.json()
+              const result = await response.json();
       
               if (result.status == true) {
-                this.getUserFoods()
+                this.getUserFoods();
                 alerts.alertSuccess("User's food deleted successfully.");
               } else {
                 alerts.alertError(result.error_msg);
               }
             } catch (error) {
               alerts.alertError(error);
+            }
+          },
+          async getFoods() {
+            var phrase = this.ui.editForm.searchfood;
+            if (phrase == undefined || phrase == null || phrase.length < 2) {
+                this.foods = [];
+                return;
+            }
+            try {
+              const response = await fetch('http://127.0.0.1:3000/api/foods?phrase=' + phrase, {
+                method: 'GET',
+                headers: {
+                  'Content-Type': 'application/json'
+                }
+              })
+              const result = await response.json()
+      
+              if (result.status == true) {
+                this.foods = [];
+                for (var i = 0; i < result.data.length; i++) {
+                  this.foods.push(result.data[i]);
+                }
+              } else {
+                alert(result.error_msg);
+              }
+            } catch (error) {
+              alert('Error: ', error);
             }
           }
     },

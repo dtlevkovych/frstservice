@@ -1,5 +1,5 @@
 get_foods:
-curl -i -X GET "http://127.0.0.1:3000/api/foods"
+curl -i -X GET "http://127.0.0.1:3000/api/foods?phrase="
 
 get_food: 
 curl -i -X GET "http://127.0.0.1:3000/api/food/2294a585-3761-414a-bd1e-67b0b251d643"
