@@ -54,7 +54,7 @@
             <td>{{ f.name }}</td>
             <td><input disabled type="color" :value="getRateColor(f.rateId)" /></td>
             <td>
-                <button @click="" class="btn btn-outline-success btn-sm">Add</button>
+                <button @click="addUserFood(f.id)" class="btn btn-outline-success btn-sm">Add</button>
             </td>
           </tr>
         </table>

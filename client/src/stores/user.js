@@ -61,6 +61,10 @@ export default {
         this.ui.page = this.ui.page + 1;
         this.getUsers();
       },
+      goToUserFood(userId) {
+        //$emit('setUserInUserFood', userId);
+        this.$router.push('/userfood');
+      },
       destroyCharts() {
         for (var i = 0; i < this.charts; i++) {
           this.charts[i].destroy();

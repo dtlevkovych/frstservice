@@ -1,5 +1,6 @@
 <script src="@/stores/user.js"></script>
 
+
 <template>
   <article id="article-user">
 
@@ -12,6 +13,7 @@
         <table class="table">
           <thead>
             <tr>
+              <th scope="col"></th>
               <th scope="col"></th>
               <th scope="col" style="text-align: right;">
                 <button @click="showAddUser()" class="btn btn-outline-success">Add</button>&nbsp;&nbsp;&nbsp;
@@ -32,6 +34,7 @@
                 <canvas :id="getUserChartId(u.id)"></canvas>
               </div>
             </td>
+            <td style="text-align: left;"><button class="btn btn-dark btn-secondary" @click="goToUserFood(u.id)">Details</button></td>
           </tr>
         </table>
       </div>

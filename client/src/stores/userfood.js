@@ -6,18 +6,20 @@ export default {
       return {
         ui: {
             page: 0,
-            limit: 2,
+            limit: 10,
             showTable: true,
             showAddForm: false,
             editForm: {
                 id: null,
+                foodId: null,
                 searchfood: ""
 
             }
         },
         userfoods: [],
         foods: [],
-        rates: new Map()
+        rates: new Map(),
+        userId: null
       }
     },
     methods: {
@@ -53,10 +55,13 @@ export default {
 
             return "";
           },
+          setUserInUserFood(userId) {
+            this.userId = userId;
+          },
         async getUserFoods() {
 
             try {
-              const response = await fetch('http://127.0.0.1:3000/api/userfoods/user/950f4862-bc4b-483b-a763-5c39765d2a71/pagination?limit=' + this.ui.limit + '&page=' + this.ui.page, {
+              const response = await fetch('http://127.0.0.1:3000/api/userfoods/user/' + this.userId + '/pagination?limit=' + this.ui.limit + '&page=' + this.ui.page, {
                 method: 'GET',
                 headers: {
                   'Content-Type': 'application/json'
@@ -69,6 +74,34 @@ export default {
                 for (var i = 0; i < result.data.length; i++) {
                   this.userfoods.push(result.data[i]);
                 }
+              } else {
+                alerts.alertError(result.error_msg);
+              }
+            } catch (error) {
+              alerts.alertError(error);
+            }
+          },
+          async addUserFood(foodId) {
+            var obj = {
+              userId: this.userId,
+              foodId: foodId
+            }
+            try {
+              const response = await fetch('http://127.0.0.1:3000/api/userfoods', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(obj)
+              })
+              const result = await response.json();
+              this.userfoods = [];
+              if (result.status == true) {
+                this.userfoods.push(result.data);
+                this.showUserFoodTable();
+                this.refresh();
+
+                alerts.alertSuccess("User's food has been successfull added.");
               } else {
                 alerts.alertError(result.error_msg);
               }
