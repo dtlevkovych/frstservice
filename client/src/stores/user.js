@@ -62,8 +62,7 @@ export default {
         this.getUsers();
       },
       goToUserFood(userId) {
-        //$emit('setUserInUserFood', userId);
-        this.$router.push('/userfood');
+        this.$router.push({path: '/userfood', query: {userId: userId}});
       },
       destroyCharts() {
         for (var i = 0; i < this.charts; i++) {

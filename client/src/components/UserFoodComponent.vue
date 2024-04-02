@@ -18,6 +18,9 @@
               <th scope="col">
                 <button @click="showAddUserFood()" class="btn btn-outline-success btn-sm">Add</button>
               </th>
+              <th scope="col">
+                <button @click="showUserTable()" class="btn btn-outline-dark btn-sm">Back</button>
+              </th>
             </tr>
           </thead>
           <tr v-for="uf in userfoods">
@@ -33,19 +36,19 @@
     </div>
 
     <div v-if="ui.showAddForm" id="userfood-edit">
-        <form>
-            <div class="form-group mx-auto m-3 w-25">
-                <label class="col-lg-5" for="searchfood">Search food</label>
-                <div class="col-lg-12">
-                    <input id="searchfood" type="text" placeholder="Search" class="form-control" v-model="ui.editForm.searchfood" @input="getFoods()" />
-                </div>
+
+        <div class="input-group mx-auto m-3 w-25 py-4">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon3">Search food</span>
             </div>
-        </form>
+            <input id="searchfood" type="text" placeholder="Search" class="form-control" v-model="ui.editForm.searchfood" @input="getFoods()" />
+        </div>
+
         <div style="text-align: center;">
         <table class="table">
           <thead>
             <tr>
-              <th scope="col">Food</th>
+              <th scope="col"><button class="btn btn-outline-success btn-sm" @click="showAddFood()">Add Food</button></th>
               <th scope="col"></th>
               <th scope="col"><button class="btn btn-outline-dark btn-sm" @click="showUserFoodTable()">Back</button></th>
             </tr>
@@ -58,6 +61,26 @@
             </td>
           </tr>
         </table>
+      </div>
+    </div>
+
+    <div v-if="ui.showAddFood" id="food-edit">
+      <div class="control-group mx-auto m-3 w-25">
+        <label for="name">Name</label>
+        <input id="name" type="text" class="form-control" v-model="ui.editForm.foodname" />
+      </div>
+
+      <div class="control-group mx-auto m-3 w-25">
+        <label for="value">Rate</label>
+        <select id="value" class="form-select" v-model="ui.editForm.rateId">
+          <option v-for="r in rates.values()" v-bind:value="r.id">{{ r.name }}</option>
+        </select>
+      </div>
+
+      <div class="control-group mx-auto m-3 w-25">
+        <button @click="addFood()" class="btn btn-outline-success btn-sm">Save</button>
+        &nbsp;
+        <button @click="showAddUserFood()" class="btn btn-outline-dark btn-sm">Cancel</button>
       </div>
     </div>
 

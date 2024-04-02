@@ -44,7 +44,7 @@
     <div v-if="ui.showEditForm" id="user-edit">
       <div class="control-group mx-auto m-3 w-25">
         <label for="firstName">First name</label>
-        <input id="firstName" type="text" class="form-control" v-model="foods" />
+        <input id="firstName" type="text" class="form-control" v-model="ui.editForm.firstName" />
       </div>
 
       <div class="control-group mx-auto m-3 w-25">
@@ -63,6 +63,6 @@
         <button @click="showUserTable()" class="btn btn-outline-dark btn-sm">Cancel</button>
       </div>
     </div>
-    
+  
   </article>
 </template>

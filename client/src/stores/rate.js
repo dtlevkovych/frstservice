@@ -12,7 +12,7 @@ export default {
             id: null,
             name: '',
             value: 0,
-            colorHex: ''
+            colorHex: "#FFFFFF"
           }
         },
         rates: []

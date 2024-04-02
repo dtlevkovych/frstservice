@@ -9,9 +9,12 @@ export default {
             limit: 10,
             showTable: true,
             showAddForm: false,
+            showAddFood: false,
             editForm: {
                 id: null,
                 foodId: null,
+                foodname: "",
+                rateId: null,
                 searchfood: ""
 
             }
@@ -19,11 +22,12 @@ export default {
         userfoods: [],
         foods: [],
         rates: new Map(),
-        userId: null
+        userId: null,
       }
     },
     methods: {
         refresh() {
+            this.userId = this.$route.query.userId;
             this.showUserFoodTable();
             this.getUserFoods();
             this.getRates();
@@ -31,10 +35,12 @@ export default {
           showUserFoodTable() {
             this.ui.showTable = true;
             this.ui.showAddForm = false;
+            this.ui.showAddFood = false;
           },
           showAddUserFood() {
-            this.ui.showTable = false;
             this.ui.showAddForm = true;
+            this.ui.showTable = false;
+            this.ui.showAddFood = false;
           },
           showPreviousPage() {
             if(this.ui.page < 1) {
@@ -57,6 +63,14 @@ export default {
           },
           setUserInUserFood(userId) {
             this.userId = userId;
+          },
+          showAddFood() {
+            this.ui.showAddFood = true;
+            this.ui.showTable = false;
+            this.ui.showAddForm = false;
+          },
+          showUserTable() {
+            this.$router.push('/');
           },
         async getUserFoods() {
 
@@ -102,6 +116,34 @@ export default {
                 this.refresh();
 
                 alerts.alertSuccess("User's food has been successfull added.");
+              } else {
+                alerts.alertError(result.error_msg);
+              }
+            } catch (error) {
+              alerts.alertError(error);
+            }
+          },
+          async addFood() {
+            var obj = {
+              name: this.ui.editForm.foodname,
+              rateId: this.ui.editForm.rateId
+            }
+            try {
+              const response = await fetch('http://127.0.0.1:3000/api/food', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(obj)
+              })
+              const result = await response.json()
+      
+              if (result.status == true) {
+                this.showAddUserFood();
+                this.ui.editForm.searchfood = this.ui.editForm.foodname;
+                this.getFoods();
+
+                alerts.alertSuccess("Food has been successfully created.");
               } else {
                 alerts.alertError(result.error_msg);
               }
