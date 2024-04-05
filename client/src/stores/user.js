@@ -1,5 +1,6 @@
 import alerts from "@/stores/common/alerts.js"
 import dateTools from "@/stores/date_tools.js"
+import Dropdown from "@/components/DropdownComponent.vue"
 
 export default {
     data: function () {
@@ -22,6 +23,7 @@ export default {
         charts: []
       }
     },
+    components: {"Dropdown": Dropdown},
     methods: {
       refresh() {
         this.showUserTable();

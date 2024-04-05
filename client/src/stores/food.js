@@ -1,5 +1,6 @@
 import alerts from "@/stores/common/alerts.js"
 import rates from "@/stores/common/rate.js"
+import Dropdown from "@/components/DropdownComponent.vue"
 
 export default {
     data: function () {
@@ -19,6 +20,7 @@ export default {
         rates: new Map()
       }
     },
+    components: {"Dropdown": Dropdown},
     methods: {
       refresh() {
         this.showFoodTable();

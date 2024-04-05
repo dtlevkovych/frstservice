@@ -4,6 +4,9 @@
   <article id="article-rate" class="article-params">
 
     <div v-if="ui.showTable" id="food-table">
+      <div class="d-flex flex-row-reverse">
+        <Dropdown />
+      </div>
 
       <button class="btn btn-link" v-if="ui.page > 0" @click="showPreviousPage">&#8592;Previous</button>
       <button class="btn btn-link" v-if="foods.length >= ui.limit" @click="showNextPage">Next&#8594;</button>
@@ -37,6 +40,9 @@
     </div>
 
     <div v-if="ui.showEditForm" id="food-edit">
+      <div class="d-flex flex-row-reverse">
+        <Dropdown />
+      </div>
       <div class="control-group mx-auto m-3 w-25">
         <label for="name">Name</label>
         <input id="name" type="text" class="form-control" v-model="ui.editForm.name" />

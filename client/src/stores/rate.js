@@ -1,4 +1,5 @@
 import alerts from "@/stores/common/alerts.js"
+import Dropdown from "@/components/DropdownComponent.vue"
 
 export default {
     data: function () {
@@ -18,6 +19,7 @@ export default {
         rates: []
       }
     },
+    components: {"Dropdown": Dropdown},
     methods: {
         refresh() {
             this.showRateTable();

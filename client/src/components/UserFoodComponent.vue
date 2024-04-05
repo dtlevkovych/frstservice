@@ -2,11 +2,13 @@
 
 <template>
     <article id="article-userfood">
-
      <div v-if="ui.showTable" id="userfood-table">
         
-        <div class="d-grid justify-content-md-end">
+        <div class="d-flex flex-row-reverse">
+
+          <Dropdown />
           <button @click="showUserTable()" class="btn border-0">&#8592;Back</button>
+
         </div>
 
         <div>
@@ -39,7 +41,8 @@
 
     <div v-if="ui.showAddForm" id="userfood-edit">
         
-        <div class="d-grid justify-content-md-end">
+        <div class="d-flex flex-row-reverse">
+          <Dropdown />
           <button @click="showUserFoodTable()" class="btn border-0">&#8592;Back</button>
         </div>
 
@@ -71,6 +74,9 @@
     </div>
 
     <div v-if="ui.showAddFood" id="food-edit">
+      <div class="d-flex flex-row-reverse">
+        <Dropdown />
+      </div>
       <div class="control-group mx-auto m-3 w-25">
         <label for="name">Name</label>
         <input id="name" type="text" class="form-control" v-model="ui.editForm.foodname" />

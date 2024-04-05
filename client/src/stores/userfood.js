@@ -1,5 +1,6 @@
 import alerts from "@/stores/common/alerts.js"
 import rates from "@/stores/common/rate.js"
+import Dropdown from "@/components/DropdownComponent.vue"
 
 export default {
     data: function () {
@@ -25,6 +26,7 @@ export default {
         userId: null,
       }
     },
+    components: {"Dropdown": Dropdown},
     methods: {
         refresh() {
             this.userId = this.$route.query.userId;
