@@ -51,13 +51,14 @@
                 <span class="input-group-text" id="basic-addon3">Search food</span>
             </div>
             <input id="searchfood" type="text" placeholder="Search" class="form-control" v-model="ui.editForm.searchfood" @input="getFoods()" />
+            <button class="btn btn-outline-success" @click="showAddFood()">Add New</button>
         </div>
 
         <div style="text-align: center;">
         <table class="table">
           <thead>
             <tr>
-              <th scope="col"><button class="btn btn-outline-success btn-sm" @click="showAddFood()">Add Food</button></th>
+              <th scope="col"></th>
               <th scope="col"></th>
               <th scope="col"></th>
             </tr>

@@ -113,7 +113,7 @@ export default {
 
         var ctx = document.getElementById(chartId);
         chart = new Chart(ctx, {
-          type: 'doughnut',
+          type: 'pie',
           data: data,
           options: {
             plugins: {

@@ -114,10 +114,8 @@ export default {
                 body: JSON.stringify(obj)
               })
               const result = await response.json();
-              this.userfoods = [];
+              
               if (result.status == true) {
-                this.userfoods.push(result.data);
-                this.showUserFoodTable();
                 this.refresh();
 
                 alerts.alertSuccess("User's food has been successfull added.");
