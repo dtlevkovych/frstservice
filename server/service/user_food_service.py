@@ -26,6 +26,9 @@ def add(userFood):
     if food_repo.get_one(userFood.foodId) == None:
         raise ValueError("Wrong food id")
 
+    if user_food_repo.get_one_by_id(userFood.userId, userFood.foodId) != None:
+        raise ValueError("Food already exist for the user")
+
     return user_food_repo.add(userFood)
 
 def delete_userfood_by_user_id(userId):

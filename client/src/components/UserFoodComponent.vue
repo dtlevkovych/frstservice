@@ -4,6 +4,11 @@
     <article id="article-userfood">
 
      <div v-if="ui.showTable" id="userfood-table">
+        
+        <div class="d-grid justify-content-md-end">
+          <button @click="showUserTable()" class="btn border-0">&#8592;Back</button>
+        </div>
+
         <div>
             <button class="btn btn-link" v-if="ui.page > 0" @click="showPreviousPage">&#8592;Previous</button>
             <button class="btn btn-link" v-if="userfoods.length >= ui.limit" @click="showNextPage">Next&#8594;</button>
@@ -17,9 +22,6 @@
               <th scope="col">Rate</th>
               <th scope="col">
                 <button @click="showAddUserFood()" class="btn btn-outline-success btn-sm">Add</button>
-              </th>
-              <th scope="col">
-                <button @click="showUserTable()" class="btn btn-outline-dark btn-sm">Back</button>
               </th>
             </tr>
           </thead>
@@ -36,6 +38,10 @@
     </div>
 
     <div v-if="ui.showAddForm" id="userfood-edit">
+        
+        <div class="d-grid justify-content-md-end">
+          <button @click="showUserFoodTable()" class="btn border-0">&#8592;Back</button>
+        </div>
 
         <div class="input-group mx-auto m-3 w-25 py-4">
             <div class="input-group-prepend">
@@ -50,7 +56,7 @@
             <tr>
               <th scope="col"><button class="btn btn-outline-success btn-sm" @click="showAddFood()">Add Food</button></th>
               <th scope="col"></th>
-              <th scope="col"><button class="btn btn-outline-dark btn-sm" @click="showUserFoodTable()">Back</button></th>
+              <th scope="col"></th>
             </tr>
           </thead>
           <tr v-for="f in foods">

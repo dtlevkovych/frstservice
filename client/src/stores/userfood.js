@@ -32,6 +32,9 @@ export default {
             this.getUserFoods();
             this.getRates();
           },
+          addBackButton() {
+           $("#gl-back").html('<button @click="showUserTable()" class="btn border-0">&#8592;Back</button>');
+          },
           showUserFoodTable() {
             this.ui.showTable = true;
             this.ui.showAddForm = false;
@@ -205,7 +208,10 @@ export default {
             }
           }
     },
+    beforCreate() {
+      this.addBackButton();
+    },
     mounted() {
-      this.refresh()
+      this.refresh();
     }
   }
