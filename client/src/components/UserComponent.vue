@@ -11,7 +11,7 @@
       <button class="btn btn-link" v-if="ui.page > 0" @click="showPreviousPage">&#8592;Previous</button>
       <button class="btn btn-link" v-if="users.length >= ui.limit" @click="showNextPage">Next&#8594;</button>
 
-      <div style="margin-left: 100px;">
+      <div>
         <table class="table">
           <thead>
             <tr>
@@ -24,19 +24,19 @@
           </thead>
           <tr v-for="u in users">
             <td style="padding: 50px; text-align: center;">
-              <p style="margin-top: 0px; padding: 1px;"><h3>{{ u.firstName }} {{ u.lastName }}</h3></p>
-              <p style="margin-top: 0px; padding: 1px;">
+              <p><h3>{{ u.firstName }} {{ u.lastName }}</h3></p>
+              <p>
                 {{ u.age }} yo &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
                 <button @click="showUpdateUser(u.id)" class="btn btn-link btn-sm">Edit</button>
                 <button @click="removeUser(u.id)" class="btn btn-link btn-sm">Delete</button>
               </p>
             </td>
-            <td style="text-align: left;">
+            <td>
               <div class="chart-container" style="width: 200px; height: 200px;">
                 <canvas :id="getUserChartId(u.id)"></canvas>
               </div>
             </td>
-            <td style="text-align: left;"><button class="btn btn-dark btn-secondary" @click="goToUserFood(u.id)">Details</button></td>
+            <td><button class="btn btn-dark btn-secondary" @click="goToUserFood(u.id)">Details</button></td>
           </tr>
         </table>
       </div>
