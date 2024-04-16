@@ -20,7 +20,9 @@ export default {
         rates: new Map()
       }
     },
-    components: {"Dropdown": Dropdown},
+    components: {
+      "Dropdown": Dropdown
+    },
     methods: {
       refresh() {
         this.showFoodTable();

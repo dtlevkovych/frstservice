@@ -8,6 +8,8 @@
         <Dropdown />
       </div>
 
+      {{ this.$store.state.auth_user }}
+
       <button class="btn btn-link" v-if="ui.page > 0" @click="showPreviousPage">&#8592;Previous</button>
       <button class="btn btn-link" v-if="foods.length >= ui.limit" @click="showNextPage">Next&#8594;</button>
 
