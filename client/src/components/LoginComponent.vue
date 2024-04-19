@@ -6,9 +6,9 @@
 
     <div class="d-grid">
       <br /><br /><br /><br /><br />
-      <label class="form-label col-md-2 mx-auto">Please login using your Google account</label>
+      <label class="form-label col-md-1 mx-auto">Please login</label>
       <div class="col-md-1 mx-auto">
-        <button class="btn btn-outline-dark form-control">Google Login</button>
+        <a class="btn btn-outline-dark form-control" href="http://127.0.0.1:3000/api/google/login">Google Login</a>
       </div>
     </div>
 
