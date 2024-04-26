@@ -2,6 +2,8 @@ import requests
 from flask import Flask, request
 import os
 import json
+from model.authuser import AuthUser
+from repository import auth_user_repo
 from oauthlib.oauth2 import WebApplicationClient
 from flask_login import (
     LoginManager,
@@ -10,7 +12,7 @@ from flask_login import (
     login_user,
     logout_user,
 )
-
+PROVIDER_NAME = "google"
 GOOGLE_CLIENT_ID = os.environ.get("GOOGLE_CLIENT_ID", None)
 GOOGLE_CLIENT_SECRET = os.environ.get("GOOGLE_CLIENT_SECRET", None)
 GOOGLE_DISCOVERY_URL = (
@@ -72,3 +74,10 @@ def login_callback():
     print(users_name)
     print(users_email)
     print(picture)
+
+    authuser = AuthUser(authenticationId=unique_id, username=users_email, provider=PROVIDER_NAME, email=users_email, name=users_name, profilePic=picture)
+
+    if auth_user_repo.get_user_by_id(authuser.authenticationId) != None:
+        auth_user_repo.update_user_by_id(authuser.authenticationId, authuser)
+    else:
+        auth_user_repo.create_user(authuser)
