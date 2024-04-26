@@ -12,7 +12,12 @@ def get_rates():
 
 @bp.route("/rate/<id>")
 def get_rate(id):
-    return Response(data=rate_serv.get_one(id).__dict__).__dict__
+    rate = rate_serv.get_one(id)
+
+    if rate == None:
+        raise NotFoundError("Rate not found.")
+        
+    return Response(data=rate.__dict__).__dict__
 
 @bp.route("/rates/pagination")
 def get_rates_pagination():
@@ -36,12 +41,9 @@ def add_rate():
     value = data["value"]
     colorHex = data["colorHex"]
 
-    try:
-        rate = Rate(None, name, value, colorHex)
-        id = rate_serv.add_rate(rate)
-        return Response(data=id).__dict__, 201
-    except ValueError as e:
-        return Response(error_msg=e.__str__(), status=False).__dict__, 400
+    rate = Rate(None, name, value, colorHex)
+    id = rate_serv.add_rate(rate)
+    return Response(data=id).__dict__, 201
 
 
 @bp.route("/rate/<id>", methods = ["PUT"])
@@ -53,18 +55,11 @@ def update_rate(id):
 
     rate = Rate(id, name, value, colorHex)
 
-    try:
-        rate_serv.update_rate(id, rate)
-        return Response().__dict__, 200
-    except Exception as e:
-        return Response(error_msg=e.__str__(), status=False).__dict__, 404
+    rate_serv.update_rate(id, rate)
+    return Response().__dict__, 200
 
 
 @bp.route("/rate/<id>", methods = ["DELETE"])
 def delete_rate(id):
-
-    try:
-        rate_serv.delete_rate(id)
-        return Response().__dict__, 200
-    except Exception as e:
-         return Response(error_msg=e.__str__(), status=False).__dict__, 404
+    rate_serv.delete_rate(id)
+    return Response().__dict__, 200

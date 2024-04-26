@@ -46,7 +46,12 @@ def get_users_pagination():
 
 @bp.route("/user/<id>")
 def get_user(id):
-    return Response(data=user_serv.get_one(id).__dict__).__dict__
+    user = user_serv.get_one(id)
+
+    if user == None:
+        raise NotFoundError("User not found.")
+
+    return Response(data=user.__dict__).__dict__
 
 @bp.route("/user", methods = ["POST"])
 def add_user():
@@ -55,12 +60,9 @@ def add_user():
     lastName = data["lastName"]
     dob = data["dob"]
 
-    try:
-        user = User(firstName, lastName, dob)
-        id = user_serv.add(user)
-        return Response(data={"id": id}).__dict__, 201
-    except ValueError as e:
-        return Response(error_msg=e.__str__(), status=False).__dict__, 400
+    user = User(firstName, lastName, dob)
+    id = user_serv.add(user)
+    return Response(data={"id": id}).__dict__, 201
 
         
 @bp.route("/user/<id>", methods = ["PUT"])
@@ -72,18 +74,11 @@ def update_user(id):
 
     user = User(firstName, lastName, dob)
     
-    try:
-        user_serv.update(id, user)
-        return Response().__dict__, 200
-    except Exception as e:
-        return Response(error_msg=e.__str__(), status=False).__dict__, 404
+    user_serv.update(id, user)
+    return Response().__dict__, 200
 
 
 @bp.route("/user/<id>", methods = ["DELETE"])
 def delete_user(id):
-    
-    try:
-        user_serv.delete(id)
-        return Response().__dict__, 200
-    except Exception as e:
-        return Response(error_msg=e.__str__(), status=False).__dict__, 404
+    user_serv.delete(id)
+    return Response().__dict__, 200

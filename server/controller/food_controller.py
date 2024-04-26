@@ -38,12 +38,9 @@ def add_food():
     name = data["name"]
     rateId = data["rateId"]
 
-    try:
-        food = Food(None, name, rateId)
-        id = food_serv.add(food)
-        return Response(data={"id": id}).__dict__, 201
-    except ValueError as e:
-        return Response(error_msg=e.__str__(), status=False).__dict__, 400
+    food = Food(None, name, rateId)
+    id = food_serv.add(food)
+    return Response(data={"id": id}).__dict__, 201
 
 @bp.route("/foods/pagination")
 def get_foods_pagination():
@@ -62,7 +59,12 @@ def get_foods_pagination():
 
 @bp.route("/food/<id>")
 def get_food(id):
-    return Response(data=food_serv.get_one(id).__dict__).__dict__
+    food = food_serv.get_one(id)
+
+    if food == None:
+        raise NotFoundError("Food not found.")
+
+    return Response(data=food.__dict__).__dict__
 
 @bp.route("/food/<id>", methods = ["PUT"])
 def update(id):
@@ -72,18 +74,10 @@ def update(id):
 
     food = Food(id, name, rateId)
 
-    try:
-        food_serv.update(id, food)
-        return Response().__dict__, 200
-    except Exception as e:
-        return Response(error_msg=e.__str__(), status=False).__dict__, 404
-
+    food_serv.update(id, food)
+    return Response().__dict__, 200
 
 @bp.route("/food/<id>", methods = ["DELETE"])
 def delete(id):
-
-    try:
-        food_serv.delete(id)
-        return Response().__dict__, 200
-    except Exception as e:
-        return Response(error_msg=e.__str__(), status=False).__dict__, 404
+    food_serv.delete(id)
+    return Response().__dict__, 200
