@@ -1,2 +1,8 @@
 google_login:
 curl -i -X GET "http://127.0.0.1:3000/api/google/login"
+
+get_all_auth_user:
+curl -i -X GET "http://127.0.0.1:3000/api/google/authusers"
+
+get_user_by_id:
+curl -i -X GET "http://127.0.0.1:3000/api/google/authuser/1"
