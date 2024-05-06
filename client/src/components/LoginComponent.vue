@@ -1,6 +1,3 @@
-<script src="@/stores/login.js"></script>
-
-
 <template>
   <article id="not-logged-in">
 

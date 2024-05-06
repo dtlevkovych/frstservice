@@ -1,10 +1,33 @@
 from flask import Flask
 from flask_cors import CORS
+from flask_login import LoginManager, login_required
+import os
+from repository import auth_user_repo
+import base64
 
 app = Flask(__name__)
+app.secret_key = os.urandom(24)
+
 CORS(app)
 
+login_manager = LoginManager()
+login_manager.init_app(app)
+
+def get_auth_id(request):
+    auth_id = request.headers.get('Authorization')
+    if auth_id:
+        auth_id = auth_id.replace('Basic ', '', 1)
+
+    return auth_id
+
+@login_manager.request_loader
+def load_user_from_request(request):
+    auth_id = get_auth_id(request)
+    print("auth_id = " + str(auth_id))
+    return auth_user_repo.get_user_by_id(auth_id)
+
 @app.route("/ping")
+@login_required
 def test_page():
     return "pong"
 

@@ -81,3 +81,5 @@ def login_callback():
         auth_user_repo.update_user_by_id(authuser.authenticationId, authuser)
     else:
         auth_user_repo.create_user(authuser)
+
+    return authuser.get_id()

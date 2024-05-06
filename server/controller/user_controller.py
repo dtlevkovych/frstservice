@@ -5,9 +5,12 @@ from model.user import User
 from model.order import Order
 from server.controller import bp
 from exception.notfound import NotFoundError
+from flask_login import login_required
+import flask_login
 
 
 @bp.route("/users")
+@login_required
 def get_users():
     orders = []
 
@@ -30,7 +33,9 @@ def get_users():
     return Response(data=[u.__dict__ for u in user_serv.get_all(orders)]).__dict__
 
 @bp.route("/users/pagination")
+@login_required
 def get_users_pagination():
+    print(flask_login.current_user.get_id())
     limit = request.args.get("limit")
     page = request.args.get("page")
 
@@ -45,6 +50,7 @@ def get_users_pagination():
     return Response(data=[u.__dict__ for u in user_serv.get_users_pagination(start, int(limit))]).__dict__
 
 @bp.route("/user/<id>")
+@login_required
 def get_user(id):
     user = user_serv.get_one(id)
 
@@ -54,6 +60,7 @@ def get_user(id):
     return Response(data=user.__dict__).__dict__
 
 @bp.route("/user", methods = ["POST"])
+@login_required
 def add_user():
     data = request.get_json()
     firstName = data["firstName"]
@@ -66,6 +73,7 @@ def add_user():
 
         
 @bp.route("/user/<id>", methods = ["PUT"])
+@login_required
 def update_user(id):
     data = request.get_json()
     firstName = data["firstName"]
@@ -79,6 +87,7 @@ def update_user(id):
 
 
 @bp.route("/user/<id>", methods = ["DELETE"])
+@login_required
 def delete_user(id):
     user_serv.delete(id)
     return Response().__dict__, 200

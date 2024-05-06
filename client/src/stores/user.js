@@ -26,6 +26,7 @@ export default {
     components: {"Dropdown": Dropdown},
     methods: {
       refresh() {
+        console.log(this.$store);
         this.showUserTable();
         this.getUsers();
       },
@@ -133,7 +134,8 @@ export default {
           const response = await fetch('http://127.0.0.1:3000/api/users/pagination?limit=' + this.ui.limit + '&page=' + this.ui.page, {
             method: 'GET',
             headers: {
-              'Content-Type': 'application/json'
+              'Content-Type': 'application/json',
+              'Authorization': 'Basic 100324161699394014642'
             }
           })
           const result = await response.json()

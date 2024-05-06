@@ -1,4 +1,5 @@
 from flask import request
+from flask_login import login_required
 from server.controller import bp
 from service import food_service as food_serv
 from model.food import Food
@@ -7,6 +8,7 @@ from model.order import Order
 from exception.notfound import NotFoundError
 
 @bp.route("/foods")
+@login_required
 def get_foods():
     orders = []
 
@@ -33,6 +35,7 @@ def get_foods():
     
 
 @bp.route("/food", methods = ["POST"])
+@login_required
 def add_food():
     data = request.get_json()
     name = data["name"]
@@ -43,6 +46,7 @@ def add_food():
     return Response(data={"id": id}).__dict__, 201
 
 @bp.route("/foods/pagination")
+@login_required
 def get_foods_pagination():
     limit = request.args.get("limit")
     page = request.args.get("page")
@@ -58,6 +62,7 @@ def get_foods_pagination():
     return Response(data=[f.__dict__ for f in food_serv.get_foods_pagination(start, int(limit))]).__dict__
 
 @bp.route("/food/<id>")
+@login_required
 def get_food(id):
     food = food_serv.get_one(id)
 
@@ -67,6 +72,7 @@ def get_food(id):
     return Response(data=food.__dict__).__dict__
 
 @bp.route("/food/<id>", methods = ["PUT"])
+@login_required
 def update(id):
     data = request.get_json()
     name = data["name"]
@@ -78,6 +84,7 @@ def update(id):
     return Response().__dict__, 200
 
 @bp.route("/food/<id>", methods = ["DELETE"])
+@login_required
 def delete(id):
     food_serv.delete(id)
     return Response().__dict__, 200
