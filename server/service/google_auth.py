@@ -1,6 +1,7 @@
 import requests
 from flask import Flask, request
 import os
+import time
 import json
 from model.authuser import AuthUser
 from repository import auth_user_repo
@@ -18,6 +19,7 @@ GOOGLE_CLIENT_SECRET = os.environ.get("GOOGLE_CLIENT_SECRET", None)
 GOOGLE_DISCOVERY_URL = (
     "https://accounts.google.com/.well-known/openid-configuration"
 )
+AUTH_LIFETIME = 3 * 60 * 1000 # 120 minutes
 
 client = WebApplicationClient(GOOGLE_CLIENT_ID)
 
@@ -75,7 +77,9 @@ def login_callback():
     print(users_email)
     print(picture)
 
-    authuser = AuthUser(authenticationId=unique_id, username=users_email, provider=PROVIDER_NAME, email=users_email, name=users_name, profilePic=picture)
+    expiredAt = round(time.time() * 1000) + AUTH_LIFETIME
+
+    authuser = AuthUser(authenticationId=unique_id, username=users_email, provider=PROVIDER_NAME, email=users_email, name=users_name, profilePic=picture, expiredAt=expiredAt)
 
     if auth_user_repo.get_user_by_id(authuser.authenticationId) != None:
         auth_user_repo.update_user_by_id(authuser.authenticationId, authuser)

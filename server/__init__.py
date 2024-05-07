@@ -1,7 +1,7 @@
 from flask import Flask
 from flask_cors import CORS
 from flask_login import LoginManager, login_required
-import os
+import os, time
 from repository import auth_user_repo
 import base64
 
@@ -23,8 +23,12 @@ def get_auth_id(request):
 @login_manager.request_loader
 def load_user_from_request(request):
     auth_id = get_auth_id(request)
-    print("auth_id = " + str(auth_id))
-    return auth_user_repo.get_user_by_id(auth_id)
+    auth_user = auth_user_repo.get_user_by_id(auth_id)
+
+    success = auth_user and auth_user.expiredAt > round(time.time() * 1000)
+    print(success)
+
+    return auth_user if success else None
 
 @app.route("/ping")
 @login_required

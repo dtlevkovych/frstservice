@@ -6,6 +6,7 @@ create table auth_user (
     name text,
     profile_pic text,
     updated_date integer not null default 0,
+    expired_at integer not null,
     PRIMARY KEY (authentication_id),
     CONSTRAINT auth_user UNIQUE (username, provider)
 );
