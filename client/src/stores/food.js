@@ -1,6 +1,7 @@
 import alerts from "@/stores/common/alerts.js"
 import rates from "@/stores/common/rate.js"
 import Dropdown from "@/components/DropdownComponent.vue"
+import http_util from "@/stores/http_util.js"
 
 export default {
     data: function () {
@@ -63,11 +64,9 @@ export default {
       },
       async getFoods() {
         try {
-          const response = await fetch('http://127.0.0.1:3000/api/foods/pagination?limit=' + this.ui.limit + '&page=' + this.ui.page + '', {
+          const response = await fetch(http_util.getBaseUrl() + 'api/foods/pagination?limit=' + this.ui.limit + '&page=' + this.ui.page + '', {
             method: 'GET',
-            headers: {
-              'Content-Type': 'application/json'
-            }
+            headers: http_util.getHeaders()
           })
           const result = await response.json()
   
@@ -99,11 +98,9 @@ export default {
         rateId: this.ui.editForm.rateId
       }
       try {
-        const response = await fetch('http://127.0.0.1:3000/api/food', {
+        const response = await fetch(http_util.getBaseUrl() + 'api/food', {
           method: 'POST',
-          headers: {
-            'Content-Type': 'application/json'
-          },
+          headers: http_util.getHeaders(),
           body: JSON.stringify(obj)
         })
         const result = await response.json()
@@ -123,11 +120,9 @@ export default {
     },
     async deleteFood(foodId) {
       try {
-        const response = await fetch('http://127.0.0.1:3000/api/food/' + foodId, {
+        const response = await fetch(http_util.getBaseUrl() + 'api/food/' + foodId, {
           method: 'DELETE',
-          headers: {
-            'Content-Type': 'application/json'
-          }
+          headers: http_util.getHeaders()
         })
         const result = await response.json()
 
@@ -147,11 +142,9 @@ export default {
         rateId: this.ui.editForm.rateId
       }
       try {
-        const response = await fetch('http://127.0.0.1:3000/api/food/' + foodId, {
+        const response = await fetch(http_util.getBaseUrl() + 'api/food/' + foodId, {
           method: 'PUT',
-          headers: {
-            'Content-Type': 'application/json'
-          },
+          headers: http_util.getHeaders(),
           body: JSON.stringify(obj)
         })
         const result = await response.json()
@@ -168,11 +161,9 @@ export default {
     },
     async getFoodAndFillForm(foodId) {
       try {
-        const response = await fetch('http://127.0.0.1:3000/api/food/' + foodId, {
+        const response = await fetch(http_util.getBaseUrl() + 'api/food/' + foodId, {
           method: 'GET',
-          headers: {
-            'Content-Type': 'application/json'
-          }
+          headers: http_util.getHeaders()
         })
 
         const result = await response.json()

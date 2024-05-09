@@ -1,6 +1,7 @@
 import alerts from "@/stores/common/alerts.js"
 import dateTools from "@/stores/date_tools.js"
 import Dropdown from "@/components/DropdownComponent.vue"
+import http_util from "@/stores/http_util.js"
 
 export default {
     data: function () {
@@ -131,12 +132,9 @@ export default {
       async getUsers() {
 
         try {
-          const response = await fetch('http://127.0.0.1:3000/api/users/pagination?limit=' + this.ui.limit + '&page=' + this.ui.page, {
+          const response = await fetch(http_util.getBaseUrl() + 'api/users/pagination?limit=' + this.ui.limit + '&page=' + this.ui.page, {
             method: 'GET',
-            headers: {
-              'Content-Type': 'application/json',
-              'Authorization': 'Basic 100324161699394014642'
-            }
+            headers: http_util.getHeaders()
           })
           const result = await response.json()
   
@@ -150,7 +148,7 @@ export default {
               this.getEatingHealthReport(result.data[i].id);
             }
           } else {
-            alerts.alertError(result.error_msg);
+            http_util.processUnsuccessfulResponse(response);
           }
         } catch (error) {
           alerts.alertError(error);
@@ -159,11 +157,9 @@ export default {
       async getEatingHealthReport(userId) {
 
         try {
-          const response = await fetch('http://127.0.0.1:3000/api/userfoods/eatinghealth/user/' + userId, {
+          const response = await fetch(http_util.getBaseUrl() + 'api/userfoods/eatinghealth/user/' + userId, {
             method: 'GET',
-            headers: {
-              'Content-Type': 'application/json'
-            }
+            headers: http_util.getHeaders()
           })
           const result = await response.json();
   
@@ -182,11 +178,9 @@ export default {
       },
       async deleteUser(userId) {
         try {
-          const response = await fetch('http://127.0.0.1:3000/api/user/' + userId, {
+          const response = await fetch(http_util.getBaseUrl() + 'api/user/' + userId, {
             method: 'DELETE',
-            headers: {
-              'Content-Type': 'application/json'
-            }
+            headers: http_util.getHeaders()
           })
           const result = await response.json()
   
@@ -214,11 +208,9 @@ export default {
           dob: dateTools.stringToMillis(this.ui.editForm.dob)
         }
         try {
-          const response = await fetch('http://127.0.0.1:3000/api/user', {
+          const response = await fetch(http_util.getBaseUrl() + 'api/user', {
             method: 'POST',
-            headers: {
-              'Content-Type': 'application/json'
-            },
+            headers: http_util.getHeaders(),
             body: JSON.stringify(obj)
           })
           const result = await response.json()
@@ -240,11 +232,9 @@ export default {
           dob: dateTools.stringToMillis(this.ui.editForm.dob)
         }
         try {
-          const response = await fetch('http://127.0.0.1:3000/api/user/' + userId, {
+          const response = await fetch(http_util.getBaseUrl() + 'api/user/' + userId, {
             method: 'PUT',
-            headers: {
-              'Content-Type': 'application/json'
-            },
+            headers: http_util.getHeaders(),
             body: JSON.stringify(obj)
           })
           const result = await response.json()
@@ -261,11 +251,9 @@ export default {
       },
       async getUserAndFillForm(userId) {
         try {
-          const response = await fetch('http://127.0.0.1:3000/api/user/' + userId, {
+          const response = await fetch(http_util.getBaseUrl() + 'api/user/' + userId, {
             method: 'GET',
-            headers: {
-              'Content-Type': 'application/json'
-            }
+            headers: http_util.getHeaders()
           })
   
           const result = await response.json()

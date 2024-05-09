@@ -1,5 +1,6 @@
 import alerts from "@/stores/common/alerts.js"
 import Dropdown from "@/components/DropdownComponent.vue"
+import http_util from "@/stores/http_util.js"
 
 export default {
     data: function () {
@@ -61,11 +62,9 @@ export default {
         async getRates() {
 
             try {
-              const response = await fetch('http://127.0.0.1:3000/api/rates/pagination?limit=' + this.ui.limit + '&page=' + this.ui.page, {
+              const response = await fetch(http_util.getBaseUrl() + 'api/rates/pagination?limit=' + this.ui.limit + '&page=' + this.ui.page, {
                 method: 'GET',
-                headers: {
-                  'Content-Type': 'application/json'
-                }
+                headers: http_util.getHeaders()
               })
               const result = await response.json()
       
@@ -95,11 +94,9 @@ export default {
               colorHex: this.ui.editForm.colorHex
             }
             try {
-              const response = await fetch('http://127.0.0.1:3000/api/rate', {
+              const response = await fetch(http_util.getBaseUrl() + 'api/rate', {
                 method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json'
-                },
+                headers: http_util.getHeaders(),
                 body: JSON.stringify(obj)
               })
               const result = await response.json()
@@ -121,11 +118,9 @@ export default {
               colorHex: this.ui.editForm.colorHex
             }
             try {
-              const response = await fetch('http://127.0.0.1:3000/api/rate/' + rateId, {
+              const response = await fetch(http_util.getBaseUrl() + 'api/rate/' + rateId, {
                 method: 'PUT',
-                headers: {
-                  'Content-Type': 'application/json'
-                },
+                headers: http_util.getHeaders(),
                 body: JSON.stringify(obj)
               })
               const result = await response.json()
@@ -145,11 +140,9 @@ export default {
         },
         async deleteRate(rateId) {
             try {
-              const response = await fetch('http://127.0.0.1:3000/api/rate/' + rateId, {
+              const response = await fetch(http_util.getBaseUrl() + 'api/rate/' + rateId, {
                 method: 'DELETE',
-                headers: {
-                  'Content-Type': 'application/json'
-                }
+                headers: http_util.getHeaders()
               })
               const result = await response.json()
       
@@ -165,11 +158,9 @@ export default {
           },
         async getRateAndFillForm(rateId) {
             try {
-              const response = await fetch('http://127.0.0.1:3000/api/rate/' + rateId, {
+              const response = await fetch(http_util.getBaseUrl() + 'api/rate/' + rateId, {
                 method: 'GET',
-                headers: {
-                  'Content-Type': 'application/json'
-                }
+                headers: http_util.getHeaders()
               })
       
               const result = await response.json()

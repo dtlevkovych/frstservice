@@ -10,8 +10,6 @@ from flask_login import (
     LoginManager,
     current_user,
     login_required,
-    login_user,
-    logout_user,
 )
 PROVIDER_NAME = "google"
 GOOGLE_CLIENT_ID = os.environ.get("GOOGLE_CLIENT_ID", None)

@@ -1,13 +1,13 @@
 import alerts from "@/stores/common/alerts.js"
+import http_util from "@/stores/http_util.js"
+
 
 var rates = {
     getRates: async function(rateMap) {
         try {
-            const response = await fetch('http://127.0.0.1:3000/api/rates', {
+            const response = await fetch(http_util.getBaseUrl() + 'api/rates', {
               method: 'GET',
-              headers: {
-                'Content-Type': 'application/json'
-              }
+              headers: http_util.getHeaders()
             })
             const result = await response.json()
     

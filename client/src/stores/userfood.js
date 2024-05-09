@@ -1,6 +1,7 @@
 import alerts from "@/stores/common/alerts.js"
 import rates from "@/stores/common/rate.js"
 import Dropdown from "@/components/DropdownComponent.vue"
+import http_util from "@/stores/http_util.js"
 
 export default {
     data: function () {
@@ -77,11 +78,9 @@ export default {
         async getUserFoods() {
 
             try {
-              const response = await fetch('http://127.0.0.1:3000/api/userfoods/user/' + this.userId + '/pagination?limit=' + this.ui.limit + '&page=' + this.ui.page, {
+              const response = await fetch(http_util.getBaseUrl() + 'api/userfoods/user/' + this.userId + '/pagination?limit=' + this.ui.limit + '&page=' + this.ui.page, {
                 method: 'GET',
-                headers: {
-                  'Content-Type': 'application/json'
-                }
+                headers: http_util.getHeaders()
               })
               const result = await response.json();
       
@@ -103,11 +102,9 @@ export default {
               foodId: foodId
             }
             try {
-              const response = await fetch('http://127.0.0.1:3000/api/userfoods', {
+              const response = await fetch(http_util.getBaseUrl() + 'api/userfoods', {
                 method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json'
-                },
+                headers: http_util.getHeaders(),
                 body: JSON.stringify(obj)
               })
               const result = await response.json();
@@ -129,11 +126,9 @@ export default {
               rateId: this.ui.editForm.rateId
             }
             try {
-              const response = await fetch('http://127.0.0.1:3000/api/food', {
+              const response = await fetch(http_util.getBaseUrl() + 'api/food', {
                 method: 'POST',
-                headers: {
-                  'Content-Type': 'application/json'
-                },
+                headers: http_util.getHeaders(),
                 body: JSON.stringify(obj)
               })
               const result = await response.json()
@@ -159,11 +154,9 @@ export default {
           },
           async deleteUserFood(userfoodId) {
             try {
-              const response = await fetch('http://127.0.0.1:3000/api/userfoods/' + userfoodId, {
+              const response = await fetch(http_util.getBaseUrl() + 'api/userfoods/' + userfoodId, {
                 method: 'DELETE',
-                headers: {
-                  'Content-Type': 'application/json'
-                }
+                headers: http_util.getHeaders()
               })
               const result = await response.json();
       
@@ -184,11 +177,9 @@ export default {
                 return;
             }
             try {
-              const response = await fetch('http://127.0.0.1:3000/api/foods?phrase=' + phrase, {
+              const response = await fetch(http_util.getBaseUrl() + 'api/foods?phrase=' + phrase, {
                 method: 'GET',
-                headers: {
-                  'Content-Type': 'application/json'
-                }
+                headers: http_util.getHeaders()
               })
               const result = await response.json()
       
