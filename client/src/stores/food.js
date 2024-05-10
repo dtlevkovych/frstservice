@@ -63,23 +63,14 @@ export default {
         this.getFoods();
       },
       async getFoods() {
-        try {
-          const response = await fetch(http_util.getBaseUrl() + 'api/foods/pagination?limit=' + this.ui.limit + '&page=' + this.ui.page + '', {
-            method: 'GET',
-            headers: http_util.getHeaders()
-          })
-          const result = await response.json()
-  
-          if (result.status == true) {
-            this.foods = []
-            for (var i = 0; i < result.data.length; i++) {
-              this.foods.push(result.data[i])
-            }
-          } else {
-            alert(result.error_msg)
+        var api_url = 'api/foods/pagination?limit=' + this.ui.limit + '&page=' + this.ui.page;
+        const result = await http_util.doGet(this, api_url, http_util.getHeaders());
+        
+        if (result.status == true) {
+          this.foods = []
+          for (var i = 0; i < result.data.length; i++) {
+            this.foods.push(result.data[i])
           }
-        } catch (error) {
-          alert('Error: ', error)
         }
       },
     getRates() {
@@ -97,43 +88,25 @@ export default {
         name: this.ui.editForm.name,
         rateId: this.ui.editForm.rateId
       }
-      try {
-        const response = await fetch(http_util.getBaseUrl() + 'api/food', {
-          method: 'POST',
-          headers: http_util.getHeaders(),
-          body: JSON.stringify(obj)
-        })
-        const result = await response.json()
+      var api_url = 'api/food';
+      var body = JSON.stringify(obj);
+      const result = await http_util.doPost(this, api_url, http_util.getHeaders(), body);
 
-        if (result.status == true) {
-          this.refresh();
-          alerts.alertSuccess("Food has been successfully created.");
-        } else {
-          alerts.alertError(result.error_msg);
-        }
-      } catch (error) {
-        alerts.alertError(error);
+      if (result.status == true) {
+        this.refresh();
+        alerts.alertSuccess("Food has been successfully created.");
       }
     },
     removeFood(foodId) {
       alerts.showConfirm("Press 'OK' to delete the user", this.deleteFood, foodId);
     },
     async deleteFood(foodId) {
-      try {
-        const response = await fetch(http_util.getBaseUrl() + 'api/food/' + foodId, {
-          method: 'DELETE',
-          headers: http_util.getHeaders()
-        })
-        const result = await response.json()
+      var api_url = 'api/food/' + foodId;
+      const result = await http_util.doDelete(this, api_url, http_util.getHeaders());
 
-        if (result.status == true) {
-          this.getFoods()
-          alerts.alertSuccess("Food deleted successfully.");
-        } else {
-          alerts.alertError(result.error_msg);
-        }
-      } catch (error) {
-        alerts.alertError(error);
+      if (result.status == true) {
+        this.getFoods()
+        alerts.alertSuccess("Food deleted successfully.");
       }
     },
     async updateFood(foodId) {
@@ -141,41 +114,22 @@ export default {
         name: this.ui.editForm.name,
         rateId: this.ui.editForm.rateId
       }
-      try {
-        const response = await fetch(http_util.getBaseUrl() + 'api/food/' + foodId, {
-          method: 'PUT',
-          headers: http_util.getHeaders(),
-          body: JSON.stringify(obj)
-        })
-        const result = await response.json()
+      var api_url = 'api/food/' + foodId;
+      var body = JSON.stringify(obj);
+      const result = await http_util.doPut(this, api_url, http_util.getHeaders(), body);
 
-        if (result.status == true) {
-          this.refresh();
-          alerts.alertSuccess("Food has been successfully updated.");
-        } else {
-          alerts.alertError(result.error_msg);
-        }
-      } catch (error) {
-        alerts.alertError(error);
+      if (result.status == true) {
+        this.refresh();
+        alerts.alertSuccess("Food has been successfully updated.");
       }
     },
     async getFoodAndFillForm(foodId) {
-      try {
-        const response = await fetch(http_util.getBaseUrl() + 'api/food/' + foodId, {
-          method: 'GET',
-          headers: http_util.getHeaders()
-        })
+      var api_url = 'api/food/' + foodId;
+      const result = await http_util.doGet(this, api_url, http_util.getHeaders());
 
-        const result = await response.json()
-
-        if (result.status == true) {
-          this.ui.editForm.name = result.data.name;
-          this.ui.editForm.rateId = result.data.rateId;
-        } else {
-          alerts.alertError(result.error_msg);
-        }
-      } catch (error) {
-        alerts.alertError(error);
+      if (result.status == true) {
+        this.ui.editForm.name = result.data.name;
+        this.ui.editForm.rateId = result.data.rateId;
       }
     }
   },

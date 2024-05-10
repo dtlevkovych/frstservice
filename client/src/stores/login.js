@@ -5,15 +5,12 @@ export default {
         async logout() {
             console.log(this.$store);
             this.$store.state.auth_user = null;
-            try {
-                const response = await fetch(http_util.getBaseUrl() + 'api/logout', {
-                  method: 'GET',
-                  headers: http_util.getHeaders()
-                })
-        
-              } catch (error) {
-                alert('Error: ', error)
-              }
+
+            var api_url = 'api/logout';
+            const result = await http_util.doGet(this, api_url, http_util.getHeaders());
+            if (result.status == true) {
+                this.$router.push("/");
+            }
         }
     }
 }

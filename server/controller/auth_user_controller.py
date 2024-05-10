@@ -2,7 +2,7 @@ from model.response import Response
 from server.controller import bp
 from service import auth_user_service as auth_user_serv
 from flask_login import login_required
-from flask import redirect
+from flask import redirect, request
 from flask_login import current_user
 
 @bp.route("/google/authusers")
@@ -27,8 +27,8 @@ def get_auth_from_header():
 def logout():
     auth_id = get_auth_from_header()
     print("User logged out.")
-    print(auth_id)
+    print("auth_id = " + auth_id)
     if auth_id:
         auth_user_serv.delete_user_by_id(auth_id)
-        
-    return redirect("http://localhost:5173/")
+
+    return Response(data=None).__dict__, 201

@@ -37,7 +37,7 @@ def create_user(authuser):
     cur = conn.cursor()
 
     auth_user_params = (authuser.authenticationId, authuser.username, authuser.provider, authuser.email, authuser.name, authuser.expiredAt, authuser.profilePic)
-    cur.execute("insert into auth_user (authentication_id, username, provider, email, name, profile_pic, expired_at, updated_date) values (?, ?, ?, ?, ?, ?, ?, unixepoch() * 1000)", auth_user_params)
+    cur.execute("insert into auth_user (authentication_id, username, provider, email, name, expired_at, profile_pic, updated_date) values (?, ?, ?, ?, ?, ?, ?, unixepoch() * 1000)", auth_user_params)
     conn.commit()
     
     return authuser.authenticationId

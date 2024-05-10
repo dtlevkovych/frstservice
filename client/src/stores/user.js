@@ -130,68 +130,39 @@ export default {
 
       },
       async getUsers() {
+        var api_url = 'api/users/pagination?limit=' + this.ui.limit + '&page=' + this.ui.page;
+        const result = await http_util.doGet(this, api_url, http_util.getHeaders());
 
-        try {
-          const response = await fetch(http_util.getBaseUrl() + 'api/users/pagination?limit=' + this.ui.limit + '&page=' + this.ui.page, {
-            method: 'GET',
-            headers: http_util.getHeaders()
-          })
-          const result = await response.json()
-  
-          if (result.status == true) {
-            this.users = [];
-            this.eatingHealth = new Map();
-            this.destroyCharts();
-            for (var i = 0; i < result.data.length; i++) {
-              result.data[i].age = parseInt((Date.now() - result.data[i].dob) / 1000 / 60 / 60 / 24 / 365);
-              this.users.push(result.data[i]);
-              this.getEatingHealthReport(result.data[i].id);
-            }
-          } else {
-            http_util.processUnsuccessfulResponse(response);
+        if (result.status == true) {
+          this.users = [];
+          this.eatingHealth = new Map();
+          this.destroyCharts();
+          for (var i = 0; i < result.data.length; i++) {
+            result.data[i].age = parseInt((Date.now() - result.data[i].dob) / 1000 / 60 / 60 / 24 / 365);
+            this.users.push(result.data[i]);
+            this.getEatingHealthReport(result.data[i].id);
           }
-        } catch (error) {
-          alerts.alertError(error);
         }
       },
       async getEatingHealthReport(userId) {
-
-        try {
-          const response = await fetch(http_util.getBaseUrl() + 'api/userfoods/eatinghealth/user/' + userId, {
-            method: 'GET',
-            headers: http_util.getHeaders()
-          })
-          const result = await response.json();
+        var api_url = 'api/userfoods/eatinghealth/user/' + userId;
+        const result = await http_util.doGet(this, api_url, http_util.getHeaders());
   
-          if (result.status == true) {
-            this.eatingHealth.set(userId, result.data);
-            this.formChartjs(userId);
-          } else {
-            alerts.alertError(result.error_msg);
-          }
-        } catch (error) {
-          alerts.alertError(error);
+        if (result.status == true) {
+          this.eatingHealth.set(userId, result.data);
+          this.formChartjs(userId);
         }
       },
       removeUser(userId) {
         alerts.showConfirm("Press 'OK' to delete the user", this.deleteUser, userId);
       },
       async deleteUser(userId) {
-        try {
-          const response = await fetch(http_util.getBaseUrl() + 'api/user/' + userId, {
-            method: 'DELETE',
-            headers: http_util.getHeaders()
-          })
-          const result = await response.json()
-  
-          if (result.status == true) {
-            this.getUsers()
-            alerts.alertSuccess("User deleted successfully.");
-          } else {
-            alerts.alertError(result.error_msg);
-          }
-        } catch (error) {
-          alerts.alertError(error);
+        var api_url = 'api/user/' + userId;
+        const result = await http_util.doDelete(this, api_url, http_util.getHeaders());
+        
+        if (result.status == true) {
+          this.getUsers()
+          alerts.alertSuccess("User deleted successfully.");
         }
       },
       saveUser() {
@@ -207,22 +178,13 @@ export default {
           lastName: this.ui.editForm.lastName,
           dob: dateTools.stringToMillis(this.ui.editForm.dob)
         }
-        try {
-          const response = await fetch(http_util.getBaseUrl() + 'api/user', {
-            method: 'POST',
-            headers: http_util.getHeaders(),
-            body: JSON.stringify(obj)
-          })
-          const result = await response.json()
-  
-          if (result.status == true) {
-            this.refresh();
-            alerts.alertSuccess("User has been successfully created.");
-          } else {
-            alerts.alertError(result.error_msg);
-          }
-        } catch (error) {
-          alerts.alertError(error);
+        var api_url = 'api/user';
+        var body = JSON.stringify(obj);
+        const result = await http_util.doPost(this, api_url, http_util.getHeaders(), body);
+
+        if (result.status == true) {
+          this.refresh();
+          alerts.alertSuccess("User has been successfully created.");
         }
       },
       async updateUser(userId) {
@@ -231,42 +193,23 @@ export default {
           lastName: this.ui.editForm.lastName,
           dob: dateTools.stringToMillis(this.ui.editForm.dob)
         }
-        try {
-          const response = await fetch(http_util.getBaseUrl() + 'api/user/' + userId, {
-            method: 'PUT',
-            headers: http_util.getHeaders(),
-            body: JSON.stringify(obj)
-          })
-          const result = await response.json()
+        var api_url = 'api/user/' + userId;
+        var body = JSON.stringify(obj);
+        const result = await http_util.doPut(this, api_url, http_util.getHeaders(), body);
   
-          if (result.status == true) {
-            this.refresh();
-            alerts.alertSuccess("User has been successfully updated.");
-          } else {
-            alerts.alertError(result.error_msg);
-          }
-        } catch (error) {
-          alerts.alertError(error);
+        if (result.status == true) {
+          this.refresh();
+          alerts.alertSuccess("User has been successfully updated.");
         }
       },
       async getUserAndFillForm(userId) {
-        try {
-          const response = await fetch(http_util.getBaseUrl() + 'api/user/' + userId, {
-            method: 'GET',
-            headers: http_util.getHeaders()
-          })
+        var api_url = 'api/user/' + userId;
+        const result = await http_util.doGet(this, api_url, http_util.getHeaders());
   
-          const result = await response.json()
-  
-          if (result.status == true) {
-            this.ui.editForm.firstName = result.data.firstName;
-            this.ui.editForm.lastName = result.data.lastName;
-            this.ui.editForm.dob = dateTools.millisToString(result.data.dob);
-          } else {
-            alerts.alertError(result.error_msg);
-          }
-        } catch (error) {
-          alerts.alertError(error);
+        if (result.status == true) {
+          this.ui.editForm.firstName = result.data.firstName;
+          this.ui.editForm.lastName = result.data.lastName;
+          this.ui.editForm.dob = dateTools.millisToString(result.data.dob);
         }
       }
     },

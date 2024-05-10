@@ -26,7 +26,7 @@ def load_user_from_request(request):
     auth_user = auth_user_repo.get_user_by_id(auth_id)
 
     success = auth_user and auth_user.expiredAt > round(time.time() * 1000)
-    print(success)
+
 
     return auth_user if success else None
 

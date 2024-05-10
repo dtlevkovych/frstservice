@@ -73,27 +73,17 @@ export default {
             this.ui.showAddForm = false;
           },
           showUserTable() {
-            this.$router.push('/');
+            this.$router.push('/user');
           },
         async getUserFoods() {
-
-            try {
-              const response = await fetch(http_util.getBaseUrl() + 'api/userfoods/user/' + this.userId + '/pagination?limit=' + this.ui.limit + '&page=' + this.ui.page, {
-                method: 'GET',
-                headers: http_util.getHeaders()
-              })
-              const result = await response.json();
+            var api_url = 'api/userfoods/user/' + this.userId + '/pagination?limit=' + this.ui.limit + '&page=' + this.ui.page;
+            const result = await http_util.doGet(this, api_url, http_util.getHeaders());
       
-              if (result.status == true) {
-                this.userfoods = [];
-                for (var i = 0; i < result.data.length; i++) {
-                  this.userfoods.push(result.data[i]);
-                }
-              } else {
-                alerts.alertError(result.error_msg);
+            if (result.status == true) {
+              this.userfoods = [];
+              for (var i = 0; i < result.data.length; i++) {
+                this.userfoods.push(result.data[i]);
               }
-            } catch (error) {
-              alerts.alertError(error);
             }
           },
           async addUserFood(foodId) {
@@ -101,23 +91,13 @@ export default {
               userId: this.userId,
               foodId: foodId
             }
-            try {
-              const response = await fetch(http_util.getBaseUrl() + 'api/userfoods', {
-                method: 'POST',
-                headers: http_util.getHeaders(),
-                body: JSON.stringify(obj)
-              })
-              const result = await response.json();
+            var api_url = 'api/userfoods';
+            var body = JSON.stringify(obj);
+            const result = await http_util.doPost(this, api_url, http_util.getHeaders(), body);
 
-              if (result.status == true) {
-                this.refresh();
-
-                alerts.alertSuccess("User's food has been successfull added.");
-              } else {
-                alerts.alertError(result.error_msg);
-              }
-            } catch (error) {
-              alerts.alertError(error);
+            if (result.status == true) {
+              this.refresh();
+              alerts.alertSuccess("User's food has been successfull added.");
             }
           },
           async addFood() {
@@ -125,25 +105,16 @@ export default {
               name: this.ui.editForm.foodname,
               rateId: this.ui.editForm.rateId
             }
-            try {
-              const response = await fetch(http_util.getBaseUrl() + 'api/food', {
-                method: 'POST',
-                headers: http_util.getHeaders(),
-                body: JSON.stringify(obj)
-              })
-              const result = await response.json()
+            var api_url = 'api/food';
+            var body = JSON.stringify(obj);
+            const result = await http_util.doPost(this, api_url, http_util.getHeaders(), body);
       
-              if (result.status == true) {
-                this.showAddUserFood();
-                this.ui.editForm.searchfood = this.ui.editForm.foodname;
-                this.getFoods();
+            if (result.status == true) {
+              this.showAddUserFood();
+              this.ui.editForm.searchfood = this.ui.editForm.foodname;
+              this.getFoods();
 
-                alerts.alertSuccess("Food has been successfully created.");
-              } else {
-                alerts.alertError(result.error_msg);
-              }
-            } catch (error) {
-              alerts.alertError(error);
+              alerts.alertSuccess("Food has been successfully created.");
             }
           },
           removeUserFood(userfoodId) {
@@ -153,46 +124,29 @@ export default {
             rates.getRates(this.rates);
           },
           async deleteUserFood(userfoodId) {
-            try {
-              const response = await fetch(http_util.getBaseUrl() + 'api/userfoods/' + userfoodId, {
-                method: 'DELETE',
-                headers: http_util.getHeaders()
-              })
-              const result = await response.json();
+            var api_url = 'api/userfoods/' + userfoodId;
+            const result = await http_util.doDelete(this, api_url, http_util.getHeaders());
       
-              if (result.status == true) {
-                this.getUserFoods();
-                alerts.alertSuccess("User's food deleted successfully.");
-              } else {
-                alerts.alertError(result.error_msg);
-              }
-            } catch (error) {
-              alerts.alertError(error);
+            if (result.status == true) {
+              this.getUserFoods();
+              alerts.alertSuccess("User's food deleted successfully.");
             }
           },
           async getFoods() {
             var phrase = this.ui.editForm.searchfood;
+            var api_url = 'api/foods?phrase=' + phrase;
+            const result = await http_util.doGet(this, api_url, http_util.getHeaders());
+
             if (phrase == undefined || phrase == null || phrase.length < 2) {
                 this.foods = [];
                 return;
             }
-            try {
-              const response = await fetch(http_util.getBaseUrl() + 'api/foods?phrase=' + phrase, {
-                method: 'GET',
-                headers: http_util.getHeaders()
-              })
-              const result = await response.json()
       
-              if (result.status == true) {
-                this.foods = [];
-                for (var i = 0; i < result.data.length; i++) {
-                  this.foods.push(result.data[i]);
-                }
-              } else {
-                alert(result.error_msg);
+            if (result.status == true) {
+              this.foods = [];
+              for (var i = 0; i < result.data.length; i++) {
+                this.foods.push(result.data[i]);
               }
-            } catch (error) {
-              alert('Error: ', error);
             }
           }
     },
