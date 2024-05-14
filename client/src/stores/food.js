@@ -64,7 +64,7 @@ export default {
       },
       async getFoods() {
         var api_url = 'api/foods/pagination?limit=' + this.ui.limit + '&page=' + this.ui.page;
-        const result = await http_util.doGet(this, api_url, http_util.getHeaders());
+        const result = await http_util.doGet(this, api_url);
         
         if (result.status == true) {
           this.foods = []
@@ -90,7 +90,7 @@ export default {
       }
       var api_url = 'api/food';
       var body = JSON.stringify(obj);
-      const result = await http_util.doPost(this, api_url, http_util.getHeaders(), body);
+      const result = await http_util.doPost(this, api_url, null, body);
 
       if (result.status == true) {
         this.refresh();
@@ -102,7 +102,7 @@ export default {
     },
     async deleteFood(foodId) {
       var api_url = 'api/food/' + foodId;
-      const result = await http_util.doDelete(this, api_url, http_util.getHeaders());
+      const result = await http_util.doDelete(this, api_url);
 
       if (result.status == true) {
         this.getFoods()
@@ -116,7 +116,7 @@ export default {
       }
       var api_url = 'api/food/' + foodId;
       var body = JSON.stringify(obj);
-      const result = await http_util.doPut(this, api_url, http_util.getHeaders(), body);
+      const result = await http_util.doPut(this, api_url, null, body);
 
       if (result.status == true) {
         this.refresh();
@@ -125,7 +125,7 @@ export default {
     },
     async getFoodAndFillForm(foodId) {
       var api_url = 'api/food/' + foodId;
-      const result = await http_util.doGet(this, api_url, http_util.getHeaders());
+      const result = await http_util.doGet(this, api_url);
 
       if (result.status == true) {
         this.ui.editForm.name = result.data.name;

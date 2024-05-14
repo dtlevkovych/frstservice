@@ -3,6 +3,7 @@ import UserComponent from '@/components/UserComponent.vue'
 import FoodComponent from '@/components/FoodComponent.vue'
 import RateComponent from '@/components/RateComponent.vue'
 import UserFoodComponent from '@/components/UserFoodComponent.vue'
+import AuthCallbackComponent from '@/components/AuthCallbackComponent.vue'
 import HomeComponent from '@/components/HomeComponent.vue'
 
 const router = createRouter({
@@ -12,7 +13,8 @@ const router = createRouter({
     {path: '/user', name: 'user', component: UserComponent},
     {path: '/food', name: 'food', component: FoodComponent},
     {path: '/rate', name: 'rate', component: RateComponent},
-    {path: '/userfood', name: 'userfood', component: UserFoodComponent}
+    {path: '/userfood', name: 'userfood', component: UserFoodComponent},
+    {path: '/auth_callback', name: 'auth_callback', component: AuthCallbackComponent}
   ]
 })
 

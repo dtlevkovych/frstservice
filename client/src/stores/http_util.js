@@ -2,6 +2,9 @@ import alerts from "@/stores/common/alerts.js"
 
 var http_util = {
   doGeneric: async function(_this, method, api_url, headers, body) {
+    if (headers == null) {
+      headers = this.getHeaders(_this);
+    }
     try {
       const response = await fetch(this.getBaseUrl() + api_url, {
         method: method,
@@ -35,10 +38,11 @@ var http_util = {
   getBaseUrl: function() {
     return 'http://127.0.0.1:3000/';
   },
-  getHeaders: function() {
+  getHeaders: function(_this) {
+    console.log(_this.$store);
     return {
       'Content-Type': 'application/json',
-      'Authorization': 'Basic 100324161699394014642'
+      'Authorization': 'Basic ' + _this.$store.state.auth_user
     }
   },
   processUnsuccessfulResponse: function(_this, response) {

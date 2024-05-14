@@ -131,7 +131,7 @@ export default {
       },
       async getUsers() {
         var api_url = 'api/users/pagination?limit=' + this.ui.limit + '&page=' + this.ui.page;
-        const result = await http_util.doGet(this, api_url, http_util.getHeaders());
+        const result = await http_util.doGet(this, api_url);
 
         if (result.status == true) {
           this.users = [];
@@ -146,7 +146,7 @@ export default {
       },
       async getEatingHealthReport(userId) {
         var api_url = 'api/userfoods/eatinghealth/user/' + userId;
-        const result = await http_util.doGet(this, api_url, http_util.getHeaders());
+        const result = await http_util.doGet(this, api_url);
   
         if (result.status == true) {
           this.eatingHealth.set(userId, result.data);
@@ -158,7 +158,7 @@ export default {
       },
       async deleteUser(userId) {
         var api_url = 'api/user/' + userId;
-        const result = await http_util.doDelete(this, api_url, http_util.getHeaders());
+        const result = await http_util.doDelete(this, api_url);
         
         if (result.status == true) {
           this.getUsers()
@@ -180,7 +180,7 @@ export default {
         }
         var api_url = 'api/user';
         var body = JSON.stringify(obj);
-        const result = await http_util.doPost(this, api_url, http_util.getHeaders(), body);
+        const result = await http_util.doPost(this, api_url, null, body);
 
         if (result.status == true) {
           this.refresh();
@@ -195,7 +195,7 @@ export default {
         }
         var api_url = 'api/user/' + userId;
         var body = JSON.stringify(obj);
-        const result = await http_util.doPut(this, api_url, http_util.getHeaders(), body);
+        const result = await http_util.doPut(this, api_url, null, body);
   
         if (result.status == true) {
           this.refresh();
@@ -204,7 +204,7 @@ export default {
       },
       async getUserAndFillForm(userId) {
         var api_url = 'api/user/' + userId;
-        const result = await http_util.doGet(this, api_url, http_util.getHeaders());
+        const result = await http_util.doGet(this, api_url);
   
         if (result.status == true) {
           this.ui.editForm.firstName = result.data.firstName;

@@ -77,7 +77,7 @@ export default {
           },
         async getUserFoods() {
             var api_url = 'api/userfoods/user/' + this.userId + '/pagination?limit=' + this.ui.limit + '&page=' + this.ui.page;
-            const result = await http_util.doGet(this, api_url, http_util.getHeaders());
+            const result = await http_util.doGet(this, api_url);
       
             if (result.status == true) {
               this.userfoods = [];
@@ -93,7 +93,7 @@ export default {
             }
             var api_url = 'api/userfoods';
             var body = JSON.stringify(obj);
-            const result = await http_util.doPost(this, api_url, http_util.getHeaders(), body);
+            const result = await http_util.doPost(this, api_url, null, body);
 
             if (result.status == true) {
               this.refresh();
@@ -107,7 +107,7 @@ export default {
             }
             var api_url = 'api/food';
             var body = JSON.stringify(obj);
-            const result = await http_util.doPost(this, api_url, http_util.getHeaders(), body);
+            const result = await http_util.doPost(this, api_url, null, body);
       
             if (result.status == true) {
               this.showAddUserFood();
@@ -125,7 +125,7 @@ export default {
           },
           async deleteUserFood(userfoodId) {
             var api_url = 'api/userfoods/' + userfoodId;
-            const result = await http_util.doDelete(this, api_url, http_util.getHeaders());
+            const result = await http_util.doDelete(this, api_url);
       
             if (result.status == true) {
               this.getUserFoods();
@@ -135,7 +135,7 @@ export default {
           async getFoods() {
             var phrase = this.ui.editForm.searchfood;
             var api_url = 'api/foods?phrase=' + phrase;
-            const result = await http_util.doGet(this, api_url, http_util.getHeaders());
+            const result = await http_util.doGet(this, api_url);
 
             if (phrase == undefined || phrase == null || phrase.length < 2) {
                 this.foods = [];

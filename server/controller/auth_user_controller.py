@@ -5,11 +5,11 @@ from flask_login import login_required
 from flask import redirect, request
 from flask_login import current_user
 
-@bp.route("/google/authusers")
+@bp.route("/authusers")
 def get_all_users():
     return Response(data=[u.__dict__ for u in auth_user_serv.get_all_users()]).__dict__, 201
 
-@bp.route("google/authuser/<id>")
+@bp.route("/authuser/<id>")
 def get_user_by_id(id):
     return Response(data=auth_user_serv.get_user_by_id(id).__dict__).__dict__
 

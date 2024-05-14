@@ -24,7 +24,7 @@ client = WebApplicationClient(GOOGLE_CLIENT_ID)
 def get_google_provider_cfg():
     return requests.get(GOOGLE_DISCOVERY_URL).json()
 
-def get_redirect_uri():
+def get_redirect_uri(redirect_to):
     google_provider_cfg = get_google_provider_cfg()
     authorization_endpoint = google_provider_cfg["authorization_endpoint"]
 
@@ -33,6 +33,7 @@ def get_redirect_uri():
         authorization_endpoint,
         redirect_uri=uri,
         scope=["openid", "email", "profile"],
+        state = {"redirect_to": redirect_to}
     )
 
     return request_uri

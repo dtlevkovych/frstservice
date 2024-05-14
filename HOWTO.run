@@ -37,4 +37,5 @@ NON-DOCKER WAY:
 
     2. From client folder:
 
+    npm ci
     npm run dev

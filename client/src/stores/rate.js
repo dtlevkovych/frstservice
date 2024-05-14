@@ -61,7 +61,7 @@ export default {
           },
         async getRates() {
             var api_url = 'api/rates/pagination?limit=' + this.ui.limit + '&page=' + this.ui.page;
-            const result = await http_util.doGet(this, api_url, http_util.getHeaders());
+            const result = await http_util.doGet(this, api_url);
       
             if (result.status == true) {
               this.rates = []
@@ -85,7 +85,7 @@ export default {
             }
             var api_url = 'api/rate';
             var body = JSON.stringify(obj);
-            const result = await http_util.doPost(this, api_url, http_util.getHeaders(), body);
+            const result = await http_util.doPost(this, api_url, null, body);
       
             if (result.status == true) {
               this.refresh();
@@ -100,7 +100,7 @@ export default {
             }
             var api_url = 'api/rate/' + rateId;
             var body = JSON.stringify(obj);
-            const result = await http_util.doPut(this, api_url, http_util.getHeaders(), body);
+            const result = await http_util.doPut(this, api_url, null, body);
       
             if (result.status == true) {
               this.refresh();
@@ -112,7 +112,7 @@ export default {
         },
         async deleteRate(rateId) {
             var api_url = 'api/rate/' + rateId;
-            const result = await http_util.doDelete(this, api_url, http_util.getHeaders());
+            const result = await http_util.doDelete(this, api_url);
       
             if (result.status == true) {
               this.getRates()
@@ -121,7 +121,7 @@ export default {
           },
         async getRateAndFillForm(rateId) {
             var api_url = 'api/rate/' + rateId;
-            const result = await http_util.doGet(this, api_url, http_util.getHeaders());
+            const result = await http_util.doGet(this, api_url);
 
             if (result.status == true) {
               this.ui.editForm.name = result.data.name;

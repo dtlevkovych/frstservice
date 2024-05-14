@@ -7,7 +7,7 @@ export default {
             this.$store.state.auth_user = null;
 
             var api_url = 'api/logout';
-            const result = await http_util.doGet(this, api_url, http_util.getHeaders());
+            const result = await http_util.doGet(this, api_url, null);
             if (result.status == true) {
                 this.$router.push("/");
             }
