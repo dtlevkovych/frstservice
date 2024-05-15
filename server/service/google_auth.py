@@ -4,7 +4,7 @@ import os
 import time
 import json
 from model.authuser import AuthUser
-from repository import auth_user_repo
+from service import auth_user_service
 from oauthlib.oauth2 import WebApplicationClient
 from flask_login import (
     LoginManager,
@@ -71,18 +71,13 @@ def login_callback():
     else:
         return "User email not available or not verified by Google.", 400
 
-    print(unique_id)
-    print(users_name)
-    print(users_email)
-    print(picture)
-
     expiredAt = round(time.time() * 1000) + AUTH_LIFETIME
 
     authuser = AuthUser(authenticationId=unique_id, username=users_email, provider=PROVIDER_NAME, email=users_email, name=users_name, profilePic=picture, expiredAt=expiredAt)
 
-    if auth_user_repo.get_user_by_id(authuser.authenticationId) != None:
-        auth_user_repo.update_user_by_id(authuser.authenticationId, authuser)
+    if auth_user_service.get_user_by_id(authuser.authenticationId) != None:
+        auth_user_service.update_user_by_id(authuser.authenticationId, authuser)
     else:
-        auth_user_repo.create_user(authuser)
+        auth_user_service.create_user(authuser)
 
     return authuser.get_id()

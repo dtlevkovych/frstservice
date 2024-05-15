@@ -1,6 +1,6 @@
 import alerts from "@/stores/common/alerts.js"
 import rates from "@/stores/common/rate.js"
-import Dropdown from "@/components/DropdownComponent.vue"
+import Header from "@/components/HeaderComponent.vue"
 import http_util from "@/stores/http_util.js"
 
 export default {
@@ -22,7 +22,7 @@ export default {
       }
     },
     components: {
-      "Dropdown": Dropdown
+      "Header": Header
     },
     methods: {
       refresh() {
@@ -63,6 +63,7 @@ export default {
         this.getFoods();
       },
       async getFoods() {
+        console.log(this.$store.state.auth_user);
         var api_url = 'api/foods/pagination?limit=' + this.ui.limit + '&page=' + this.ui.page;
         const result = await http_util.doGet(this, api_url);
         
@@ -74,7 +75,7 @@ export default {
         }
       },
     getRates() {
-      rates.getRates(this.rates);
+      rates.getRates(this, this.rates);
     },
     saveFood() {
       if (this.ui.editForm.foodId == null) {

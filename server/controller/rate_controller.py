@@ -3,6 +3,7 @@ from flask_login import login_required
 from server.controller import bp
 from service import rate_service as rate_serv
 from model.response import Response
+from exception.notfound import NotFoundError
 from model.rate import Rate
 
 

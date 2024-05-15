@@ -5,20 +5,25 @@ import json
 
 @bp.route("/google/login")
 def login():
-    print("login")
     redirect_to = request.args.get("redirect_to")
     request_uri = google_auth_serv.get_redirect_uri(redirect_to)
     return redirect(request_uri)
 
 @bp.route("/google/login/callback")
 def login_callback():
-    print("callback")
     auth_id = google_auth_serv.login_callback()
 
-    url = get_redirect_url()
+    url = str(get_redirect_url())
+    url = add_auth_id(url, auth_id)
 
-    resp = Response(headers={"auth_id": auth_id})
-    return redirect(url, Response=resp)
+    return redirect(url)
+
+def add_auth_id(url, auth_id):
+    _url = url
+    _url += ("&" if url.find("?") > -1 else "?")
+    _url += "auth_id="+auth_id
+
+    return _url
 
 def get_redirect_url():
     url = None

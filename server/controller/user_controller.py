@@ -35,7 +35,6 @@ def get_users():
 @bp.route("/users/pagination")
 @login_required
 def get_users_pagination():
-    print(flask_login.current_user.get_id())
     limit = request.args.get("limit")
     page = request.args.get("page")
 

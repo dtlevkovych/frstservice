@@ -1,8 +1,8 @@
-<script src="@/stores/login.js"></script>
-
 <template>
-    <div class="dropdown">
-        <button class="btn btn-light btn-secondary" type="button" data-bs-toggle="dropdown" aria-expanded="false"><img src="../assets/settings.png" /></button>
+    <div v-if="this.$store.state.auth_user != null">
+        
+        
+        <button class="btn btn-light btn-secondary" type="button" data-bs-toggle="dropdown" aria-expanded="false"><img v-bind:src="this.$store.state.auth_user.profilePic" width="35" height="35" style="border-radius: 50%;"> &nbsp; {{ this.$store.state.auth_user.name }} &nbsp; &nbsp; &#926;</button>
         <ul class="dropdown-menu">
             <li><a class="dropdown-item" href="/">User</a></li>
             <li><a class="dropdown-item" href="/food">Food</a></li>

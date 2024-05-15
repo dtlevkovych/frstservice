@@ -1,6 +1,6 @@
 import alerts from "@/stores/common/alerts.js"
 import rates from "@/stores/common/rate.js"
-import Dropdown from "@/components/DropdownComponent.vue"
+import Header from "@/components/HeaderComponent.vue"
 import http_util from "@/stores/http_util.js"
 
 export default {
@@ -27,7 +27,9 @@ export default {
         userId: null,
       }
     },
-    components: {"Dropdown": Dropdown},
+    components: {
+      "Header": Header
+    },
     methods: {
         refresh() {
             this.userId = this.$route.query.userId;
@@ -121,7 +123,7 @@ export default {
             alerts.showConfirm("Press 'OK' to delete the user's food", this.deleteUserFood, userfoodId);
           },
           getRates() {
-            rates.getRates(this.rates);
+            rates.getRates(this, this.rates);
           },
           async deleteUserFood(userfoodId) {
             var api_url = 'api/userfoods/' + userfoodId;

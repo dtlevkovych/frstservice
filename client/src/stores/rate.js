@@ -1,5 +1,5 @@
 import alerts from "@/stores/common/alerts.js"
-import Dropdown from "@/components/DropdownComponent.vue"
+import Header from "@/components/HeaderComponent.vue"
 import http_util from "@/stores/http_util.js"
 
 export default {
@@ -20,7 +20,9 @@ export default {
         rates: []
       }
     },
-    components: {"Dropdown": Dropdown},
+    components: {
+      "Header": Header
+    },
     methods: {
         refresh() {
             this.showRateTable();

@@ -26,8 +26,6 @@ def get_auth_from_header():
 #@login_required
 def logout():
     auth_id = get_auth_from_header()
-    print("User logged out.")
-    print("auth_id = " + auth_id)
     if auth_id:
         auth_user_serv.delete_user_by_id(auth_id)
 

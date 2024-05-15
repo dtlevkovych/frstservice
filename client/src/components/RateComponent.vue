@@ -4,8 +4,8 @@
   <article id="article-rate">
 
     <div v-if="ui.showTable" id="rate-table">
-      <div class="d-flex flex-row-reverse">
-        <Dropdown />
+      <div>
+        <Header />
       </div>
 
       <button class="btn btn-link" v-if="ui.page > 0" @click="showPreviousPage">&#8592;Previous</button>
@@ -42,8 +42,8 @@
     </div>
 
     <div v-if="ui.showEditForm" id="rate-edit">
-      <div class="d-flex flex-row-reverse">
-        <Dropdown />
+      <div>
+        <Header />
       </div>
       <div class="control-group mx-auto m-3 w-25">
         <label for="name">Name</label>

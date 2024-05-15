@@ -5,10 +5,8 @@
      <div v-if="ui.showTable" id="userfood-table">
         
         <div class="d-flex flex-row-reverse">
-
-          <Dropdown />
+          <Header />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
           <button @click="showUserTable()" class="btn border-0">&#8592;Back</button>
-
         </div>
 
         <div>
@@ -42,8 +40,8 @@
     <div v-if="ui.showAddForm" id="userfood-edit">
         
         <div class="d-flex flex-row-reverse">
-          <Dropdown />
-          <button @click="showUserFoodTable()" class="btn border-0">&#8592;Back</button>
+            <Header />&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+            <button @click="showUserFoodTable()" class="btn border-0">&#8592;Back</button>
         </div>
 
         <div class="input-group mx-auto m-3 w-25 py-4">
@@ -75,8 +73,8 @@
     </div>
 
     <div v-if="ui.showAddFood" id="food-edit">
-      <div class="d-flex flex-row-reverse">
-        <Dropdown />
+      <div>
+        <Header />
       </div>
       <div class="control-group mx-auto m-3 w-25">
         <label for="name">Name</label>

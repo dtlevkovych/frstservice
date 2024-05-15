@@ -4,8 +4,8 @@
   <article id="article-rate" class="article-params">
 
     <div v-if="ui.showTable" id="food-table">
-      <div class="d-flex flex-row-reverse">
-        <Dropdown />
+      <div>
+        <Header />
       </div>
 
       {{ this.$store.state.auth_user }}
@@ -42,8 +42,8 @@
     </div>
 
     <div v-if="ui.showEditForm" id="food-edit">
-      <div class="d-flex flex-row-reverse">
-        <Dropdown />
+      <div>
+        <Header />
       </div>
       <div class="control-group mx-auto m-3 w-25">
         <label for="name">Name</label>

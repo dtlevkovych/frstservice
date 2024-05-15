@@ -39,11 +39,20 @@ var http_util = {
     return 'http://127.0.0.1:3000/';
   },
   getHeaders: function(_this) {
-    console.log(_this.$store);
+    var auth_id = this.getAuthId(_this);
     return {
       'Content-Type': 'application/json',
-      'Authorization': 'Basic ' + _this.$store.state.auth_user
+      'Authorization': 'Basic ' + auth_id
     }
+  },
+  getAuthId: function(_this) {
+    var auth_id = null;
+    if (_this.$store.state.auth_user) {
+      auth_id = _this.$store.state.auth_user.authenticationId;
+    } else {
+      auth_id = "";
+    }
+    return auth_id;
   },
   processUnsuccessfulResponse: function(_this, response) {
     if (response.status == 401) {
@@ -55,3 +64,4 @@ var http_util = {
 }
 
 export default http_util
+

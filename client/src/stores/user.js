@@ -1,6 +1,6 @@
 import alerts from "@/stores/common/alerts.js"
 import dateTools from "@/stores/date_tools.js"
-import Dropdown from "@/components/DropdownComponent.vue"
+import Header from "@/components/HeaderComponent.vue"
 import http_util from "@/stores/http_util.js"
 
 export default {
@@ -24,10 +24,11 @@ export default {
         charts: []
       }
     },
-    components: {"Dropdown": Dropdown},
+    components: {
+      "Header": Header
+    },
     methods: {
       refresh() {
-        console.log(this.$store);
         this.showUserTable();
         this.getUsers();
       },
@@ -130,6 +131,7 @@ export default {
 
       },
       async getUsers() {
+        console.log("here");
         var api_url = 'api/users/pagination?limit=' + this.ui.limit + '&page=' + this.ui.page;
         const result = await http_util.doGet(this, api_url);
 

@@ -2,7 +2,7 @@ from flask import Flask
 from flask_cors import CORS
 from flask_login import LoginManager, login_required
 import os, time
-from repository import auth_user_repo
+from service import auth_user_service
 import base64
 
 app = Flask(__name__)
@@ -23,7 +23,7 @@ def get_auth_id(request):
 @login_manager.request_loader
 def load_user_from_request(request):
     auth_id = get_auth_id(request)
-    auth_user = auth_user_repo.get_user_by_id(auth_id)
+    auth_user = auth_user_service.get_user_by_id(auth_id)
 
     success = auth_user and auth_user.expiredAt > round(time.time() * 1000)
 
