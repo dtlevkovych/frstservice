@@ -1,15 +1,9 @@
-import http_util from "@/stores/http_util.js"
+import conf from "@/stores/common/conf.js"
 
 export default {
     methods: {
-        async logout() {
-            var api_url = 'api/logout';
-            const result = await http_util.doGet(this, api_url, null);
-
-            if (result.status == true) {
-                this.$store.state.auth_user = null;
-                this.$router.push("/");
-            }
+        googleLogin() {
+            window.location = conf.base_api_url + "api/google/login?redirect_to=" + conf.base_url + "auth_callback";
         }
     }
 }

@@ -1,6 +1,6 @@
 from server.controller import bp
 from service import google_auth as google_auth_serv
-from flask import redirect, request, Response
+from flask import redirect, request
 import json
 
 @bp.route("/google/login")
@@ -12,18 +12,19 @@ def login():
 @bp.route("/google/login/callback")
 def login_callback():
     auth_id = google_auth_serv.login_callback()
-
-    url = str(get_redirect_url())
-    url = add_auth_id(url, auth_id)
+    url = get_redirect_url_with_auth(auth_id)
 
     return redirect(url)
 
-def add_auth_id(url, auth_id):
-    _url = url
-    _url += ("&" if url.find("?") > -1 else "?")
-    _url += "auth_id="+auth_id
+def get_redirect_url_with_auth(auth_id):
+    url = get_redirect_url()
+    url += get_query_separator(url)
+    url += "auth_id=" + auth_id
 
-    return _url
+    return url
+
+def get_query_separator(url):
+    return "&" if url.find("?") > -1 else "?"
 
 def get_redirect_url():
     url = None

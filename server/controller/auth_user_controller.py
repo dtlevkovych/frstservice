@@ -2,8 +2,7 @@ from model.response import Response
 from server.controller import bp
 from service import auth_user_service as auth_user_serv
 from flask_login import login_required
-from flask import redirect, request
-from flask_login import current_user
+from flask import request
 
 @bp.route("/authusers")
 def get_all_users():
@@ -23,7 +22,7 @@ def get_auth_from_header():
     return auth_header
 
 @bp.route("/logout")
-#@login_required
+@login_required
 def logout():
     auth_id = get_auth_from_header()
     if auth_id:

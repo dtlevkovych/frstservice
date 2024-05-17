@@ -1,7 +1,6 @@
 import repository.db_conn as db_conn
 import repository.db_tools as db_tools
 from model.food import Food
-from model.order import Order
 
 
 def get_conn():

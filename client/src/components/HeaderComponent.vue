@@ -1,15 +1,15 @@
 <script>
-    import UserInfo from "@/components/UserInfoComponent.vue"
+    import UserMenu from "@/components/UserMenuComponent.vue"
 
     export default {
         components: {
-            "UserInfo": UserInfo
+            "UserMenu": UserMenu
         }
     }
 </script>
 
 <template>
     <div class="d-flex flex-row-reverse">
-        <UserInfo />
+        <UserMenu />
     </div>
 </template>

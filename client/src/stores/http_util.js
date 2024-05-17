@@ -1,4 +1,5 @@
 import alerts from "@/stores/common/alerts.js"
+import conf from "@/stores/common/conf.js"
 
 var http_util = {
   doGeneric: async function(_this, method, api_url, headers, body) {
@@ -6,7 +7,7 @@ var http_util = {
       headers = this.getHeaders(_this);
     }
     try {
-      const response = await fetch(this.getBaseUrl() + api_url, {
+      const response = await fetch(this.getBaseApiUrl() + api_url, {
         method: method,
         headers: headers,
         body: body
@@ -35,14 +36,14 @@ var http_util = {
   doDelete: async function(_this, api_url, headers) {
     return this.doGeneric(_this, 'DELETE', api_url, headers, null);
   },
-  getBaseUrl: function() {
-    return 'http://127.0.0.1:3000/';
+  getBaseApiUrl: function() {
+    return conf.base_api_url;
   },
   getHeaders: function(_this) {
     var auth_id = this.getAuthId(_this);
     return {
       'Content-Type': 'application/json',
-      'Authorization': 'Basic ' + auth_id
+      'Authorization': conf.tocken_type + auth_id
     }
   },
   getAuthId: function(_this) {

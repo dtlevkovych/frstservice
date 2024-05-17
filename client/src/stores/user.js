@@ -87,6 +87,9 @@ export default {
       },
       formChartjs(userId) {
         var userData =  this.eatingHealth.get(userId);
+        if (!userData) {
+          return;
+        }
        
         var lables = [];
         var datasetsData = [];
@@ -131,7 +134,6 @@ export default {
 
       },
       async getUsers() {
-        console.log("here");
         var api_url = 'api/users/pagination?limit=' + this.ui.limit + '&page=' + this.ui.page;
         const result = await http_util.doGet(this, api_url);
 

@@ -1,5 +1,4 @@
 from repository import user_repo, food_repo, user_food_repo
-from model.userfood import UserFood
 from exception.notfound import NotFoundError
 
 

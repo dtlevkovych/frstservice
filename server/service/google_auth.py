@@ -1,16 +1,12 @@
 import requests
-from flask import Flask, request
+from flask import request
 import os
 import time
 import json
 from model.authuser import AuthUser
 from service import auth_user_service
 from oauthlib.oauth2 import WebApplicationClient
-from flask_login import (
-    LoginManager,
-    current_user,
-    login_required,
-)
+
 PROVIDER_NAME = "google"
 GOOGLE_CLIENT_ID = os.environ.get("GOOGLE_CLIENT_ID", None)
 GOOGLE_CLIENT_SECRET = os.environ.get("GOOGLE_CLIENT_SECRET", None)

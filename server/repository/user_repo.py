@@ -1,4 +1,3 @@
-from model.order import Order
 from model.user import User
 import repository.db_conn as db_conn
 import repository.db_tools as db_tools

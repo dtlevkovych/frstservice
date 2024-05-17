@@ -63,7 +63,6 @@ export default {
         this.getFoods();
       },
       async getFoods() {
-        console.log(this.$store.state.auth_user);
         var api_url = 'api/foods/pagination?limit=' + this.ui.limit + '&page=' + this.ui.page;
         const result = await http_util.doGet(this, api_url);
         

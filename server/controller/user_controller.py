@@ -6,8 +6,6 @@ from model.order import Order
 from server.controller import bp
 from exception.notfound import NotFoundError
 from flask_login import login_required
-import flask_login
-
 
 @bp.route("/users")
 @login_required
