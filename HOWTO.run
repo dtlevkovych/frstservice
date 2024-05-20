@@ -33,9 +33,10 @@ NON-DOCKER WAY:
 
     1. From server folder:
 
-    OAUTHLIB_INSECURE_TRANSPORT="1" GOOGLE_CLIENT_ID="429504215997-g93u9aonqvuv3dijsdvgths0i9nfltf8.apps.googleusercontent.com" GOOGLE_CLIENT_SECRET="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" python3 -m flask --app . run --port=3000
+    BASE_API_URL="http://127.0.0.1:3000/api" OAUTHLIB_INSECURE_TRANSPORT="1" GOOGLE_CLIENT_ID="429504215997-g93u9aonqvuv3dijsdvgths0i9nfltf8.apps.googleusercontent.com" GOOGLE_CLIENT_SECRET="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" python3 -m flask --app . run --port=3000
 
     2. From client folder:
 
     npm ci
-    npm run dev
+    VUE_APP_BASE_URL="http://localhost:5173/" VUE_APP_BASE_API_URL="http://127.0.0.1:3000/api/" npm run dev
+    

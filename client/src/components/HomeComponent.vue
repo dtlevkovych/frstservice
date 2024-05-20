@@ -1,11 +1,12 @@
 <script>
 import LoginComponent from "@/components/LoginComponent.vue"
 import UserComponent from "@/components/UserComponent.vue"
+import { store } from '@/stores/store.js'
 
 export default {
     data: function () {
       return {
-        
+        store
       }
     },
     components: {
@@ -16,10 +17,10 @@ export default {
 </script>
 
 <template>
-  <article id="article-user" v-if="this.$store.state.auth_user == null">
+  <article id="article-user" v-if="store.auth_user == null">
     <LoginComponent />
   </article>
-  <article id="article-user" v-if="this.$store.state.auth_user != null">
+  <article id="article-user" v-if="store.auth_user != null">
     <UserComponent />
   </article>
 </template>

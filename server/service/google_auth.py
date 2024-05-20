@@ -14,6 +14,7 @@ GOOGLE_DISCOVERY_URL = (
     "https://accounts.google.com/.well-known/openid-configuration"
 )
 AUTH_LIFETIME = 3 * 60 * 1000 # 120 minutes
+BASE_API_URL = os.environ.get("BASE_API_URL", None)
 
 client = WebApplicationClient(GOOGLE_CLIENT_ID)
 
@@ -24,7 +25,7 @@ def get_redirect_uri(redirect_to):
     google_provider_cfg = get_google_provider_cfg()
     authorization_endpoint = google_provider_cfg["authorization_endpoint"]
 
-    uri = request.base_url + "/callback"
+    uri = BASE_API_URL + "/google/login/callback"
     request_uri = client.prepare_request_uri(
         authorization_endpoint,
         redirect_uri=uri,
@@ -43,7 +44,7 @@ def login_callback():
     token_url, headers, body = client.prepare_token_request(
         token_endpoint,
         authorization_response=request.url,
-        redirect_url=request.base_url,
+        redirect_url=BASE_API_URL,
         code=code
     )
     token_response = requests.post(

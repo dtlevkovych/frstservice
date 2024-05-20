@@ -1,5 +1,6 @@
 import alerts from "@/stores/common/alerts.js"
 import conf from "@/stores/common/conf.js"
+import { store } from '@/stores/store.js'
 
 var http_util = {
   doGeneric: async function(_this, method, api_url, headers, body) {
@@ -48,8 +49,8 @@ var http_util = {
   },
   getAuthId: function(_this) {
     var auth_id = null;
-    if (_this.$store.state.auth_user) {
-      auth_id = _this.$store.state.auth_user.authenticationId;
+    if (store.auth_user) {
+      auth_id = store.auth_user.authenticationId;
     } else {
       auth_id = "";
     }

@@ -1,13 +1,19 @@
 import http_util from "@/stores/http_util.js"
+import { store } from '@/stores/store.js'
 
 export default {
+    data: function() {
+        return {
+            store
+        }
+    },
     methods: {
         async logout() {
             var api_url = 'api/logout';
             const result = await http_util.doGet(this, api_url, null);
 
             if (result.status == true) {
-                this.$store.state.auth_user = null;
+                store.auth_user = null;
                 this.$router.push("/");
             }
         },
