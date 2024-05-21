@@ -1,7 +1,6 @@
-console.log(process.env.VUE_APP_BASE_URL);
 var conf = {
-    //base_url: process.env.BASE_URL,
-    //base_api_url: process.env.BASE_API_URL,
+    base_url: "http://localhost:5173/",
+    base_api_url: 'http://127.0.0.1:3000/',
     tocken_type: "Basic "
 }
 
