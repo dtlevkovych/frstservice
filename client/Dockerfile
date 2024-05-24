@@ -1,19 +1,12 @@
-FROM node:lts-alpine
-
-RUN npm install -g http-server
-
-WORKDIR /app/client
-
-ENV BASE_URL="http://127.0.0.1:3000/"
-ENV BASE_API_URL="http://127.0.0.1:3000/api/"
-
+FROM node:latest as build-stage
+WORKDIR /app
 COPY package*.json ./
-COPY . .
-
-RUN npm ci
-
+RUN npm install
+COPY ./ .
+COPY ./src/stores/common/conf.docker.js ./src/stores/common/conf.js 
 RUN npm run build
 
-EXPOSE 8080
-
-CMD [ "http-server", "dist" ]
+FROM nginx as production-stage
+RUN mkdir /app
+COPY --from=build-stage /app/dist /app
+COPY nginx/default.conf /etc/nginx/nginx.conf

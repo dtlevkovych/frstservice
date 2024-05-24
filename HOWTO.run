@@ -8,7 +8,7 @@ DOCKER WAY:
 
     - server: container with python flask server solution
 
-    - client: container with vue.js client solution
+    - client: container with vue.js client solution + nginx to serve client
 
     - nginx: nginx http server container that sits in front of two previous
 
@@ -22,7 +22,7 @@ DOCKER WAY:
 
     - in browser go by following link:
 
-    http://localhost:3000/
+    http://127.0.0.1:3000/
 
 
 
@@ -38,5 +38,4 @@ NON-DOCKER WAY:
     2. From client folder:
 
     npm ci
-    VUE_APP_BASE_URL="http://localhost:5173/" VUE_APP_BASE_API_URL="http://127.0.0.1:3000/api/" npm run dev
-    
+    npm run dev -- --port 7005
