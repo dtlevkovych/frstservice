@@ -29,6 +29,15 @@ DOCKER WAY:
 
 NON-DOCKER WAY:
 
+    Please install following dependencies:
+
+        pip3 install flask
+        pip3 install flask-cors
+        pip3 install requests
+        pip3 install oauthlib
+        pip3 install pyOpenSSL
+        pip3 install Flask-Login
+
     To run the solution please use following two commands:
 
     1. From server folder:

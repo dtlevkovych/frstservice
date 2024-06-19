@@ -3,6 +3,7 @@ import repository.db_tools as db_tools
 from model.userfood import UserFood
 from model.userfood_detailed import UserFoodDetailed
 from model.rate_report import RateReport
+import utils.timeutils as timeutils
 
 
 def get_conn():
@@ -92,8 +93,8 @@ def add(userFood):
 
     cur = conn.cursor()
     id = db_tools.get_next_id()
-    user_food_params = (id, userFood.userId, userFood.foodId)
-    sql = "insert into user_food (id, user_id, food_id, created_at) values (?, ?, ?, unixepoch() * 1000)"
+    user_food_params = (id, userFood.userId, userFood.foodId, timeutils.current_time_millis())
+    sql = "insert into user_food (id, user_id, food_id, created_at) values (?, ?, ?, ?)"
             
     cur.execute(sql, user_food_params)
 

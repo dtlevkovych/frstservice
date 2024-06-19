@@ -1,6 +1,7 @@
 import repository.db_conn as db_conn
 import repository.db_tools as db_tools
 from model.rate import Rate
+import utils.timeutils as timeutils
 
 
 def get_conn():
@@ -73,8 +74,8 @@ def add_rate(rate):
 
     id = db_tools.get_next_id()
 
-    rate_params = (id, rate.name, rate.value, rate.colorHex)
-    cur.execute("insert into rate (id, name, value, color_hex, created_at) values (?, ?, ?, ?, unixepoch() * 1000)", rate_params)
+    rate_params = (id, rate.name, rate.value, rate.colorHex, timeutils.current_time_millis())
+    cur.execute("insert into rate (id, name, value, color_hex, created_at) values (?, ?, ?, ?, ?)", rate_params)
     conn.commit()
     
     return id

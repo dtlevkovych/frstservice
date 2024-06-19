@@ -1,5 +1,6 @@
 import repository.db_conn as db_conn
 from model.authuser import AuthUser
+import utils.timeutils as timeutils
 
 def get_conn():
     return db_conn.get_conn()
@@ -35,8 +36,8 @@ def create_user(authuser):
 
     cur = conn.cursor()
 
-    auth_user_params = (authuser.authenticationId, authuser.username, authuser.provider, authuser.email, authuser.name, authuser.expiredAt, authuser.profilePic)
-    cur.execute("insert into auth_user (authentication_id, username, provider, email, name, expired_at, profile_pic, updated_date) values (?, ?, ?, ?, ?, ?, ?, unixepoch() * 1000)", auth_user_params)
+    auth_user_params = (authuser.authenticationId, authuser.username, authuser.provider, authuser.email, authuser.name, authuser.expiredAt, authuser.profilePic, timeutils.current_time_millis())
+    cur.execute("insert into auth_user (authentication_id, username, provider, email, name, expired_at, profile_pic, updated_date) values (?, ?, ?, ?, ?, ?, ?, ?)", auth_user_params)
     conn.commit()
     
     return authuser.authenticationId
@@ -45,8 +46,8 @@ def update_user_by_id(id, authuser):
     conn = get_conn()
 
     cur = conn.cursor()
-    auth_user_params = (authuser.username, authuser.provider, authuser.email, authuser.name, authuser.profilePic, authuser.expiredAt, authuser.authenticationId)
-    cur.execute("update auth_user set username=?, provider=?, email=?, name=?, profile_pic=?, expired_at=?, updated_date=unixepoch() * 1000 where authentication_id=?", auth_user_params)
+    auth_user_params = (authuser.username, authuser.provider, authuser.email, authuser.name, authuser.profilePic, authuser.expiredAt, timeutils.current_time_millis(), authuser.authenticationId)
+    cur.execute("update auth_user set username=?, provider=?, email=?, name=?, profile_pic=?, expired_at=?, updated_date=? where authentication_id=?", auth_user_params)
     conn.commit()
 
     return True

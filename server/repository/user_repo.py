@@ -1,6 +1,7 @@
 from model.user import User
 import repository.db_conn as db_conn
 import repository.db_tools as db_tools
+import utils.timeutils as timeutils
 
 def get_conn():
     return db_conn.get_conn()
@@ -63,8 +64,8 @@ def add(user):
 
     id = db_tools.get_next_id()
 
-    user_params = (id, user.firstName, user.lastName, user.dob, user.active)
-    cur.execute("insert into user (id, first_name, last_name, dob, active, created_at) values (?, ?, ?, ?, ?, unixepoch() * 1000)", user_params)
+    user_params = (id, user.firstName, user.lastName, user.dob, user.active, timeutils.current_time_millis())
+    cur.execute("insert into user (id, first_name, last_name, dob, active, created_at) values (?, ?, ?, ?, ?, ?)", user_params)
     conn.commit()
     
     return id
