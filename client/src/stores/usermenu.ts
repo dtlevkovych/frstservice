@@ -1,7 +1,8 @@
-import http_util from "@/stores/http_util.js"
-import { store } from '@/stores/store.js'
+import { defineComponent } from "vue"
+import http_util from "@/stores/http_util"
+import { store } from '@/stores/store'
 
-export default {
+export default defineComponent({
     data: function() {
         return {
             store
@@ -27,4 +28,4 @@ export default {
             this.$router.push("/rate");
         }
     }
-}
+})

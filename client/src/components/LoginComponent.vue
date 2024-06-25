@@ -1,4 +1,4 @@
-<script src="@/stores/login.js"></script>
+<script src="@/stores/login.ts"></script>
 
 <template>
   <article id="not-logged-in">

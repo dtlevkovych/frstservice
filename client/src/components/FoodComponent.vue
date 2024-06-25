@@ -1,4 +1,4 @@
-<script src="@/stores/food.js"></script>
+<script src="@/stores/food.ts"></script>
 
 <template>
   <article id="article-rate" class="article-params">

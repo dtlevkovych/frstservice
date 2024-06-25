@@ -1,4 +1,4 @@
-<script src="@/stores/rate.js"></script>
+<script src="@/stores/rate.ts"></script>
 
 <template>
   <article id="article-rate">

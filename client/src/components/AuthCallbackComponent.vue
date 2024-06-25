@@ -1,4 +1,4 @@
-<script src="@/stores/auth_callback.js"></script>
+<script src="@/stores/auth_callback.ts"></script>
 
 <template>
 </template>

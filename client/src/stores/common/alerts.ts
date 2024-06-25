@@ -3,7 +3,7 @@ var alerts = {
     getRandomId: function() {
         return "alert-" + Math.random().toString(36).slice(2);
     },
-    alertSuccess: function(msg) {
+    alertSuccess: function(msg: any) {
         var self = this;
         var id = this.getRandomId();
         this.showAlertWithTimeout("success", msg, id);
@@ -13,17 +13,17 @@ var alerts = {
             });
         }, self.SHOW_INTERVAL + 10000);
     },
-    alertWarning: function(msg) {
+    alertWarning: function(msg: any) {
         this.showAlertWithTimeout("warning", msg, this.getRandomId());
     },
-    alertError: function(msg) {
+    alertError: function(msg: any) {
         this.showAlertWithTimeout("danger", msg, this.getRandomId());
     },
-    showAlertWithTimeout: function(type, msg, id){
+    showAlertWithTimeout: function(type: string, msg: any, id: string){
         var self = this;
         setTimeout(self.showAlert, self.SHOW_INTERVAL, type, msg, id);
     },
-    showAlert: function(type, msg, id) {
+    showAlert: function(type: string, msg: any, id: string) {
         const alertArea = document.getElementsByClassName("alert-area")[0];
         alertArea.innerHTML = alertArea.innerHTML 
         + '<div class="alert alert-' + type + ' alert-dismissible fade show ' + id + '" style="display: none;" role="alert">' + msg 
@@ -31,11 +31,11 @@ var alerts = {
 
         $("." + id).first().fadeIn(800);
     },
-    showConfirm: function(msg, func, par1) {
+    showConfirm: function(msg: any, func: any, par1: any) {
         bootbox.confirm({
             closeButton: false,
             message: msg,
-            callback: function(result) {
+            callback: function(result: any) {
               if(result == true) func(par1);
             }
           });

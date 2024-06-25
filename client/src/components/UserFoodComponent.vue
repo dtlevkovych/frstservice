@@ -1,4 +1,4 @@
-<script src="@/stores/userfood.js"></script>
+<script src="@/stores/userfood.ts"></script>
 
 <template>
     <article id="article-userfood">

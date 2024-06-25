@@ -1,5 +1,5 @@
 var dateTools = {
-    stringToMillis: function(str) {
+    stringToMillis: function(str: string): number {
         // str - string date in 'YYYY-MM-DD' format
         var date = new Date();
         var date_arr = str.split("-");
@@ -9,7 +9,7 @@ var dateTools = {
 
         return date.valueOf();
     },
-    millisToString: function(millis) {
+    millisToString: function(millis: any): string {
         // this function returns string date in 'YYYY-MM-DD' format
         var date = new Date(millis);
         var month = (date.getMonth() + 1);

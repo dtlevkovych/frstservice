@@ -1,4 +1,4 @@
-<script src="@/stores/user.js"></script>
+<script src="@/stores/user.ts"></script>
 
 
 <template>

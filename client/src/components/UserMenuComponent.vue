@@ -1,4 +1,4 @@
-<script src="@/stores/usermenu.js"></script>
+<script src="@/stores/usermenu.ts"></script>
 
 <template>
     <div v-if="store.auth_user != null">

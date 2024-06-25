@@ -3,7 +3,7 @@ WORKDIR /app
 COPY package*.json ./
 RUN npm install
 COPY ./ .
-COPY ./src/stores/common/conf.docker.js ./src/stores/common/conf.js 
+COPY ./src/stores/common/conf.docker.ts ./src/stores/common/conf.ts 
 RUN npm run build
 
 FROM nginx as production-stage

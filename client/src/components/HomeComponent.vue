@@ -1,7 +1,7 @@
 <script>
 import LoginComponent from "@/components/LoginComponent.vue"
 import UserComponent from "@/components/UserComponent.vue"
-import { store } from '@/stores/store.js'
+import { store } from '@/stores/store.ts'
 
 export default {
     data: function () {
